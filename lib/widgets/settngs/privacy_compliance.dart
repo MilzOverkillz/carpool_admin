@@ -153,7 +153,11 @@ Widget buildSettingsToggle({
         child: Switch.adaptive(
           value: value,
           onChanged: onChanged,
-          activeColor: AppColors.primary,
+          activeColor: Colors.white,
+          activeTrackColor: const Color.fromARGB(255, 0, 0, 0),
+          inactiveThumbColor: Colors.white,
+          inactiveTrackColor: const Color.fromARGB(255, 197, 201, 206),
+          trackOutlineColor: WidgetStateProperty.all(Colors.transparent),
         ),
       ),
     ],

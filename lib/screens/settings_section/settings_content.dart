@@ -1,6 +1,11 @@
+import 'package:carpool_admin/screens/notification_temp.dart';
+import 'package:carpool_admin/screens/policies.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:carpool_admin/utils/theme/text_styles.dart';
+import 'package:carpool_admin/widgets/settngs/automatic_backup.dart';
+import 'package:carpool_admin/widgets/settngs/backup_export.dart';
+import 'package:carpool_admin/widgets/settngs/privacy_compliance.dart';
 import 'package:flutter/material.dart';
 
 class SettingsContent extends StatefulWidget {
@@ -115,7 +120,7 @@ class _SettingsContentState extends State<SettingsContent>
           _buildSegmentDivider(),
           Expanded(child: _buildSegmentTab('Notifications', 3)),
           _buildSegmentDivider(),
-          Expanded(child: _buildSegmentTab('Places', 4)),
+          Expanded(child: _buildSegmentTab('Policies', 4)),
         ],
       ),
     );
@@ -140,8 +145,10 @@ class _SettingsContentState extends State<SettingsContent>
           style: TextStyle(
             fontFamily: AppFonts.primary,
             fontSize: 13,
-            fontWeight: isActive ? AppFonts.semibold : AppFonts.normal,
-            color: isActive ? AppColors.textPrimary : AppColors.textPrimary,
+            fontWeight: isActive
+                ? FontWeight.w700
+                : FontWeight.w600, // ← bolder
+            color: Colors.black, // ← always black
           ),
         ),
       ),
@@ -161,6 +168,15 @@ class _SettingsContentState extends State<SettingsContent>
       case 1:
         content = _buildAccessControlTab();
         break;
+      case 2:
+        content = _buildDataManagementTab();
+        break;
+      case 3:
+        content = _buildNotificationsTab(); // ← add this
+        break;
+      case 4:
+        content = _buildPoliciesTab(); // ← was 5, now 4
+        break;
       default:
         content = _buildComingSoon(
           [
@@ -168,11 +184,10 @@ class _SettingsContentState extends State<SettingsContent>
             'Access Control',
             'Data Management',
             'Notifications',
-            'Places',
+            'Policies',
           ][_tabController.index],
         );
     }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -479,6 +494,48 @@ class _SettingsContentState extends State<SettingsContent>
     );
   }
 
+  Widget _buildDataManagementTab() {
+    return Column(
+      children: [
+        _buildSectionCard(
+          title: '',
+          connectTop: true,
+          child: const AutomaticBackup(),
+        ),
+        const SizedBox(height: 20),
+        _buildSectionCard(title: '', child: const BackupAndExport()),
+        const SizedBox(height: 20),
+        _buildSectionCard(title: '', child: const PrivacyCompliance()),
+        const SizedBox(height: 24),
+        _buildActionButtons(), // ← already here
+      ],
+    );
+  }
+
+  Widget _buildNotificationsTab() {
+    return Column(
+      children: [
+        _buildSectionCard(
+          title: '',
+          connectTop: true,
+          child: const NotificationTemp(),
+        ),
+        const SizedBox(height: 24),
+        _buildActionButtons(), // ← add this
+      ],
+    );
+  }
+
+  Widget _buildPoliciesTab() {
+    return Column(
+      children: [
+        _buildSectionCard(title: '', connectTop: true, child: const Policies()),
+        const SizedBox(height: 24),
+        _buildActionButtons(), // ← add this
+      ],
+    );
+  }
+
   Widget _buildSectionCard({
     required String title,
     required Widget child,
@@ -507,7 +564,13 @@ class _SettingsContentState extends State<SettingsContent>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title.isNotEmpty) ...[
-            Text(title, style: AppTextStyles.cardTitle.copyWith(fontSize: 14)),
+            Text(
+              title,
+              style: AppTextStyles.cardTitle.copyWith(
+                fontSize: 14,
+                color: const Color(0xFF212B36),
+              ),
+            ),
             const SizedBox(height: 20),
           ],
           child,
@@ -528,7 +591,7 @@ class _SettingsContentState extends State<SettingsContent>
         Text(
           label,
           style: AppTextStyles.caption.copyWith(
-            color: AppColors.textPrimary,
+            color: const Color(0xFF262626),
             fontWeight: AppFonts.medium,
             fontSize: 12,
           ),
@@ -550,7 +613,7 @@ class _SettingsContentState extends State<SettingsContent>
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textHint,
+                color: const Color(0xFF9A9A9A),
               ),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12,
@@ -577,7 +640,7 @@ class _SettingsContentState extends State<SettingsContent>
         Text(
           label,
           style: AppTextStyles.caption.copyWith(
-            color: AppColors.textPrimary,
+            color: const Color(0xFF262626),
             fontWeight: AppFonts.medium,
             fontSize: 12,
           ),
@@ -601,7 +664,7 @@ class _SettingsContentState extends State<SettingsContent>
                 color: AppColors.iconPrimary,
               ),
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textPrimary,
+                color: const Color(0xFF9A9A9A),
               ),
               onChanged: onChanged,
               items: items
@@ -695,7 +758,7 @@ class _SettingsContentState extends State<SettingsContent>
               controller: controller,
               keyboardType: keyboardType,
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textPrimary,
+                color: const Color(0xFF9A9A9A),
               ),
               decoration: InputDecoration(
                 hintText: hint,
