@@ -1,4 +1,4 @@
-import 'package:carpool_admin/screens/login_and_register_section/login.dart';
+import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,7 +21,7 @@ class AppRouter {
       // Auth Flow
       GoRoute(
         path: AppRoutes.login,
-        builder: (context, state) => const Login(),
+        builder: (context, state) => const SignUp(),
       ),
 
       // Dashboard Flow

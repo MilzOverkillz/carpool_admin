@@ -140,4 +140,31 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.success,
   );
+
+  static const TextStyle authContainerHeading = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontWeight: FontWeight.w700,
+    fontSize: 40,
+    letterSpacing: -0.04,
+    color: AppColors.authHeading
+  );
+  static const TextStyle authContainerSubHeading = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
+    color: AppColors.authSubHeading
+  );
+  static const TextStyle authActiveTextField = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
+    color: AppColors.authHeading
+  );
+  static const TextStyle authHintTextField = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontWeight: FontWeight.w400,
+    fontSize: 18,
+    color: Color(0xFF9A9A9A)
+  );
+
 }
