@@ -1,0 +1,23 @@
+import 'dart:ui';
+
+/// Font family constants
+/// All fonts used in the application are defined here
+class AppFonts {
+  AppFonts._(); // Private constructor to prevent instantiation
+
+  // Primary font family used throughout the app
+  static const String primary = 'Inter';
+  static const String inter = 'DM-Sans';
+
+
+  // Font weights
+  static const FontWeight thin = FontWeight.w100;
+  static const FontWeight extralight = FontWeight.w200;
+  static const FontWeight light = FontWeight.w300;
+  static const FontWeight normal = FontWeight.w400;
+  static const FontWeight medium = FontWeight.w500;
+  static const FontWeight semibold = FontWeight.w600;
+  static const FontWeight bold = FontWeight.w700;
+  static const FontWeight extrabold = FontWeight.w800;
+  static const FontWeight black = FontWeight.w900;
+}
