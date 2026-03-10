@@ -33,6 +33,8 @@ class AppColors {
   static const Color textTertiary = Color(0xFF6B7280); // Muted text, captions
   static const Color textHint = Color(0xFF9CA3AF); // Placeholder text in inputs
   static const Color textInverse = Color(0xFFFFFFFF); // Text on dark backgrounds (Sign in btn)
+  static const Color authHeading = Color(0xFF232323);
+  static const Color authSubHeading = Color(0xFF969696);
 
   // ==========================================
   // Borders & Dividers
@@ -62,4 +64,10 @@ class AppColors {
   
   static const Color scrim = Color(0x66000000); // Semi-transparent black for modal backgrounds
   static const Color shadow = Color(0x0A000000); // Very subtle shadow for cards
+
+  // Button Colors
+  static const Color backButtonColor = Color(0xFFE4E4E4);
+  static const Color backButtonArrowColor = Color(0xFF626262);
+  static const Color authContainerColor = Color(0xFFF1F1F1);
+
 }
