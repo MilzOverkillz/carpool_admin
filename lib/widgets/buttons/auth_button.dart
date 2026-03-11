@@ -47,7 +47,7 @@ class AuthButton extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: AppTextStyles.labelButton.copyWith(fontSize: 16),
+          style: AppTextStyles.authButtonText
         ),
       ),
     );

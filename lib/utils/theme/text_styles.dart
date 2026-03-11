@@ -166,5 +166,29 @@ class AppTextStyles {
     fontSize: 18,
     color: Color(0xFF9A9A9A)
   );
+  static const TextStyle loginRememberText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    color: AppColors.authHeading,
+  );
+  static const TextStyle forgotPasswordText = TextStyle(
+  fontFamily: AppFonts.primary,
+  fontSize: 16,
+  fontWeight: FontWeight.w500, 
+  height: 1.5, 
+  letterSpacing: 0,
+  color: AppColors.authHeading, // Adjust based on your primary color
+  decoration: TextDecoration.underline,
+  decorationStyle: TextDecorationStyle.solid,
+);
+static const TextStyle authButtonText = TextStyle(
+  fontFamily: AppFonts.primary,
+  fontSize: 18,
+  fontWeight: FontWeight.w600, 
+  height: 1.2, 
+  letterSpacing: -0.01,
+  color: AppColors.background,
+);
 
 }

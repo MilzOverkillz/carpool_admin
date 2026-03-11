@@ -5,14 +5,14 @@ import 'package:carpool_admin/widgets/buttons/auth_button.dart';
 import 'package:carpool_admin/widgets/text_fields/custom_auth_text_field.dart';
 import 'package:flutter/material.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignIn extends StatefulWidget {
+  const SignIn({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignIn> createState() => _SignInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignInState extends State<SignIn> {
   bool isChecked = false;
   @override
   Widget build(BuildContext context) {
@@ -46,16 +46,16 @@ class _SignUpState extends State<SignUp> {
                 Container(
                   margin: EdgeInsets.only(top: 86),
                   width: 514,
-                  height: 449,
+                  height: 371,
                   child: Column(
                     children: [
                       Text(
-                        'Sign Up',
+                        'Sign In',
                         style: AppTextStyles.authContainerHeading,
                       ),
                       SizedBox(height: 14),
                       Text(
-                        'Please Register  to continue to your admin account.',
+                        'Please login to continue to your admin account.',
                         style: AppTextStyles.authContainerSubHeading,
                       ),
                       SizedBox(height: 30),
@@ -67,16 +67,6 @@ class _SignUpState extends State<SignUp> {
                       const SizedBox(height: 10),
                       CustomAuthTextField(
                         hintText: "Password",
-                        isPassword: true,
-                        suffixIcon: Image.asset(
-                          'assets/icons/login_and_register/ic_eyeOff.png',
-                          width: 20.0,
-                          height: 20,
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      CustomAuthTextField(
-                        hintText: "Confirm Password",
                         isPassword: true,
                         suffixIcon: Image.asset(
                           'assets/icons/login_and_register/ic_eyeOff.png',
@@ -119,7 +109,7 @@ class _SignUpState extends State<SignUp> {
                       ),
                       SizedBox(height: 12,),
                       AuthButton(
-                        label: "Sign Up",
+                        label: "Sign in",
                         onTap: () {
                           // Your logic here
                         },

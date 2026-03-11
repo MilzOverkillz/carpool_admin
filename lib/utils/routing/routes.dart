@@ -1,3 +1,4 @@
+import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -7,7 +8,8 @@ import 'package:go_router/go_router.dart';
 // import '../../screens/dashboard/payments_dashboard.dart';
 
 abstract class AppRoutes {
-  static const String login = '/';
+  static const String signIn = '/';
+  static const String  signUp = '/sign-up';
   static const String dashboard = '/dashboard';
   static const String payments = '/payments';
   static const String settings = '/settings';
@@ -15,12 +17,16 @@ abstract class AppRoutes {
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    initialLocation: AppRoutes.login,
+    initialLocation: AppRoutes.signIn,
     debugLogDiagnostics: true,
     routes: [
       // Auth Flow
       GoRoute(
-        path: AppRoutes.login,
+        path: AppRoutes.signIn,
+        builder: (context, state) => const SignIn(),
+      ),
+      GoRoute(
+        path: AppRoutes.signIn,
         builder: (context, state) => const SignUp(),
       ),
 
@@ -48,7 +54,7 @@ class AppRouter {
             const Text('Oops! Page not found.', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () => context.go(AppRoutes.login),
+              onPressed: () => context.go(AppRoutes.signIn),
               child: const Text('Go to Home'),
             ),
           ],
