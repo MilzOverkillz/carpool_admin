@@ -145,7 +145,7 @@ class AppTextStyles {
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w700,
     fontSize: 40,
-    letterSpacing: -0.04,
+    letterSpacing: -0.4,
     color: AppColors.authHeading
   );
   static const TextStyle authContainerSubHeading = TextStyle(
@@ -189,6 +189,12 @@ static const TextStyle authButtonText = TextStyle(
   height: 1.2, 
   letterSpacing: -0.01,
   color: AppColors.background,
+);
+static const TextStyle verificationHeadingText = TextStyle(
+  fontFamily: AppFonts.primary,
+  fontSize: 32,
+  fontWeight: FontWeight.w600,  
+  color: AppColors.black,
 );
 
 }

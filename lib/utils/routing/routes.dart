@@ -1,5 +1,8 @@
+import 'package:carpool_admin/screens/login_and_register_section/forgot_password.dart';
+import 'package:carpool_admin/screens/login_and_register_section/reset_password.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
+import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,10 +12,13 @@ import 'package:go_router/go_router.dart';
 
 abstract class AppRoutes {
   static const String signIn = '/';
-  static const String  signUp = '/sign-up';
+  static const String signUp = '/sign-up';
+  static const String verification = '/verification';
   static const String dashboard = '/dashboard';
   static const String payments = '/payments';
   static const String settings = '/settings';
+  static const String forgotPassword = '/forgot-password';
+  static const String resetPassword = '/reset-password';
 }
 
 class AppRouter {
@@ -22,12 +28,28 @@ class AppRouter {
     routes: [
       // Auth Flow
       GoRoute(
+        name: 'sign-in',
         path: AppRoutes.signIn,
         builder: (context, state) => const SignIn(),
       ),
       GoRoute(
         path: AppRoutes.signIn,
         builder: (context, state) => const SignUp(),
+      ),
+      GoRoute(
+        name: 'verification',
+        path: AppRoutes.verification,
+        builder: (context, state) => const Verification(),
+      ),
+      GoRoute(
+        name: 'forgot-password',
+        path: AppRoutes.forgotPassword,
+        builder: (context, state) => const ForgotPassword(),
+      ),
+      GoRoute(
+        name: 'reset-password',
+        path: AppRoutes.resetPassword,
+        builder: (context, state) => const ResetPassword(),
       ),
 
       // Dashboard Flow

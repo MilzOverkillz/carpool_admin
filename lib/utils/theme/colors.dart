@@ -12,7 +12,8 @@ class AppColors {
   // The primary color in this design is essentially black/dark slate.
   static const Color primary = Color(0xFF111827); // Dark Slate/Black
   static const Color primaryDark = Color(0xFF000000); // Pure Black (Sign In Button)
-  static const Color primaryLight = Color(0xFF374151); // Lighter Slate (Sidebar active item)
+  static const Color primaryLight = Color(0xFF374151);
+  static const Color black = Color(0xFF000000); // Lighter Slate (Sidebar active item)
 
   // ==========================================
   // Backgrounds & Surfaces

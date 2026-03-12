@@ -4,6 +4,7 @@ import 'package:carpool_admin/widgets/buttons/auth_back_button.dart';
 import 'package:carpool_admin/widgets/buttons/auth_button.dart';
 import 'package:carpool_admin/widgets/text_fields/custom_auth_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -33,7 +34,6 @@ class _SignInState extends State<SignIn> {
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
-                  // ignore: deprecated_member_use
                   color: Colors.black.withOpacity(0.25),
                   offset: const Offset(0, 4),
                   blurRadius: 9.4,
@@ -104,14 +104,14 @@ class _SignInState extends State<SignIn> {
                               Text('Keep me logged in', style: AppTextStyles.loginRememberText,)
                             ],
                           ),
-                          Text('Fogot Password ?', style: AppTextStyles.forgotPasswordText,)
+                          GestureDetector(onTap: () => context.pushNamed('forgot-password'), child: Text('Forgot Password ?', style: AppTextStyles.forgotPasswordText,))
                         ],
                       ),
                       SizedBox(height: 12,),
                       AuthButton(
                         label: "Sign in",
                         onTap: () {
-                          // Your logic here
+                          context.pushNamed('verification');
                         },
                       ),
                     ],

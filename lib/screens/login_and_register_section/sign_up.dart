@@ -4,6 +4,7 @@ import 'package:carpool_admin/widgets/buttons/auth_back_button.dart';
 import 'package:carpool_admin/widgets/buttons/auth_button.dart';
 import 'package:carpool_admin/widgets/text_fields/custom_auth_text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -33,7 +34,6 @@ class _SignUpState extends State<SignUp> {
               borderRadius: BorderRadius.circular(25),
               boxShadow: [
                 BoxShadow(
-                  // ignore: deprecated_member_use
                   color: Colors.black.withOpacity(0.25),
                   offset: const Offset(0, 4),
                   blurRadius: 9.4,
@@ -121,7 +121,7 @@ class _SignUpState extends State<SignUp> {
                       AuthButton(
                         label: "Sign Up",
                         onTap: () {
-                          // Your logic here
+                          context.pushNamed('verification');
                         },
                       ),
                     ],
