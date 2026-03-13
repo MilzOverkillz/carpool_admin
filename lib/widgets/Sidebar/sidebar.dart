@@ -16,17 +16,26 @@ class SidebarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 240, // Total sidebar width from screenshot
+      width: 240, 
       color: AppColors.surface,
       child: Column(
         children: [
           // Logo/Carpool Title
-          const SizedBox(height: 20), // <--- REDUCED FROM 48 to bring it closer to the top
-          const Text(
-            'Carpool',
-            style: AppTextStyles.sidebarLogo, 
+          const SizedBox(height: 20),
+          
+          // --- ALIGNMENT FIX APPLIED HERE ---
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 40.0), // 40px places it slightly to the left of the 48px menu items
+              child: const Text(
+                'Carpool',
+                style: AppTextStyles.sidebarLogo, 
+              ),
+            ),
           ),
-          const SizedBox(height: 32), // <--- REDUCED FROM 48 to tighten the gap before menu
+          
+          const SizedBox(height: 32),
 
           // Menu Items
           Expanded(
@@ -60,7 +69,6 @@ class SidebarWidget extends StatelessWidget {
 
   /// Helper to build a menu item with exact Figma sizes
   Widget _buildMenuItem(BuildContext context, String title, bool isActive) {
-    // Text style adapts based on active state
     final styleBase = TextStyle(
       fontFamily: AppFonts.primary, 
       fontSize: 14,
@@ -70,7 +78,6 @@ class SidebarWidget extends StatelessWidget {
     );
 
     return Padding(
-      // EXACT GAP: 4px bottom padding matches the 4px gap in your Figma layout
       padding: const EdgeInsets.only(bottom: 4.0), 
       child: InkWell(
         onTap: () {
@@ -87,14 +94,14 @@ class SidebarWidget extends StatelessWidget {
           }
         },
         child: SizedBox(
-          width: 240, // Exact width from Figma
-          height: 50, // Exact height from Figma (240 x 50)
+          width: 240, 
+          height: 50, 
           child: Row(
             children: [
-              // 1. The Active Marker on the far left edge
+              // 1. The Active Marker
               Container(
                 width: 4, 
-                height: 50, // Matches full height of the item
+                height: 50, 
                 decoration: BoxDecoration(
                   color: isActive ? const Color(0xFF495056) : Colors.transparent,
                   borderRadius: const BorderRadius.only(
@@ -104,14 +111,14 @@ class SidebarWidget extends StatelessWidget {
                 ),
               ),
               
-              const SizedBox(width: 20), // Spacing between edge marker and background box
+              const SizedBox(width: 20), 
               
               // 2. The Main Button Area
               Container(
-                width: 192, // Exact active box width from Figma
+                width: 192, 
                 height: 50,
-                padding: const EdgeInsets.only(left: 24.0), // Forces text to align exactly 24px from the inner left edge
-                alignment: Alignment.centerLeft, // Left aligned text
+                padding: const EdgeInsets.only(left: 24.0), 
+                alignment: Alignment.centerLeft, 
                 decoration: BoxDecoration(
                   color: isActive ? const Color(0xFF495056) : Colors.transparent,
                   borderRadius: BorderRadius.circular(6.0),
