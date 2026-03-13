@@ -145,7 +145,7 @@ class AppTextStyles {
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w700,
     fontSize: 40,
-    letterSpacing: -0.04,
+    letterSpacing: -0.4,
     color: AppColors.authHeading
   );
   static const TextStyle authContainerSubHeading = TextStyle(
@@ -166,5 +166,35 @@ class AppTextStyles {
     fontSize: 18,
     color: Color(0xFF9A9A9A)
   );
+  static const TextStyle loginRememberText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+    color: AppColors.authHeading,
+  );
+  static const TextStyle forgotPasswordText = TextStyle(
+  fontFamily: AppFonts.primary,
+  fontSize: 16,
+  fontWeight: FontWeight.w500, 
+  height: 1.5, 
+  letterSpacing: 0,
+  color: AppColors.authHeading, // Adjust based on your primary color
+  decoration: TextDecoration.underline,
+  decorationStyle: TextDecorationStyle.solid,
+);
+static const TextStyle authButtonText = TextStyle(
+  fontFamily: AppFonts.primary,
+  fontSize: 18,
+  fontWeight: FontWeight.w600, 
+  height: 1.2, 
+  letterSpacing: -0.01,
+  color: AppColors.background,
+);
+static const TextStyle verificationHeadingText = TextStyle(
+  fontFamily: AppFonts.primary,
+  fontSize: 32,
+  fontWeight: FontWeight.w600,  
+  color: AppColors.black,
+);
 
 }
