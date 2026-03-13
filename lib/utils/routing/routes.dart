@@ -6,9 +6,8 @@ import 'package:carpool_admin/screens/login_and_register_section/verification.da
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Placeholder imports - replace these with your actual new file paths
-// import '../../screens/auth/login_page.dart';
-// import '../../screens/dashboard/payments_dashboard.dart';
+// Import your new UserScreen here (adjust the filename if you named it differently)
+import 'package:carpool_admin/screens/User_Section/user_screen.dart';
 
 abstract class AppRoutes {
   static const String signIn = '/';
@@ -19,11 +18,15 @@ abstract class AppRoutes {
   static const String settings = '/settings';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
+  
+  // Added the new users route
+  static const String users = '/users'; 
 }
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    initialLocation: AppRoutes.signIn,
+    // Changed initial location to start directly on the Users screen
+    initialLocation: AppRoutes.users, 
     debugLogDiagnostics: true,
     routes: [
       // Auth Flow
@@ -33,7 +36,8 @@ class AppRouter {
         builder: (context, state) => const SignIn(),
       ),
       GoRoute(
-        path: AppRoutes.signIn,
+        name: 'sign-up',
+        path: AppRoutes.signUp, // FIXED: This was accidentally set to AppRoutes.signIn
         builder: (context, state) => const SignUp(),
       ),
       GoRoute(
@@ -52,20 +56,27 @@ class AppRouter {
         builder: (context, state) => const ResetPassword(),
       ),
 
+      // Users Flow (New)
+      GoRoute(
+        name: 'users',
+        path: AppRoutes.users,
+        builder: (context, state) => const UserScreen(),
+      ),
+
       // Dashboard Flow
       GoRoute(
         path: AppRoutes.dashboard,
         builder: (context, state) => const PlaceholderScreen(title: "Main Dashboard"),
       ),
 
-      // Payments Overview (The screen in your screenshot)
+      // Payments Overview 
       GoRoute(
         path: AppRoutes.payments,
         builder: (context, state) => const PlaceholderScreen(title: "Payments Overview"),
       ),
     ],
     
-    // Error Page (matching your existing design preference)
+    // Error Page 
     errorBuilder: (context, state) => Scaffold(
       body: Center(
         child: Column(

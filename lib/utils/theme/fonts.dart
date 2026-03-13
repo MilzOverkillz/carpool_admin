@@ -8,7 +8,9 @@ class AppFonts {
   // Primary font family used throughout the app
   static const String primary = 'Inter';
   static const String inter = 'DM-Sans';
-
+  
+  // ADD THIS LINE FOR THE LOGO
+  static const String nunitoSans = 'Nunito Sans'; 
 
   // Font weights
   static const FontWeight thin = FontWeight.w100;
