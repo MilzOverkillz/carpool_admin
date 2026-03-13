@@ -182,7 +182,7 @@ class AppTextStyles {
   decoration: TextDecoration.underline,
   decorationStyle: TextDecorationStyle.solid,
 );
-static const TextStyle authButtonText = TextStyle(
+ static const TextStyle authButtonText = TextStyle(
   fontFamily: AppFonts.primary,
   fontSize: 18,
   fontWeight: FontWeight.w600, 
@@ -190,11 +190,76 @@ static const TextStyle authButtonText = TextStyle(
   letterSpacing: -0.01,
   color: AppColors.background,
 );
-static const TextStyle verificationHeadingText = TextStyle(
+ static const TextStyle verificationHeadingText = TextStyle(
   fontFamily: AppFonts.primary,
   fontSize: 32,
   fontWeight: FontWeight.w600,  
   color: AppColors.black,
 );
+ static const TextStyle sidebarLogo = TextStyle(
+    fontFamily: AppFonts.nunitoSans,
+    fontSize: 20,
+    fontWeight: AppFonts.extrabold, // 800
+    color: Color(0xFF1E272E),
+  );
 
+  static const TextStyle sidebarMenuText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: AppFonts.semibold, // 600
+    letterSpacing: 0.3,
+    // Note: Color is omitted here because it changes dynamically 
+    // depending on whether the tab is Active (White) or Inactive (Dark Gray).
+  );
+
+  static const TextStyle sidebarAvatarText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: AppFonts.semibold, // 600
+    color: Colors.white,
+  );
+
+  static const TextStyle sidebarProfileName = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 12,
+    fontWeight: AppFonts.medium, // 500
+    color: Color(0xFF1E272E),
+  );
+
+  static const TextStyle sidebarProfileEmail = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 10,
+    fontWeight: AppFonts.normal, // 400
+    color: Color(0xFF828282),
+  );
+
+  static const TextStyle sidebarLogoutText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 13,
+    fontWeight: AppFonts.medium, // 500
+    color: AppColors.textSecondary,
+  );
+ static const TextStyle topBarTitle = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 30,
+    fontWeight: AppFonts.bold, // 700
+    letterSpacing: -0.5,
+    color: Color(0xFF323D4E),
+  );
+
+  static const TextStyle searchHintText = TextStyle(
+    fontFamily: AppFonts.inter, // DM Sans
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 14,
+    height: 1.4, // 20px line height / 14px size
+    letterSpacing: -0.28, // -2%
+    color: Color(0xFF495056),
+  );
+
+  static const TextStyle searchInputText = TextStyle(
+    fontFamily: AppFonts.inter, // DM Sans
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 14,
+    color: AppColors.textPrimary,
+  );
 }
