@@ -3,6 +3,7 @@ import 'package:carpool_admin/screens/login_and_register_section/reset_password.
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
+import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -26,7 +27,7 @@ abstract class AppRoutes {
 class AppRouter {
   static final GoRouter _router = GoRouter(
     // Changed initial location to start directly on the Users screen
-    initialLocation: AppRoutes.users, 
+    initialLocation: AppRoutes.signIn, 
     debugLogDiagnostics: true,
     routes: [
       // Auth Flow
@@ -65,8 +66,9 @@ class AppRouter {
 
       // Dashboard Flow
       GoRoute(
+        name: 'main-dashboard',
         path: AppRoutes.dashboard,
-        builder: (context, state) => const PlaceholderScreen(title: "Main Dashboard"),
+        builder: (context, state) => const MainDashboard(),
       ),
 
       // Payments Overview 

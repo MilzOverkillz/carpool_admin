@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/fonts.dart';
@@ -9,9 +10,9 @@ class SidebarWidget extends StatelessWidget {
   final String activeTitle; 
 
   const SidebarWidget({
-    Key? key,
+    super.key,
     required this.activeTitle,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -213,8 +214,8 @@ class SidebarWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/icons/logout.png', 
+            SvgPicture.asset(
+              'assets/icons/dashboard/logout.svg', 
               width: 18,
               height: 18,
             ),

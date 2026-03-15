@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/text_styles.dart'; 
 
@@ -6,9 +7,9 @@ class TopBarWidget extends StatelessWidget {
   final String title;
 
   const TopBarWidget({
-    Key? key,
+    super.key,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,38 +26,40 @@ class TopBarWidget extends StatelessWidget {
           ),
 
           // Right Side: Search and Icons
-          Row(
-            children: [
-              _buildSearchBar(),
-              const SizedBox(width: 24),
-              
-              // Notifications Icon
-              _buildCustomIcon(
-                assetPath: 'assets/icons/notifications.png', 
-                width: 21.68,
-                height: 24.0,
-              ),
-              const SizedBox(width: 16),
-              
-              // Moon (Dark Mode) Icon
-              _buildCustomIcon(
-                assetPath: 'assets/icons/moon.png', 
-                width: 16.26,
-                height: 18.0,
-              ),
-              const SizedBox(width: 16),
-              
-              // Info Icon
-              _buildCustomIcon(
-                assetPath: 'assets/icons/info.png', 
-                width: 21.68,
-                height: 24.0,
-              ),
-              const SizedBox(width: 24),
-              
-              // User Avatar
-              _buildAvatar(),
-            ],
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 9.03),
+            width: 381.23,
+        height: 61,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color:Colors.white),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildSearchBar(),
+                // Notifications Icon
+                _buildCustomIcon(
+                  assetPath: 'assets/icons/dashboard/notifications.svg', 
+                  width: 21.68,
+                  height: 24.0,
+                ),
+                
+                // Moon (Dark Mode) Icon
+                _buildCustomIcon(
+                  assetPath: 'assets/icons/dashboard/moon.svg', 
+                  width: 16.26,
+                  height: 18.0,
+                ),
+                
+                // Info Icon
+                _buildCustomIcon(
+                  assetPath: 'assets/icons/dashboard/info.svg', 
+                  width: 21.68,
+                  height: 24.0,
+                ),
+                
+                // User Avatar
+                _buildAvatar(),
+              ],
+            ),
           ),
         ],
       ),
@@ -66,8 +69,8 @@ class TopBarWidget extends StatelessWidget {
   // --- Helper: Search Bar ---
   Widget _buildSearchBar() {
     return Container(
-      width: 300, 
-      height: 44,
+      width: 193.33, 
+      height: 41,
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
         color: AppColors.surface, 
@@ -84,7 +87,7 @@ class TopBarWidget extends StatelessWidget {
         children: [
           // Custom Search Icon
           Image.asset(
-            'assets/icons/search.png', 
+            'assets/icons/dashboard/search.png', 
             width: 10.0, 
             height: 10.0, 
             color: const Color(0xFF495056), 
@@ -118,7 +121,7 @@ class TopBarWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Image.asset(
+        child: SvgPicture.asset(
           assetPath,
           width: width,   
           height: height, 
@@ -136,7 +139,7 @@ class TopBarWidget extends StatelessWidget {
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(
-          image: AssetImage('assets/icons/avatar_placeholder.png'), 
+          image: AssetImage('assets/icons/dashboard/avatar_placeholder.png'), 
           fit: BoxFit.cover,
         ),
       ),

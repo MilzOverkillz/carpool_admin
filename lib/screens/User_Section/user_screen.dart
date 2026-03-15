@@ -7,7 +7,7 @@ import '../../utils/theme/text_styles.dart';
 import '../../widgets/layout/main_layout.dart'; 
 
 class UserScreen extends StatelessWidget {
-  const UserScreen({Key? key}) : super(key: key);
+  const UserScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

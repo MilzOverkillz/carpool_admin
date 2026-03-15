@@ -19,7 +19,7 @@ class AppColors {
   // Backgrounds & Surfaces
   // ==========================================
   static const Color background = Color(0xFFF3F4F6); // Very light gray (App background)
-  static const Color surface = Color(0xFFFFFFFF); // White (Cards, Modals, Inputs)
+  static const Color surface = Color(0xFFF4F7FE); // White (Cards, Modals, Inputs)
   static const Color surfaceSecondary = Color(0xFFF9FAFB); // Slightly off-white surface
   
   // Interactive Surfaces (Buttons, Tags)

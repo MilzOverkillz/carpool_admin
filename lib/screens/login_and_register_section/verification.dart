@@ -119,7 +119,7 @@ class Verification extends StatelessWidget {
                       text: "Verify",
                       isSolid: true,
                       onPressed: () {
-                        // Your verification logic
+                        context.goNamed('main-dashboard');
                       },
                     ),
                   ],
