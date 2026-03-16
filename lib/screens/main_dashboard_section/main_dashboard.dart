@@ -1,4 +1,7 @@
 import 'package:carpool_admin/widgets/cards/dashboard_stat_card.dart';
+import 'package:carpool_admin/widgets/charts/dashboard_bar_chart.dart';
+import 'package:carpool_admin/widgets/charts/monthly_revenue_chart.dart';
+import 'package:carpool_admin/widgets/charts/user_distribution_chart.dart';
 import 'package:carpool_admin/widgets/layout/main_layout.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +57,7 @@ class MainDashboard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 270, 
+              height: 270,
               child: Container(
                 padding: const EdgeInsets.only(left: 23, right: 73),
                 child: Row(
@@ -66,11 +69,11 @@ class MainDashboard extends StatelessWidget {
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 3,
-                          crossAxisSpacing: 280,
-                          mainAxisSpacing: 27,
-                          childAspectRatio: 2.2,
-                        ),
+                              crossAxisCount: 3,
+                              crossAxisSpacing: 260,
+                              mainAxisSpacing: 27,
+                              childAspectRatio: 2.2,
+                            ),
                         itemCount: stats.length,
                         itemBuilder: (context, index) {
                           final stat = stats[index];
@@ -88,6 +91,44 @@ class MainDashboard extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(height: 29),
+            Row(
+              children: [
+                DashboardBarChart(
+                  title: "Rides Per Day",
+                  subtitle: "Last 7 days activity",
+                  labels: const [
+                    "Mon",
+                    "Tue",
+                    "Wed",
+                    "Thu",
+                    "Fri",
+                    "Sat",
+                    "Sun",
+                  ],
+                  values: const [260, 200, 410, 130, 220, 60, 160],
+                ),
+                Spacer(),
+                UsersDistributionChart(
+                  title: 'User Distribution',
+                  subtitle: 'Drivers vs Riders',
+                  period: 'Monthly',
+                  ridersPercent: 65.0,
+                  driversPercent: 35.0,
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            MonthlyRevenueChart(
+  year2020: [
+    10000, 18000, 17000, 20000, 30000, 38000,
+    28000, 19000, 20000, 23000, 24000, 23000
+  ],
+  year2021: [
+    22000, 29000, 11000, 26000, 36000, 21000,
+    30000, 36000, 26000, 15000, 32000, 36000
+  ],
+)
           ],
         ),
       ),

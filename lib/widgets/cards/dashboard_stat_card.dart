@@ -99,8 +99,8 @@ class DashboardStatCard extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(
                 iconPath,
-                width: 26,
-                height: 26,
+                width: 21.88,
+                height: 25,
               ),
             ),
           ),
