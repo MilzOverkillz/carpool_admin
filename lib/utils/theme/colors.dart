@@ -9,7 +9,6 @@ class AppColors {
   // ==========================================
   // Brand & Primary Colors
   // ==========================================
-  // The primary color in this design is essentially black/dark slate.
   static const Color primary = Color(0xFF111827); // Dark Slate/Black
   static const Color primaryDark = Color(0xFF000000); // Pure Black (Sign In Button)
   static const Color primaryLight = Color(0xFF374151);
@@ -71,4 +70,26 @@ class AppColors {
   static const Color backButtonArrowColor = Color(0xFF626262);
   static const Color authContainerColor = Color(0xFFF1F1F1);
 
+  // ==========================================
+  // Filter Bar & Header Specific Colors
+  // ==========================================
+  static const Color filterBorder = Color(0xFFE9E9EA); 
+  static const Color filterText = Color(0xFF1D1929);
+  
+  static const Color pageHeaderTitle = Color(0xFF212B36);
+  static const Color pageHeaderSubtitle = Color(0xFF9EA2A5);
+  static const Color primaryButtonBg = Color(0xFF495056);
+  
+  // Progress Bar Specific Colors
+  static const Color barFillGrey = Color(0xFFC0C0C0); 
+  static const Color barTrackGrey = Color(0xFFE9E9EA);
+
+  
+  // The subtle grey used for the role/status pills and filter bar
+  static const Color tagPillBg = Color(0xFFC7C9CB); // #C7C9CB from roles/status pills
+
+  static const Color purpleText = Color(0xFF6B7280); // Lighter purple for role pill text
+  static const Color outlinedButtonText = Color(0xFF6B7280); // Outlined button text color (purple)
+  static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
+  
 }
