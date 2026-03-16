@@ -3,10 +3,11 @@ import 'package:carpool_admin/screens/login_and_register_section/reset_password.
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
+import 'package:carpool_admin/screens/notifications_screen/notifications_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Import your new UserScreen here (adjust the filename if you named it differently)
+// Import screens
 import 'package:carpool_admin/screens/User_Section/user_screen.dart';
 
 abstract class AppRoutes {
@@ -18,15 +19,14 @@ abstract class AppRoutes {
   static const String settings = '/settings';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
-  
-  // Added the new users route
-  static const String users = '/users'; 
+  static const String users = '/users';
+  static const String notifications = '/notifications'; // Added notifications route
 }
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    // Changed initial location to start directly on the Users screen
-    initialLocation: AppRoutes.users, 
+    // Changed initial location to start directly on the Notifications screen for testing
+    initialLocation: AppRoutes.notifications, 
     debugLogDiagnostics: true,
     routes: [
       // Auth Flow
@@ -37,7 +37,7 @@ class AppRouter {
       ),
       GoRoute(
         name: 'sign-up',
-        path: AppRoutes.signUp, // FIXED: This was accidentally set to AppRoutes.signIn
+        path: AppRoutes.signUp,
         builder: (context, state) => const SignUp(),
       ),
       GoRoute(
@@ -56,11 +56,18 @@ class AppRouter {
         builder: (context, state) => const ResetPassword(),
       ),
 
-      // Users Flow (New)
+      // Users Flow
       GoRoute(
         name: 'users',
         path: AppRoutes.users,
         builder: (context, state) => const UserScreen(),
+      ),
+
+      // Notifications Flow (NEW)
+      GoRoute(
+        name: 'notifications',
+        path: AppRoutes.notifications,
+        builder: (context, state) => const NotificationScreen(),
       ),
 
       // Dashboard Flow

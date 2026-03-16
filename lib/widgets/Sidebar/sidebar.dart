@@ -49,7 +49,7 @@ class SidebarWidget extends StatelessWidget {
                 _buildMenuItem(context, 'Rides', activeTitle == 'Rides'),
                 _buildMenuItem(context, 'Payments', activeTitle == 'Payments'),
                 _buildMenuItem(context, 'Analytics', activeTitle == 'Analytics'),
-                _buildMenuItem(context, 'Notifications', activeTitle == 'Notifications'),
+                _buildMenuItem(context, 'Notifications', activeTitle == 'Notifications'), // Fixed to be clickable
                 _buildMenuItem(context, 'Settings', activeTitle == 'Settings'),
               ],
             ),
@@ -90,6 +90,9 @@ class SidebarWidget extends StatelessWidget {
               break;
             case 'Payments':
               context.go(AppRoutes.payments);
+              break;
+            case 'Notifications':
+              context.go(AppRoutes.notifications); // Added navigation
               break;
           }
         },
