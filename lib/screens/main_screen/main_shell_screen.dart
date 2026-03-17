@@ -68,7 +68,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.mainBackground,
       body: Row(
         children: [
           // 1. FIXED SIDEBAR (never rebuilds)
