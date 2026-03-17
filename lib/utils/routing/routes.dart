@@ -3,7 +3,8 @@ import 'package:carpool_admin/screens/login_and_register_section/reset_password.
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
-import 'package:carpool_admin/screens/notifications_screen/notifications_screen.dart';
+import 'package:carpool_admin/screens/main_screen/main_shell_screen.dart';
+import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,13 +21,15 @@ abstract class AppRoutes {
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
   static const String users = '/users';
-  static const String notifications = '/notifications'; // Added notifications route
+  static const String notifications = '/notifications';
+  static const String mainScreen = '/mainScreen';
+  // Added notifications route
 }
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
     // Changed initial location to start directly on the Notifications screen for testing
-    initialLocation: AppRoutes.notifications, 
+    initialLocation: AppRoutes.mainScreen,
     debugLogDiagnostics: true,
     routes: [
       // Auth Flow
@@ -44,6 +47,11 @@ class AppRouter {
         name: 'verification',
         path: AppRoutes.verification,
         builder: (context, state) => const Verification(),
+      ),
+      GoRoute(
+        name: 'mainScreen',
+        path: AppRoutes.mainScreen,
+        builder: (context, state) => const MainShellScreen(),
       ),
       GoRoute(
         name: 'forgot-password',
@@ -67,23 +75,25 @@ class AppRouter {
       GoRoute(
         name: 'notifications',
         path: AppRoutes.notifications,
-        builder: (context, state) => const NotificationScreen(),
+        builder: (context, state) => const NotificationsContent(),
       ),
 
       // Dashboard Flow
       GoRoute(
         path: AppRoutes.dashboard,
-        builder: (context, state) => const PlaceholderScreen(title: "Main Dashboard"),
+        builder: (context, state) =>
+            const PlaceholderScreen(title: "Main Dashboard"),
       ),
 
-      // Payments Overview 
+      // Payments Overview
       GoRoute(
         path: AppRoutes.payments,
-        builder: (context, state) => const PlaceholderScreen(title: "Payments Overview"),
+        builder: (context, state) =>
+            const PlaceholderScreen(title: "Payments Overview"),
       ),
     ],
-    
-    // Error Page 
+
+    // Error Page
     errorBuilder: (context, state) => Scaffold(
       body: Center(
         child: Column(
@@ -91,7 +101,10 @@ class AppRouter {
           children: [
             const Icon(Icons.error_outline, size: 64, color: Colors.red),
             const SizedBox(height: 16),
-            const Text('Oops! Page not found.', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            const Text(
+              'Oops! Page not found.',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () => context.go(AppRoutes.signIn),
@@ -111,5 +124,8 @@ class PlaceholderScreen extends StatelessWidget {
   final String title;
   const PlaceholderScreen({super.key, required this.title});
   @override
-  Widget build(BuildContext context) => Scaffold(appBar: AppBar(title: Text(title)), body: Center(child: Text(title)));
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(title: Text(title)),
+    body: Center(child: Text(title)),
+  );
 }

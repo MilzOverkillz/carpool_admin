@@ -1,6 +1,5 @@
 import 'package:carpool_admin/utils/models/notification_dummy_data.dart';
 import 'package:carpool_admin/widgets/buttons/send_notification_button.dart';
-import 'package:carpool_admin/widgets/layout/main_layout.dart';
 import 'package:carpool_admin/widgets/notifications_widgets/complaints_tab.dart';
 import 'package:carpool_admin/widgets/notifications_widgets/notification_tabs.dart';
 import 'package:carpool_admin/widgets/notifications_widgets/notifications_table.dart';
@@ -11,15 +10,16 @@ import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/fonts.dart';
 
-
-class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({Key? key}) : super(key: key);
+/// This is the CONTENT-ONLY version of the Notifications screen
+/// It does NOT include MainLayout - that's handled by MainShellScreen
+class NotificationsContent extends StatefulWidget {
+  const NotificationsContent({Key? key}) : super(key: key);
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
+  State<NotificationsContent> createState() => _NotificationsContentState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _NotificationsContentState extends State<NotificationsContent> {
   int _selectedTabIndex = 0;
   final TextEditingController _searchController = TextEditingController();
   String _selectedType = 'All Type';
@@ -52,7 +52,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         final matchesType = _selectedType == 'All Type' ||
             notification.typeLabel == _selectedType;
 
-        // Status filter (for now all notifications are "Sent", but ready for future)
+        // Status filter
         final matchesStatus = _selectedStatus == 'All Status' ||
             notification.status == _selectedStatus;
 
@@ -63,39 +63,36 @@ class _NotificationScreenState extends State<NotificationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      pageTitle: 'Notifications',
-      child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Stats Cards Row (No changes - keep as is)
-              _buildStatsCards(),
-              
-              const SizedBox(height: 32),
-              
-              // Section Header (No changes - keep as is)
-              _buildSectionHeader(),
-              
-              const SizedBox(height: 24),
-              
-              // Tabs
-              NotificationTabs(
-                selectedIndex: _selectedTabIndex,
-                onTabChanged: (index) {
-                  setState(() => _selectedTabIndex = index);
-                },
-                complaintsBadgeCount: NotificationDummyData.newComplaints,
-              ),
-              
-              const SizedBox(height: 16),
-              
-              // Tab Content (with proper container)
-              _buildTabContent(),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Stats Cards Row
+            _buildStatsCards(),
+
+            const SizedBox(height: 32),
+
+            // Section Header
+            _buildSectionHeader(),
+
+            const SizedBox(height: 24),
+
+            // Tabs
+            NotificationTabs(
+              selectedIndex: _selectedTabIndex,
+              onTabChanged: (index) {
+                setState(() => _selectedTabIndex = index);
+              },
+              complaintsBadgeCount: NotificationDummyData.newComplaints,
+            ),
+
+            const SizedBox(height: 16),
+
+            // Tab Content
+            _buildTabContent(),
+          ],
         ),
       ),
     );
@@ -104,12 +101,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
   Widget _buildStatsCards() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        // Responsive grid
         final isWideScreen = constraints.maxWidth > 1400;
         final crossAxisCount = isWideScreen ? 4 : 2;
         final spacing = 16.0;
         final itemWidth = (constraints.maxWidth - (spacing * (crossAxisCount - 1))) / crossAxisCount;
-        
+
         return Wrap(
           spacing: spacing,
           runSpacing: spacing,
@@ -232,7 +228,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
             },
             onSearchChanged: _applyFilters,
           ),
-          
+
           // Notifications Table
           NotificationsTable(
             notifications: _filteredNotifications,
