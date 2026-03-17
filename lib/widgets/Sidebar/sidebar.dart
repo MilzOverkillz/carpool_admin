@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/fonts.dart';
 import '../../utils/theme/text_styles.dart';
@@ -10,9 +8,10 @@ class SidebarWidget extends StatelessWidget {
   final Function(String)? onNavigate; // Callback for navigation
 
   const SidebarWidget({
-    super.key,
+    Key? key,
     required this.activeTitle,
-  });
+    this.onNavigate,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -204,8 +203,8 @@ class SidebarWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              'assets/icons/dashboard/logout.svg', 
+            Image.asset(
+              'assets/icons/logout.png',
               width: 18,
               height: 18,
             ),
