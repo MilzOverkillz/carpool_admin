@@ -9,7 +9,7 @@ import '../../widgets/dropdowns/add_user_dialog.dart';
 import '../../widgets/cards/user_filter_bar.dart'; // <--- Import the new filter bar widget
 
 class UserScreen extends StatelessWidget {
-  const UserScreen({Key? key}) : super(key: key);
+  const UserScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

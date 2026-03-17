@@ -248,7 +248,7 @@ class AppTextStyles {
   );
 
   static const TextStyle searchHintText = TextStyle(
-    fontFamily: AppFonts.inter, // DM Sans
+    fontFamily: AppFonts.primary, // DM Sans
     fontWeight: AppFonts.normal, // 400
     fontSize: 14,
     height: 1.4, // 20px line height / 14px size
@@ -257,7 +257,7 @@ class AppTextStyles {
   );
 
   static const TextStyle searchInputText = TextStyle(
-    fontFamily: AppFonts.inter, // DM Sans
+    fontFamily: AppFonts.primary, // DM Sans
     fontWeight: AppFonts.normal, // 400
     fontSize: 14,
     color: AppColors.textPrimary,
