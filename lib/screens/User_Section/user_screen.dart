@@ -4,9 +4,9 @@ import '../../utils/theme/text_styles.dart';
 
 // IMPORTANT: Ensure these paths point to your actual files
 import '../../widgets/layout/main_layout.dart';
-import '../../widgets/Cards/user_card.dart'; // Imports the separated card widget
-import '../../widgets/dropdowns/company_dropdown.dart'; // Imports the new dropdown filter widget
+import '../../widgets/Cards/user_card.dart'; 
 import '../../widgets/dropdowns/add_user_dialog.dart';
+import '../../widgets/cards/user_filter_bar.dart'; // <--- Import the new filter bar widget
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class UserScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildPageHeader(context), // Passed context here to allow the dialog to open
+            _buildPageHeader(context), 
             const SizedBox(height: 24),
             _buildMainContentCard(),
           ],
@@ -56,7 +56,6 @@ class UserScreen extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            // TRIGGER THE NEW DIALOG WIDGET
             showDialog(
               context: context,
               builder: (BuildContext context) {
@@ -114,78 +113,9 @@ class UserScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              children: [
-                _buildSearchFilter(),
-                const Spacer(),
-                const CompanyDropdownFilter(
-                  hint: 'All Roles', 
-                  width: 106.0,
-                  items: ['All Roles', 'Company Admin', 'Admin', 'Driver', 'Rider', 'Driver & Rider'],
-                ),
-                const SizedBox(width: 12),
-                const CompanyDropdownFilter(
-                  hint: 'All Companies', 
-                  width: 132.0,
-                  items: ['All Companies', 'Tech corp Inc', 'Design Studio Ltd', 'Finance solutions', 'Healthcare Pvt', 'Retail Group'],
-                ),
-                const SizedBox(width: 12),
-                const CompanyDropdownFilter(
-                  hint: 'All Status', 
-                  width: 106.0,
-                  items: ['All Status', 'Active', 'Inactive', 'Suspend', 'Banned'],
-                ),
-              ],
-            ),
-          ),
+          const UserFilterBar(), // <--- Dropped your new reusable widget right here!
           const Divider(height: 1, color: AppColors.divider),
           _buildDataTable(),
-        ],
-      ),
-    );
-  }
-
-  // --- Sub-widget: Filter Search Box ---
-  Widget _buildSearchFilter() {
-    return Container(
-      width: 469,
-      height: 47,
-      padding: const EdgeInsets.only(left: 30, right: 40),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: AppColors.filterBorder,
-          width: 1.0,
-        ),
-        borderRadius: BorderRadius.circular(10),
-        color: AppColors.surface,
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            'assets/icons/search.png',
-            width: 16,
-            height: 16,
-          ),
-          const SizedBox(width: 12),
-          const Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: AppTextStyles.filterSearchText,
-                border: InputBorder.none,
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-              ),
-              style: AppTextStyles.filterSearchText,
-            ),
-          ),
-          Image.asset(
-            'assets/icons/sliders.png',
-            width: 16,
-            height: 16,
-          ),
         ],
       ),
     );
