@@ -20,7 +20,7 @@ class NotificationTabs extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 24),
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: AppColors.tabsSelection,
+        color: AppColors.tabsSelection.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

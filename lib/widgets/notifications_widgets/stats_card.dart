@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../utils/theme/colors.dart';
 import '../../../utils/theme/text_styles.dart';
 import '../../../utils/theme/app_sizes.dart';
@@ -20,14 +21,18 @@ class StatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(AppSizes.radiusXl),
-        border: Border.all(
-          color: AppColors.divider,
-          width: 1,
-        ),
+        borderRadius: BorderRadius.circular(AppSizes.radiusXXl),
+        border: Border.all(color: AppColors.tabsSelection, width: 2),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.04), // very light shadow
+            blurRadius: 1.4, // softness
+            offset: Offset(0, 1), // position (x, y)
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -35,21 +40,9 @@ class StatsCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  label,
-                  style: AppTextStyles.bodySmall.copyWith(
-                    color: AppColors.textSecondary,
-                    fontSize: 14,
-                  ),
-                ),
+                Text(label, style: AppTextStyles.statesCardLabel.copyWith()),
                 const SizedBox(height: 8),
-                Text(
-                  value,
-                  style: AppTextStyles.displayMedium.copyWith(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
+                Text(value, style: AppTextStyles.statesCardValue.copyWith()),
               ],
             ),
           ),
@@ -63,15 +56,10 @@ class StatsCard extends StatelessWidget {
             ),
             child: Center(
               child: iconAsset != null
-                  ? Image.asset(
-                      iconAsset!,
-                      width: 24,
-                      height: 24,
-                      color: AppColors.textSecondary,
-                    )
+                  ? SvgPicture.asset(iconAsset!, width: 24, height: 24)
                   : Icon(
                       icon ?? Icons.notifications_outlined,
-                      color: AppColors.textSecondary,
+                      color: AppColors.black,
                       size: 24,
                     ),
             ),

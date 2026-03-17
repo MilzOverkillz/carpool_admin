@@ -40,20 +40,25 @@ class _NotificationsContentState extends State<NotificationsContent> {
 
   void _applyFilters() {
     setState(() {
-      _filteredNotifications = NotificationDummyData.notifications.where((notification) {
+      _filteredNotifications = NotificationDummyData.notifications.where((
+        notification,
+      ) {
         // Search filter
         final searchLower = _searchController.text.toLowerCase();
-        final matchesSearch = searchLower.isEmpty ||
+        final matchesSearch =
+            searchLower.isEmpty ||
             notification.title.toLowerCase().contains(searchLower) ||
             notification.subtitle.toLowerCase().contains(searchLower) ||
             notification.recipients.toLowerCase().contains(searchLower);
 
         // Type filter
-        final matchesType = _selectedType == 'All Type' ||
+        final matchesType =
+            _selectedType == 'All Type' ||
             notification.typeLabel == _selectedType;
 
         // Status filter
-        final matchesStatus = _selectedStatus == 'All Status' ||
+        final matchesStatus =
+            _selectedStatus == 'All Status' ||
             notification.status == _selectedStatus;
 
         return matchesSearch && matchesType && matchesStatus;
@@ -101,10 +106,12 @@ class _NotificationsContentState extends State<NotificationsContent> {
   Widget _buildStatsCards() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isWideScreen = constraints.maxWidth > 1400;
-        final crossAxisCount = isWideScreen ? 4 : 2;
+        final width = constraints.maxWidth;
+        final crossAxisCount = width > 1100 ? 4 : 2;
         final spacing = 16.0;
-        final itemWidth = (constraints.maxWidth - (spacing * (crossAxisCount - 1))) / crossAxisCount;
+        final itemWidth =
+            (constraints.maxWidth - (spacing * (crossAxisCount - 1))) /
+            crossAxisCount;
 
         return Wrap(
           spacing: spacing,
@@ -115,7 +122,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
               child: StatsCard(
                 label: 'Notification',
                 value: NotificationDummyData.totalNotifications.toString(),
-                icon: Icons.notifications_outlined,
+                iconAsset: 'assets/icons/notification_icons/stats_notification.svg',
               ),
             ),
             SizedBox(
@@ -123,7 +130,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
               child: StatsCard(
                 label: 'New Complaints',
                 value: NotificationDummyData.newComplaints.toString(),
-                icon: Icons.person_outline,
+                iconAsset: 'assets/icons/notification_icons/complaint.svg',
               ),
             ),
             SizedBox(
@@ -131,7 +138,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
               child: StatsCard(
                 label: 'In Progress',
                 value: NotificationDummyData.inProgress.toString(),
-                icon: Icons.schedule_outlined,
+                iconAsset: 'assets/icons/notification_icons/progress.svg',
               ),
             ),
             SizedBox(
@@ -139,7 +146,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
               child: StatsCard(
                 label: 'Resolved',
                 value: NotificationDummyData.resolved.toString(),
-                icon: Icons.check_circle_outline,
+                iconAsset: 'assets/icons/notification_icons/resolved.svg',
               ),
             ),
           ],
@@ -179,19 +186,13 @@ class _NotificationsContentState extends State<NotificationsContent> {
     switch (_selectedTabIndex) {
       case 0:
         return Column(
-          children: [
-            const SendNotificationButton(),
-            _buildNotificationsTab(),
-          ],
+          children: [const SendNotificationButton(), _buildNotificationsTab()],
         );
       case 1:
         return const ComplaintsTab();
       case 2:
         return Column(
-          children: [
-            const SendNotificationButton(),
-            const TemplatesTab(),
-          ],
+          children: [const SendNotificationButton(), const TemplatesTab()],
         );
       default:
         return const SizedBox.shrink();
@@ -204,10 +205,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.divider,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.divider, width: 1),
       ),
       child: Column(
         children: [
@@ -230,9 +228,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
           ),
 
           // Notifications Table
-          NotificationsTable(
-            notifications: _filteredNotifications,
-          ),
+          NotificationsTable(notifications: _filteredNotifications),
         ],
       ),
     );
