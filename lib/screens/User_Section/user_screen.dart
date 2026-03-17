@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
-import '../../utils/theme/fonts.dart';
 import '../../utils/theme/text_styles.dart';
 
-// IMPORTANT: Ensure this path points to your new main_layout.dart file
-import '../../widgets/layout/main_layout.dart'; 
+// IMPORTANT: Ensure these paths point to your actual files
+import '../../widgets/layout/main_layout.dart';
+import '../../widgets/Cards/user_card.dart'; 
+import '../../widgets/dropdowns/add_user_dialog.dart';
+import '../../widgets/cards/user_filter_bar.dart'; // <--- Import the new filter bar widget
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // We now use MainLayout to automatically handle the Sidebar and TopBar!
     return MainLayout(
-      pageTitle: 'Users', // This tells the layout to highlight "Users"
+      pageTitle: 'Users',
       child: SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
+        padding: const EdgeInsets.only(
+          left: 32.0,
+          right: 32.0,
+          bottom: 32.0,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildPageHeader(),
+            _buildPageHeader(context), 
             const SizedBox(height: 24),
             _buildMainContentCard(),
           ],
@@ -31,51 +36,57 @@ class UserScreen extends StatelessWidget {
   // ==========================================
   // Section: Page Header
   // ==========================================
-  Widget _buildPageHeader() {
+  Widget _buildPageHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        // Title and Subtitle
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'User Management',
-              style: AppTextStyles.cardTitle.copyWith(fontSize: 18),
+              style: AppTextStyles.pageHeaderTitle,
             ),
-            const SizedBox(height: 4),
-            Text(
-              'Mange all users , rolls and permissions', // Kept typo from Figma for exact match
-              style: AppTextStyles.caption.copyWith(
-                color: const Color(0xFF828282),
-              ),
+            const Text(
+              'Mange all users , rolls and permissions',
+              style: AppTextStyles.pageHeaderSubtitle,
             ),
           ],
         ),
-
-        // Add New User Button
         InkWell(
           onTap: () {
-            // Add user action
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return const AddUserDialog();
+              },
+            );
           },
+          borderRadius: BorderRadius.circular(15),
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+            height: 37,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 25,
+              vertical: 10,
+            ),
             decoration: BoxDecoration(
-              color: const Color(0xFF4B5563), // Dark Gray Button
-              borderRadius: BorderRadius.circular(8),
+              color: AppColors.primaryButtonBg,
+              borderRadius: BorderRadius.circular(15),
             ),
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
+                const Text(
                   'Add New User',
-                  style: AppTextStyles.labelButton.copyWith(
-                    fontSize: 13,
-                    fontWeight: AppFonts.medium,
-                  ),
+                  style: AppTextStyles.primaryButtonText,
                 ),
-                const SizedBox(width: 8),
-                const Icon(Icons.add_box_outlined, color: Colors.white, size: 16),
+                const SizedBox(width: 10),
+                Image.asset(
+                  'assets/icons/add_user.png',
+                  width: 16,
+                  height: 16,
+                ),
               ],
             ),
           ),
@@ -94,7 +105,7 @@ class UserScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x05000000),
+            color: AppColors.shadow,
             blurRadius: 10,
             offset: Offset(0, 2),
           ),
@@ -102,79 +113,9 @@ class UserScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          // Filters Row
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              children: [
-                _buildSearchFilter(),
-                const Spacer(),
-                _buildDropdownFilter('All Roles'),
-                const SizedBox(width: 12),
-                _buildDropdownFilter('All Companies'),
-                const SizedBox(width: 12),
-                _buildDropdownFilter('All Status'),
-              ],
-            ),
-          ),
-          
+          const UserFilterBar(), // <--- Dropped your new reusable widget right here!
           const Divider(height: 1, color: AppColors.divider),
-          
-          // Data Table
           _buildDataTable(),
-        ],
-      ),
-    );
-  }
-
-  // --- Sub-widget: Filter Search Box ---
-  Widget _buildSearchFilter() {
-    return Container(
-      width: 250,
-      height: 40,
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.border),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.search, size: 18, color: AppColors.textHint),
-          const SizedBox(width: 8),
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                hintStyle: AppTextStyles.bodyMedium.copyWith(color: AppColors.textHint),
-                border: InputBorder.none,
-                isDense: true,
-                contentPadding: EdgeInsets.zero,
-              ),
-            ),
-          ),
-          const Icon(Icons.tune, size: 18, color: AppColors.textHint), // Filter settings icon
-        ],
-      ),
-    );
-  }
-
-  // --- Sub-widget: Dropdown Filter ---
-  Widget _buildDropdownFilter(String hint) {
-    return Container(
-      height: 40,
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        border: Border.all(color: AppColors.border),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Row(
-        children: [
-          Text(
-            hint,
-            style: AppTextStyles.bodyMedium.copyWith(fontSize: 13),
-          ),
-          const SizedBox(width: 8),
-          const Icon(Icons.keyboard_arrow_down, size: 18, color: AppColors.iconPrimary),
         ],
       ),
     );
@@ -186,187 +127,104 @@ class UserScreen extends StatelessWidget {
   Widget _buildDataTable() {
     return Column(
       children: [
-        // Table Header
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 24.0,
+            vertical: 16.0,
+          ),
           child: Row(
             children: [
-              _buildTableHeader('USER', flex: 3),
-              _buildTableHeader('COMPANY', flex: 2),
-              _buildTableHeader('ROLE', flex: 1),
-              _buildTableHeader('TOTAL RIDES', flex: 1),
-              _buildTableHeader('RATING', flex: 1),
-              _buildTableHeader('STATUS', flex: 1),
-              _buildTableHeader('ACTIONS', flex: 1),
+              _buildTableHeader('USER', flex: 3, align: Alignment.centerLeft),
+              _buildTableHeader('COMPANY', flex: 2, align: Alignment.centerLeft),
+              _buildTableHeader('ROLE', flex: 2, align: Alignment.center), 
+              _buildTableHeader('TOTAL RIDES', flex: 1, align: Alignment.center),
+              _buildTableHeader('RATING', flex: 1, align: Alignment.center),
+              _buildTableHeader('STATUS', flex: 1, align: Alignment.center),
+              _buildTableHeader('ACTIONS', flex: 1, align: Alignment.center),
             ],
           ),
         ),
         const Divider(height: 1, color: AppColors.divider),
 
-        // Table Rows (Mock Data based on screenshot)
-        _buildTableRow(
-          initials: 'SA', name: 'Sithum Anuththara', email: 'admin@carpool.com',
-          company: 'Carpool Platform', role: 'Admin', rides: '250', rating: 'N/A', status: 'Active',
+        // Calling the separated UserCardWidget
+        const UserCardWidget(
+          initials: 'SA',
+          name: 'Sithum Anuththara',
+          email: 'admin@carpool.com',
+          company: 'Carpool Platform',
+          role: 'Admin',
+          rides: '250',
+          rating: 'N/A',
+          status: 'Active',
         ),
-        _buildTableRow(
-          initials: 'JS', name: 'John Smith', email: 'johnsmithtechcorp@gmail.com',
-          company: 'Tech Corp Inc', role: 'Driver', rides: '200', rating: '2.9', status: 'Inactive',
+        const UserCardWidget(
+          initials: 'JS',
+          name: 'John Smith',
+          email: 'johnsmithtechcorp@gmail.com',
+          company: 'Tech Corp Inc',
+          role: 'Driver',
+          rides: '200',
+          rating: '2.9',
+          status: 'Inactive',
         ),
-        _buildTableRow(
-          initials: 'SJ', name: 'Sara Johnson', email: 'sarajohnsonds@gmail.com',
-          company: 'Design Studio Ltd', role: 'Rider', rides: '120', rating: '4.5', status: 'Suspend',
+        const UserCardWidget(
+          initials: 'SJ',
+          name: 'Sara Johnson',
+          email: 'sarajohnsonds@gmail.com',
+          company: 'Design Studio Ltd',
+          role: 'Rider',
+          rides: '120',
+          rating: '4.5',
+          status: 'Suspend',
         ),
-        _buildTableRow(
-          avatarUrl: 'https://i.pravatar.cc/150?img=11', // Dummy avatar image
-          name: 'Dulanja Hansika', email: 'dulanjahansika@gmail.com',
-          company: 'Finance Solutions', role: 'Both', rides: '220', rating: '4.7', status: 'Inactive',
+        const UserCardWidget(
+          initials: 'DH', 
+          profileImageName: 'dulanja.jpg', 
+          name: 'Dulanja Hansika',
+          email: 'dulanjahansika@gmail.com',
+          company: 'Finance Solutions',
+          role: 'Both',
+          rides: '220',
+          rating: '4.7',
+          status: 'Inactive',
         ),
-        const SizedBox(height: 16), // Bottom padding for table
+        const UserCardWidget(
+          initials: 'KK',
+          name: 'Kebuni Kasunika',
+          email: 'admin@carpool.com',
+          company: 'Retail Group',
+          role: 'Admin',
+          rides: '220',
+          rating: '1.7',
+          status: 'Inactive',
+        ),
+        const UserCardWidget(
+          initials: 'MS', 
+          profileImageName: 'manul.jpg', 
+          name: 'Manul Singh',
+          email: 'admin@carpool.com',
+          company: 'Healthcare Pvt',
+          role: 'Company Admin',
+          rides: '220',
+          rating: '2.7',
+          status: 'Inactive',
+        ),
+
+        const SizedBox(height: 16),
       ],
     );
   }
 
-  // --- Helper: Table Header Text ---
-  Widget _buildTableHeader(String text, {required int flex}) {
+  Widget _buildTableHeader(String text, {required int flex, required Alignment align}) {
     return Expanded(
       flex: flex,
-      child: Text(
-        text,
-        style: AppTextStyles.tableHeader.copyWith(
-          color: const Color(0xFF9CA3AF),
-        ),
-      ),
-    );
-  }
-
-  // --- Helper: Table Row Builder ---
-  Widget _buildTableRow({
-    String? initials,
-    String? avatarUrl,
-    required String name,
-    required String email,
-    required String company,
-    required String role,
-    required String rides,
-    required String rating,
-    required String status,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColors.divider)),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // 1. User Info (Avatar + Name + Email)
-          Expanded(
-            flex: 3,
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 16,
-                  backgroundColor: const Color(0xFF4B5563),
-                  backgroundImage: avatarUrl != null ? NetworkImage(avatarUrl) : null,
-                  child: initials != null
-                      ? Text(initials, style: const TextStyle(color: Colors.white, fontSize: 12, fontWeight: AppFonts.medium))
-                      : null,
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(name, style: AppTextStyles.bodyMedium.copyWith(fontWeight: AppFonts.semibold, color: const Color(0xFF374151))),
-                      Text(email, style: AppTextStyles.caption.copyWith(color: const Color(0xFF9CA3AF), fontSize: 11), overflow: TextOverflow.ellipsis),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+      child: Align(
+        alignment: align,
+        child: Text(
+          text,
+          style: AppTextStyles.tableHeader.copyWith(
+            color: AppColors.textHint,
           ),
-          
-          // 2. Company
-          Expanded(
-            flex: 2,
-            child: Text(company, style: AppTextStyles.bodySmall.copyWith(fontWeight: AppFonts.semibold, color: const Color(0xFF4B5563))),
-          ),
-          
-          // 3. Role Pill
-          Expanded(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: _buildPill(role),
-            ),
-          ),
-          
-          // 4. Total Rides
-          Expanded(
-            flex: 1,
-            child: Text(rides, style: AppTextStyles.bodySmall.copyWith(fontWeight: AppFonts.semibold, color: const Color(0xFF4B5563))),
-          ),
-          
-          // 5. Rating
-          Expanded(
-            flex: 1,
-            child: Row(
-              children: [
-                if (rating != 'N/A') const Icon(Icons.star, size: 14, color: Color(0xFF374151)),
-                if (rating != 'N/A') const SizedBox(width: 4),
-                Text(rating, style: AppTextStyles.bodySmall.copyWith(fontWeight: AppFonts.semibold, color: const Color(0xFF4B5563))),
-              ],
-            ),
-          ),
-          
-          // 6. Status Pill
-          Expanded(
-            flex: 1,
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: _buildPill(status),
-            ),
-          ),
-          
-          // 7. Actions
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.border),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text('Action', style: TextStyle(fontSize: 12, color: Color(0xFF4B5563))),
-                  SizedBox(width: 4),
-                  Icon(Icons.keyboard_arrow_down, size: 14, color: Color(0xFF4B5563)),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // --- Helper: Status/Role Pill ---
-  Widget _buildPill(String text) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-      decoration: BoxDecoration(
-        color: const Color(0xFFE5E7EB), // Light gray background
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Text(
-        text,
-        style: const TextStyle(
-          fontSize: 11,
-          fontWeight: AppFonts.medium,
-          color: Color(0xFF4B5563),
         ),
       ),
     );
