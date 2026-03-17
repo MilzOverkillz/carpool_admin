@@ -23,7 +23,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           width: 666,
           height: 729,
           decoration: BoxDecoration(
-            color: Color(0xFFF1F1F1),
+            color: AppColors.authContainerColor,
             borderRadius: BorderRadius.circular(25),
             boxShadow: [
               BoxShadow(

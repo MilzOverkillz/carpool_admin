@@ -3,6 +3,7 @@ import 'package:carpool_admin/screens/login_and_register_section/reset_password.
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
+import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/main_screen/main_shell_screen.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:flutter/material.dart';
@@ -80,6 +81,7 @@ class AppRouter {
 
       // Dashboard Flow
       GoRoute(
+        name: 'main-dashboard',
         path: AppRoutes.dashboard,
         builder: (context, state) =>
             const PlaceholderScreen(title: "Main Dashboard"),
