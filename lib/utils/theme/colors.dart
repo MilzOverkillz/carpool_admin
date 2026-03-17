@@ -23,7 +23,8 @@ class AppColors {
   
   // Interactive Surfaces (Buttons, Tags)
   static const Color buttonSecondaryBg = Color(0xFFE5E7EB); // Light gray (Process Refund button)
-  static const Color tagBg = Color(0xFFE5E7EB); // Light gray (Pending/Approved pills)
+  static const Color tagBg = Color(0xFFE5E7EB); 
+  static const Color white = Color(0xFFFFFFFF);// Light gray (Pending/Approved pills)
 
   // ==========================================
   // Text Colors
@@ -35,6 +36,7 @@ class AppColors {
   static const Color textInverse = Color(0xFFFFFFFF); // Text on dark backgrounds (Sign in btn)
   static const Color authHeading = Color(0xFF232323);
   static const Color authSubHeading = Color(0xFF969696);
+  static const Color tabsSelection = Color(0xFFE1E1E1);
 
   // ==========================================
   // Borders & Dividers
