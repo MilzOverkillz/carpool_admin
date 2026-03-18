@@ -8,7 +8,7 @@ class AppTextStyles {
   AppTextStyles._(); // Private constructor to prevent instantiation
 
   // ==========================================
-  // Display & Hero Styles 
+  // Display & Hero Styles
   // ==========================================
   static const TextStyle displayLarge = TextStyle(
     fontFamily: AppFonts.primary,
@@ -26,7 +26,13 @@ class AppTextStyles {
     height: 1.3,
     color: AppColors.textPrimary,
   );
-
+  static const TextStyle statesCardValue = TextStyle(
+    fontFamily: AppFonts.inter,
+    fontSize: 24,
+    fontWeight: FontWeight.w700, // Semi-bold
+    height: 1.3,
+    color: AppColors.textPrimary,
+  );
   // ==========================================
   // Dashboard & Table Headings
   // ==========================================
@@ -74,7 +80,13 @@ class AppTextStyles {
     height: 1.4,
     color: AppColors.textPrimary,
   );
-
+  static const TextStyle statesCardLabel = TextStyle(
+    fontFamily: AppFonts.inter,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.4,
+    color: AppColors.textPrimary,
+  );
   // ==========================================
   // Label & Button Styles
   // ==========================================
@@ -146,25 +158,25 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 40,
     letterSpacing: -0.4,
-    color: AppColors.authHeading
+    color: AppColors.authHeading,
   );
   static const TextStyle authContainerSubHeading = TextStyle(
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w400,
     fontSize: 18,
-    color: AppColors.authSubHeading
+    color: AppColors.authSubHeading,
   );
   static const TextStyle authActiveTextField = TextStyle(
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w400,
     fontSize: 18,
-    color: AppColors.authHeading
+    color: AppColors.authHeading,
   );
   static const TextStyle authHintTextField = TextStyle(
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w400,
     fontSize: 18,
-    color: Color(0xFF9A9A9A)
+    color: Color(0xFF9A9A9A),
   );
   static const TextStyle loginRememberText = TextStyle(
     fontFamily: AppFonts.primary,
@@ -173,30 +185,30 @@ class AppTextStyles {
     color: AppColors.authHeading,
   );
   static const TextStyle forgotPasswordText = TextStyle(
-  fontFamily: AppFonts.primary,
-  fontSize: 16,
-  fontWeight: FontWeight.w500, 
-  height: 1.5, 
-  letterSpacing: 0,
-  color: AppColors.authHeading, // Adjust based on your primary color
-  decoration: TextDecoration.underline,
-  decorationStyle: TextDecorationStyle.solid,
-);
- static const TextStyle authButtonText = TextStyle(
-  fontFamily: AppFonts.primary,
-  fontSize: 18,
-  fontWeight: FontWeight.w600, 
-  height: 1.2, 
-  letterSpacing: -0.01,
-  color: AppColors.background,
-);
- static const TextStyle verificationHeadingText = TextStyle(
-  fontFamily: AppFonts.primary,
-  fontSize: 32,
-  fontWeight: FontWeight.w600,  
-  color: AppColors.black,
-);
- static const TextStyle sidebarLogo = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: 0,
+    color: AppColors.authHeading, // Adjust based on your primary color
+    decoration: TextDecoration.underline,
+    decorationStyle: TextDecorationStyle.solid,
+  );
+  static const TextStyle authButtonText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    height: 1.2,
+    letterSpacing: -0.01,
+    color: AppColors.background,
+  );
+  static const TextStyle verificationHeadingText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 32,
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
+  );
+  static const TextStyle sidebarLogo = TextStyle(
     fontFamily: AppFonts.nunitoSans,
     fontSize: 20,
     fontWeight: AppFonts.extrabold, // 800
@@ -208,7 +220,7 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: AppFonts.semibold, // 600
     letterSpacing: 0.3,
-    // Note: Color is omitted here because it changes dynamically 
+    // Note: Color is omitted here because it changes dynamically
     // depending on whether the tab is Active (White) or Inactive (Dark Gray).
   );
 
@@ -239,7 +251,7 @@ class AppTextStyles {
     fontWeight: AppFonts.medium, // 500
     color: AppColors.textSecondary,
   );
- static const TextStyle topBarTitle = TextStyle(
+  static const TextStyle topBarTitle = TextStyle(
     fontFamily: AppFonts.primary, // Inter
     fontSize: 30,
     fontWeight: AppFonts.bold, // 700
@@ -248,7 +260,7 @@ class AppTextStyles {
   );
 
   static const TextStyle searchHintText = TextStyle(
-    fontFamily: AppFonts.inter, // DM Sans
+    fontFamily: AppFonts.primary, // DM Sans
     fontWeight: AppFonts.normal, // 400
     fontSize: 14,
     height: 1.4, // 20px line height / 14px size
@@ -257,9 +269,57 @@ class AppTextStyles {
   );
 
   static const TextStyle searchInputText = TextStyle(
-    fontFamily: AppFonts.inter, // DM Sans
+    fontFamily: AppFonts.primary, // DM Sans
     fontWeight: AppFonts.normal, // 400
     fontSize: 14,
     color: AppColors.textPrimary,
   );
+}
+
+  static const TextStyle filterSearchText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 14,
+    color: AppColors.filterText, // #1D1929
+  );
+
+  static const TextStyle filterDropdownText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 12,
+    color: AppColors.filterText, // #1D1929
+  );
+
+  static const TextStyle pageHeaderTitle = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 18,
+    fontWeight: AppFonts.bold, // 700
+    height: 1.55, // 28px line-height / 18px size
+    color: Color(0xFF212B36),
+  );
+
+  static const TextStyle pageHeaderSubtitle = TextStyle(
+    fontFamily: AppFonts.inter, // DM Sans
+    fontSize: 12,
+    fontWeight: AppFonts.normal, // 400
+    height: 1.66, // 20px line-height / 12px size
+    letterSpacing: -0.24, // -2% of 12px
+    color: Color(0xFF9EA2A5),
+  );
+
+  static const TextStyle primaryButtonText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 14,
+    fontWeight: AppFonts.normal, // 400
+    color: Color(0xFFFFFFFF),
+  );
+
+  static const TextStyle actionButtonText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 12,
+    fontWeight: FontWeight.w500, // Medium
+    height: 1.5,
+    color: AppColors.outlinedButtonText, // Uses your new purple text color
+  );
+
 }

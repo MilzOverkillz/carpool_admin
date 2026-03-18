@@ -8,10 +8,10 @@ class MainLayout extends StatelessWidget {
   final Widget child; // The unique content for each screen
 
   const MainLayout({
-    Key? key,
+    super.key,
     required this.pageTitle,
     required this.child,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
