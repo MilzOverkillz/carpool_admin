@@ -1,7 +1,7 @@
 import 'package:carpool_admin/utils/models/notification_dummy_data.dart';
+import 'package:carpool_admin/widgets/notifications_widgets/complaints_table.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/theme/colors.dart';
-import '../../../utils/theme/fonts.dart';
 import 'table_filters.dart';
 
 class ComplaintsTab extends StatefulWidget {
@@ -31,16 +31,20 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
 
   void _applyFilters() {
     setState(() {
-      _filteredComplaints = NotificationDummyData.complaints.where((complaint) {
+      _filteredComplaints =
+          NotificationDummyData.complaints.where((complaint) {
         // Search filter
         final searchLower = _searchController.text.toLowerCase();
         final matchesSearch = searchLower.isEmpty ||
-            complaint.title.toLowerCase().contains(searchLower) ||
+            complaint.id.toLowerCase().contains(searchLower) ||
+            complaint.complaintType.toLowerCase().contains(searchLower) ||
+            complaint.reporterName.toLowerCase().contains(searchLower) ||
+            complaint.reportedUserName.toLowerCase().contains(searchLower) ||
             complaint.description.toLowerCase().contains(searchLower);
 
         // Type filter
         final matchesType = _selectedType == 'All Type' ||
-            complaint.type == _selectedType;
+            complaint.complaintType == _selectedType;
 
         // Status filter
         final matchesStatus = _selectedStatus == 'All Status' ||
@@ -54,19 +58,37 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.fromLTRB(0, 24, 24, 0),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.divider,
-          width: 1,
-        ),
+        border: Border.all(color: AppColors.tableBorder, width: 1),
+        boxShadow: [
+          // Left shadow (light)
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            offset: const Offset(-2, 0),
+            blurRadius: 6,
+          ),
+
+          // Right shadow (light)
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            offset: const Offset(2, 0),
+            blurRadius: 6,
+          ),
+
+          // Bottom shadow (darker)
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            offset: const Offset(1, 9),
+            blurRadius: 10,
+          ),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // Filters (Reusing the TableFilters widget)
+          // Filters
           TableFilters(
             searchController: _searchController,
             selectedType: _selectedType,
@@ -83,23 +105,9 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
             },
             onSearchChanged: _applyFilters,
           ),
-          
-          // TODO: Add Complaints Table here
-          // This is where the complaints table will be added later
-          Padding(
-            padding: const EdgeInsets.all(48.0),
-            child: Center(
-              child: Text(
-                'Complaints Table - Coming Soon',
-                style: TextStyle(
-                  fontFamily: AppFonts.primary,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.textTertiary,
-                ),
-              ),
-            ),
-          ),
+
+          // Complaints Table
+          ComplaintsTable(complaints: _filteredComplaints),
         ],
       ),
     );

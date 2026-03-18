@@ -156,7 +156,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
         child: Container(
           width: widget.width,
           height: 56, // Fixed height to match search field
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 0),
           decoration: BoxDecoration(
             color: AppColors.white,
             borderRadius: BorderRadius.circular(10),
