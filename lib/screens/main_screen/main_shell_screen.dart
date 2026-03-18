@@ -1,14 +1,9 @@
+import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:flutter/material.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
-
-// Import all your screen contents (not the full screens with MainLayout)
-// import 'package:carpool_admin/screens/dashboard/dashboard_content.dart';
-// import 'package:carpool_admin/screens/users/users_content.dart';
-// import 'package:carpool_admin/screens/payments/payments_content.dart';
-// etc...
 
 class MainShellScreen extends StatefulWidget {
   const MainShellScreen({Key? key}) : super(key: key);
@@ -33,7 +28,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
     switch (_activeScreen) {
       case 'Dashboard':
         // return const DashboardContent();
-        return _buildPlaceholder('Dashboard');
+        return MainDashboard();
       case 'Companies':
         return _buildPlaceholder('Companies');
       case 'Users':

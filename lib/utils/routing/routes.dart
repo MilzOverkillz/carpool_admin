@@ -79,13 +79,6 @@ class AppRouter {
         builder: (context, state) => const NotificationsContent(),
       ),
 
-      // Dashboard Flow
-      GoRoute(
-        name: 'main-dashboard',
-        path: AppRoutes.dashboard,
-        builder: (context, state) =>
-            const PlaceholderScreen(title: "Main Dashboard"),
-      ),
 
       // Payments Overview
       GoRoute(

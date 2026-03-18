@@ -48,7 +48,7 @@ class UserScreen extends StatelessWidget {
               'User Management',
               style: AppTextStyles.pageHeaderTitle,
             ),
-            const Text(
+            Text(
               'Mange all users , rolls and permissions',
               style: AppTextStyles.pageHeaderSubtitle,
             ),
