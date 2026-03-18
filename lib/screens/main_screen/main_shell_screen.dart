@@ -1,4 +1,5 @@
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/payment/payment_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
@@ -43,7 +44,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
         return _buildPlaceholder('Rides');
       case 'Payments':
         // return const PaymentsContent();
-        return _buildPlaceholder('Payments');
+        return const PayemntScreen();
       case 'Analytics':
         return _buildPlaceholder('Analytics');
       case 'Notifications':

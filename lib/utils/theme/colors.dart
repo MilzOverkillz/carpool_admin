@@ -21,8 +21,8 @@ class AppColors {
   static const Color surface = Color(0xFFFFFFFF); // White (Cards, Modals, Inputs)
   static const Color surfaceSecondary = Color(0xFFF9FAFB);
   static const Color mainBackground = Color(0xFFF4F7FE); // Slightly off-white surface
-  static const Color surface = Color(0xFFF4F7FE); // White (Cards, Modals, Inputs)
-  static const Color surfaceSecondary = Color(0xFFF9FAFB); // Slightly off-white surface
+  //static const Color surface = Color(0xFFF4F7FE); // White (Cards, Modals, Inputs)
+  //static const Color surfaceSecondary = Color(0xFFF9FAFB); // Slightly off-white surface
   
   // Interactive Surfaces (Buttons, Tags)
   static const Color buttonSecondaryBg = Color(0xFFE5E7EB); // Light gray (Process Refund button)
@@ -96,5 +96,7 @@ class AppColors {
   static const Color purpleText = Color(0xFF6B7280); // Lighter purple for role pill text
   static const Color outlinedButtonText = Color(0xFF6B7280); // Outlined button text color (purple)
   static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
+
+  static const Color paymentText = Color(0xFF1E272E);
   
 }

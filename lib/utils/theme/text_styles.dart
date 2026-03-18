@@ -27,7 +27,7 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
   static const TextStyle statesCardValue = TextStyle(
-    fontFamily: AppFonts.inter,
+    fontFamily: AppFonts.primary,
     fontSize: 24,
     fontWeight: FontWeight.w700, // Semi-bold
     height: 1.3,
@@ -81,7 +81,7 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
   static const TextStyle statesCardLabel = TextStyle(
-    fontFamily: AppFonts.inter,
+    fontFamily: AppFonts.primary,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     height: 1.4,
@@ -274,7 +274,7 @@ class AppTextStyles {
     fontSize: 14,
     color: AppColors.textPrimary,
   );
-}
+
 
   static const TextStyle filterSearchText = TextStyle(
     fontFamily: AppFonts.primary, // Inter
@@ -299,7 +299,7 @@ class AppTextStyles {
   );
 
   static const TextStyle pageHeaderSubtitle = TextStyle(
-    fontFamily: AppFonts.inter, // DM Sans
+    fontFamily: AppFonts.primary, // DM Sans
     fontSize: 12,
     fontWeight: AppFonts.normal, // 400
     height: 1.66, // 20px line-height / 12px size

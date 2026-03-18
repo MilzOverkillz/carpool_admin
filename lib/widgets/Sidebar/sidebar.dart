@@ -204,7 +204,7 @@ class SidebarWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/icons/logout.png',
+              'assets/icons/dashboard/logout.png',
               width: 18,
               height: 18,
             ),
