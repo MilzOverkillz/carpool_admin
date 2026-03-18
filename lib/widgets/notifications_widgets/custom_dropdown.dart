@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../utils/theme/colors.dart';
 import '../../../utils/theme/fonts.dart';
 
@@ -65,12 +66,12 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 offset: Offset(0, size.height + 4),
                 child: Material(
                   elevation: 8,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(15),
                   color: Colors.white,
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -93,28 +94,32 @@ class _CustomDropdownState extends State<CustomDropdown> {
                             child: Container(
                               width: double.infinity,
                               padding: const EdgeInsets.symmetric(
-                                horizontal: 16,
+                                horizontal: 20,
                                 vertical: 12,
                               ),
+                              color: isSelected
+                                  ? Colors.grey.withOpacity(0.08)
+                                  : Colors.transparent,
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     item,
                                     style: TextStyle(
                                       fontFamily: AppFonts.primary,
-                                      fontSize: 14,
+                                      fontSize: 13,
                                       fontWeight: isSelected
                                           ? FontWeight.w600
-                                          : FontWeight.w400,
+                                          : FontWeight.w500,
                                       color: AppColors.textPrimary,
                                     ),
                                   ),
                                   if (isSelected)
-                                    const Icon(
-                                      Icons.check,
-                                      size: 16,
-                                      color: AppColors.textPrimary,
+                                    SvgPicture.asset(
+                                      "assets/icons/notification_icons/check_icon.svg",
+                                      width: 8,
+                                      height: 8,
                                     ),
                                 ],
                               ),
@@ -147,20 +152,18 @@ class _CustomDropdownState extends State<CustomDropdown> {
       link: _layerLink,
       child: InkWell(
         onTap: _toggleDropdown,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
         child: Container(
           width: widget.width,
-          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+          height: 56, // Fixed height to match search field
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 0),
           decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: AppColors.divider,
-              width: 1,
-            ),
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: AppColors.searchBorder, width: 1.2),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: Text(
@@ -169,15 +172,15 @@ class _CustomDropdownState extends State<CustomDropdown> {
                     fontFamily: AppFonts.primary,
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
+                    color: AppColors.black,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 2),
               Icon(
                 _isOpen ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
-                size: 20,
+                size: 30,
                 color: AppColors.textSecondary,
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:carpool_admin/utils/models/notification_dummy_data.dart';
+import 'package:carpool_admin/utils/theme/text_styles.dart';
 import 'package:carpool_admin/widgets/buttons/send_notification_button.dart';
 import 'package:carpool_admin/widgets/notifications_widgets/complaints_tab.dart';
 import 'package:carpool_admin/widgets/notifications_widgets/notification_tabs.dart';
@@ -8,7 +9,6 @@ import 'package:carpool_admin/widgets/notifications_widgets/table_filters.dart';
 import 'package:carpool_admin/widgets/notifications_widgets/templates_tab.dart';
 import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
-import '../../utils/theme/fonts.dart';
 
 /// This is the CONTENT-ONLY version of the Notifications screen
 /// It does NOT include MainLayout - that's handled by MainShellScreen
@@ -93,7 +93,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
               complaintsBadgeCount: NotificationDummyData.newComplaints,
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 6),
 
             // Tab Content
             _buildTabContent(),
@@ -122,7 +122,8 @@ class _NotificationsContentState extends State<NotificationsContent> {
               child: StatsCard(
                 label: 'Notification',
                 value: NotificationDummyData.totalNotifications.toString(),
-                iconAsset: 'assets/icons/notification_icons/stats_notification.svg',
+                iconAsset:
+                    'assets/icons/notification_icons/stats_notification.svg',
               ),
             ),
             SizedBox(
@@ -159,24 +160,14 @@ class _NotificationsContentState extends State<NotificationsContent> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Notifications & Alerts',
-          style: TextStyle(
-            fontFamily: AppFonts.primary,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: AppColors.textPrimary,
-          ),
+          style: AppTextStyles.notificationHeading.copyWith(),
         ),
         const SizedBox(height: 4),
-        const Text(
+        Text(
           'Manage system notification and complaints',
-          style: TextStyle(
-            fontFamily: AppFonts.primary,
-            fontSize: 14,
-            fontWeight: FontWeight.w400,
-            color: AppColors.textSecondary,
-          ),
+          style: AppTextStyles.notificationSubHeading.copyWith(),
         ),
       ],
     );
@@ -201,11 +192,34 @@ class _NotificationsContentState extends State<NotificationsContent> {
 
   Widget _buildNotificationsTab() {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.fromLTRB(0, 0, 24, 0),
       decoration: BoxDecoration(
         color: AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.divider, width: 1),
+        border: Border.all(color: AppColors.tableBorder, width: 1),
+        boxShadow: [
+          // Top shadow (normal)
+
+          // Left shadow (light)
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            offset: const Offset(-2, 0),
+            blurRadius: 6,
+          ),
+
+          // Right shadow (light)
+          BoxShadow(
+            color: Colors.black.withOpacity(0.02),
+            offset: const Offset(2, 0),
+            blurRadius: 6,
+          ),
+
+          // Bottom shadow (darker)
+          BoxShadow(
+            color: Colors.black.withOpacity(0.12),
+            offset: const Offset(-1, 9),
+            blurRadius: 10,
+          ),
+        ],
       ),
       child: Column(
         children: [

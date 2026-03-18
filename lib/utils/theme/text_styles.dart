@@ -27,11 +27,25 @@ class AppTextStyles {
     color: AppColors.textPrimary,
   );
   static const TextStyle statesCardValue = TextStyle(
-    fontFamily: AppFonts.inter,
+    fontFamily: AppFonts.primary,
     fontSize: 24,
     fontWeight: FontWeight.w700, // Semi-bold
     height: 1.3,
     color: AppColors.textPrimary,
+  );
+  static const TextStyle notificationHeading = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 20,
+    fontWeight: FontWeight.w700, // Semi-bold
+    height: 1.3,
+    color: AppColors.textPrimary,
+  );
+  static const TextStyle notificationSubHeading = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w400, // Semi-bold
+    height: 1.3,
+    color: AppColors.blackText200,
   );
   // ==========================================
   // Dashboard & Table Headings
@@ -43,6 +57,14 @@ class AppTextStyles {
     height: 1.5,
     letterSpacing: 0.5,
     color: AppColors.textSecondary, // Muted color as seen in table headers
+  );
+  static const TextStyle notificationTableHeader = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: 0.5,
+    color: AppColors.blackText200, // Muted color as seen in table headers
   );
 
   static const TextStyle cardTitle = TextStyle(
@@ -63,6 +85,12 @@ class AppTextStyles {
     height: 1.5,
     color: AppColors.textPrimary,
   );
+  static const TextStyle filterSearchText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 14,
+    color: AppColors.filterText, // #1D1929
+  );
 
   static const TextStyle bodyMedium = TextStyle(
     fontFamily: AppFonts.primary,
@@ -71,7 +99,13 @@ class AppTextStyles {
     height: 1.4,
     color: AppColors.textPrimary,
   );
-
+  static const TextStyle notificationBodyMedium = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    height: 1.4,
+    color: AppColors.black,
+  );
   // Used for table rows (e.g., "Maduwantha Herath")
   static const TextStyle bodySmall = TextStyle(
     fontFamily: AppFonts.primary,
@@ -80,8 +114,24 @@ class AppTextStyles {
     height: 1.4,
     color: AppColors.textPrimary,
   );
+  static const TextStyle pageHeaderTitle = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 18,
+    fontWeight: AppFonts.bold, // 700
+    height: 1.55, // 28px line-height / 18px size
+    color: Color(0xFF212B36),
+  );
+
+  static const TextStyle pageHeaderSubtitle = TextStyle(
+    fontFamily: AppFonts.dmSans, // DM Sans
+    fontSize: 12,
+    fontWeight: AppFonts.normal, // 400
+    height: 1.66, // 20px line-height / 12px size
+    letterSpacing: -0.24, // -2% of 12px
+    color: Color(0xFF9EA2A5),
+  );
   static const TextStyle statesCardLabel = TextStyle(
-    fontFamily: AppFonts.inter,
+    fontFamily: AppFonts.primary,
     fontSize: 16,
     fontWeight: FontWeight.w500,
     height: 1.4,
@@ -95,6 +145,12 @@ class AppTextStyles {
     fontSize: 15,
     fontWeight: FontWeight.w600,
     color: AppColors.textInverse, // White text on dark buttons
+  );
+  static const TextStyle primaryButtonText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 14,
+    fontWeight: AppFonts.normal, // 400
+    color: Color(0xFFFFFFFF),
   );
 
   static const TextStyle labelInput = TextStyle(
@@ -137,6 +193,13 @@ class AppTextStyles {
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: AppColors.textTertiary,
+  );
+  static const TextStyle notificationCaption = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    height: 1.2,
+    color: AppColors.blackText100,
   );
 
   static const TextStyle error = TextStyle(
@@ -260,7 +323,7 @@ class AppTextStyles {
   );
 
   static const TextStyle searchHintText = TextStyle(
-    fontFamily: AppFonts.primary, // DM Sans
+    fontFamily: AppFonts.dmSans, // DM Sans
     fontWeight: AppFonts.normal, // 400
     fontSize: 14,
     height: 1.4, // 20px line height / 14px size
@@ -269,57 +332,9 @@ class AppTextStyles {
   );
 
   static const TextStyle searchInputText = TextStyle(
-    fontFamily: AppFonts.primary, // DM Sans
+    fontFamily: AppFonts.dmSans, // DM Sans
     fontWeight: AppFonts.normal, // 400
     fontSize: 14,
     color: AppColors.textPrimary,
   );
-}
-
-  static const TextStyle filterSearchText = TextStyle(
-    fontFamily: AppFonts.primary, // Inter
-    fontWeight: AppFonts.normal, // 400
-    fontSize: 14,
-    color: AppColors.filterText, // #1D1929
-  );
-
-  static const TextStyle filterDropdownText = TextStyle(
-    fontFamily: AppFonts.primary, // Inter
-    fontWeight: AppFonts.normal, // 400
-    fontSize: 12,
-    color: AppColors.filterText, // #1D1929
-  );
-
-  static const TextStyle pageHeaderTitle = TextStyle(
-    fontFamily: AppFonts.primary, // Inter
-    fontSize: 18,
-    fontWeight: AppFonts.bold, // 700
-    height: 1.55, // 28px line-height / 18px size
-    color: Color(0xFF212B36),
-  );
-
-  static const TextStyle pageHeaderSubtitle = TextStyle(
-    fontFamily: AppFonts.inter, // DM Sans
-    fontSize: 12,
-    fontWeight: AppFonts.normal, // 400
-    height: 1.66, // 20px line-height / 12px size
-    letterSpacing: -0.24, // -2% of 12px
-    color: Color(0xFF9EA2A5),
-  );
-
-  static const TextStyle primaryButtonText = TextStyle(
-    fontFamily: AppFonts.primary, // Inter
-    fontSize: 14,
-    fontWeight: AppFonts.normal, // 400
-    color: Color(0xFFFFFFFF),
-  );
-
-  static const TextStyle actionButtonText = TextStyle(
-    fontFamily: AppFonts.primary, // Inter
-    fontSize: 12,
-    fontWeight: FontWeight.w500, // Medium
-    height: 1.5,
-    color: AppColors.outlinedButtonText, // Uses your new purple text color
-  );
-
 }

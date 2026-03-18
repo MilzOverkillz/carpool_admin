@@ -17,7 +17,7 @@ class NotificationTabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
+      margin: const EdgeInsets.fromLTRB(0, 0, 26, 0),
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
         color: AppColors.tabsSelection.withOpacity(0.5),
@@ -74,7 +74,7 @@ class NotificationTabs extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.white : Colors.transparent,
           borderRadius: BorderRadius.circular(6),
