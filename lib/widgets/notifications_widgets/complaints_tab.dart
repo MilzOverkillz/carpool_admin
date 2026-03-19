@@ -13,8 +13,8 @@ class ComplaintsTab extends StatefulWidget {
 
 class _ComplaintsTabState extends State<ComplaintsTab> {
   final TextEditingController _searchController = TextEditingController();
-  String _selectedType = 'All Type';
-  String _selectedStatus = 'All Status';
+  String _selectedType = 'All Status';
+  String _selectedStatus = 'All Priority';
   List<ComplaintItem> _filteredComplaints = [];
 
   @override
@@ -43,12 +43,12 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
             complaint.description.toLowerCase().contains(searchLower);
 
         // Type filter
-        final matchesType = _selectedType == 'All Type' ||
-            complaint.complaintType == _selectedType;
+        final matchesType = _selectedType == 'All Status' ||
+            complaint.status == _selectedType;
 
         // Status filter
-        final matchesStatus = _selectedStatus == 'All Status' ||
-            complaint.status == _selectedStatus;
+        final matchesStatus = _selectedStatus == 'All Priority' ||
+            complaint.priority == _selectedStatus;
 
         return matchesSearch && matchesType && matchesStatus;
       }).toList();
@@ -93,8 +93,8 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
             searchController: _searchController,
             selectedType: _selectedType,
             selectedStatus: _selectedStatus,
-            typeOptions: NotificationDummyData.complaintTypeOptions,
-            statusOptions: NotificationDummyData.statusOptions,
+            typeOptions: NotificationDummyData.statusOptions,
+            statusOptions: NotificationDummyData.priorityOptions,
             onTypeChanged: (value) {
               setState(() => _selectedType = value);
               _applyFilters();

@@ -64,7 +64,7 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     height: 1.5,
     letterSpacing: 0.5,
-    color: AppColors.blackText200, // Muted color as seen in table headers
+    color: AppColors.blackText100, // Muted color as seen in table headers
   );
 
   static const TextStyle cardTitle = TextStyle(

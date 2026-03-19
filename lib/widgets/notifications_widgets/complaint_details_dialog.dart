@@ -6,10 +6,8 @@ import '../../../utils/theme/fonts.dart';
 class ComplaintDetailsDialog extends StatefulWidget {
   final ComplaintItem complaint;
 
-  const ComplaintDetailsDialog({
-    Key? key,
-    required this.complaint,
-  }) : super(key: key);
+  const ComplaintDetailsDialog({Key? key, required this.complaint})
+    : super(key: key);
 
   @override
   State<ComplaintDetailsDialog> createState() => _ComplaintDetailsDialogState();
@@ -39,10 +37,10 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
       backgroundColor: AppColors.surface,
       elevation: 4,
       // Updated to match the rounded corners in the design
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
       child: Container(
-        width: 540,
-        padding: const EdgeInsets.all(32),
+        width: 600,
+        padding: const EdgeInsets.fromLTRB(44, 50, 44, 50),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -60,19 +58,19 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                         'Complaint Details',
                         style: TextStyle(
                           fontFamily: AppFonts.primary,
-                          fontSize: 24,
+                          fontSize: 20,
                           fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary,
+                          color: AppColors.blackTextTitle,
                         ),
                       ),
                       const SizedBox(height: 6),
                       Text(
                         'CMP - 2025 - 001',
                         style: TextStyle(
-                          fontFamily: AppFonts.primary,
-                          fontSize: 14,
+                          fontFamily: AppFonts.dmSans,
+                          fontSize: 13,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.blackText200, // Light gray matching image
+                          color: AppColors.blackText200,
                         ),
                       ),
                     ],
@@ -86,13 +84,13 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
 
               // Ride Status and Priority Row
               Row(
                 children: [
                   Expanded(
-                    child: Column(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
@@ -100,18 +98,18 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                           style: TextStyle(
                             fontFamily: AppFonts.primary,
                             fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.blackText200,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.black,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(width: 12),
                         _buildDarkPillBadge(widget.complaint.rideStatus),
                       ],
                     ),
                   ),
                   const SizedBox(width: 24),
                   Expanded(
-                    child: Column(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
@@ -119,18 +117,18 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                           style: TextStyle(
                             fontFamily: AppFonts.primary,
                             fontSize: 13,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.blackText200,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.black,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(width: 12),
                         _buildDarkPillBadge(widget.complaint.priority),
                       ],
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 28),
+              const SizedBox(height: 24),
 
               // Reporter Section (Two Columns)
               Row(
@@ -144,25 +142,25 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                           style: TextStyle(
                             fontFamily: AppFonts.primary,
                             fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textTertiary,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.blackText400,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           widget.complaint.reporterName,
                           style: const TextStyle(
-                            fontFamily: AppFonts.primary,
-                            fontSize: 14,
+                            fontFamily: AppFonts.dmSans,
+                            fontSize: 13,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.textPrimary,
+                            color: AppColors.blackText400,
                           ),
                         ),
-                        const SizedBox(height: 2),
+                        const SizedBox(height: 0),
                         Text(
                           widget.complaint.reporterEmail,
                           style: const TextStyle(
-                            fontFamily: AppFonts.primary,
+                            fontFamily: AppFonts.dmSans,
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                             color: AppColors.blackText200,
@@ -183,25 +181,25 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                           style: TextStyle(
                             fontFamily: AppFonts.primary,
                             fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: AppColors.textTertiary,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.blackText400,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           widget.complaint.reportedUserName,
                           style: const TextStyle(
-                            fontFamily: AppFonts.primary,
-                            fontSize: 14,
+                            fontFamily: AppFonts.dmSans,
+                            fontSize: 13,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.textPrimary,
+                            color: AppColors.blackText400,
                           ),
                         ),
-                        const SizedBox(height: 2),
+                        const SizedBox(height: 0),
                         Text(
                           widget.complaint.reportedUserEmail,
                           style: const TextStyle(
-                            fontFamily: AppFonts.primary,
+                            fontFamily: AppFonts.dmSans,
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
                             color: AppColors.blackText200,
@@ -221,22 +219,22 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                 label: 'Complaint Type',
                 value: widget.complaint.complaintType,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               _buildInfoField(
                 label: 'Description',
                 value: widget.complaint.description,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               _buildInfoField(
                 label: 'Related - Ride',
                 value: widget.complaint.relatedRideId,
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               _buildInfoField(
                 label: 'Date Reported',
                 value: widget.complaint.dateReported,
               ),
-              const SizedBox(height: 28),
+              const SizedBox(height: 32),
 
               // Resolution Notes
               const Text(
@@ -245,18 +243,18 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                   fontFamily: AppFonts.primary,
                   fontSize: 14,
                   fontWeight: FontWeight.w500,
-                  color: AppColors.textPrimary,
+                  color: AppColors.black,
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 6),
               TextField(
                 controller: _resolutionNotesController,
-                maxLines: 3,
+                maxLines: 1,
                 style: const TextStyle(
                   fontFamily: AppFonts.primary,
                   fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.black,
                 ),
                 decoration: InputDecoration(
                   hintText: 'Add notes about the resolution...',
@@ -273,11 +271,14 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                     vertical: 16,
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: const BorderSide(color: AppColors.border, width: 1),
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                      color: AppColors.border,
+                      width: 1,
+                    ),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(10),
                     borderSide: const BorderSide(
                       color: AppColors.textPrimary,
                       width: 1.5,
@@ -285,7 +286,7 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                   ),
                 ),
               ),
-              const SizedBox(height: 32),
+              const SizedBox(height: 24),
 
               // Action Buttons
               Row(
@@ -297,30 +298,27 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                       Navigator.of(context).pop();
                     },
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: AppColors.border,
-                        width: 1,
-                      ),
+                      side: const BorderSide(color: AppColors.blackText200, width: 1),
                       backgroundColor: AppColors.surface,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
+                        horizontal: 22,
+                        vertical: 15,
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: const Text(
                       'Escalate',
                       style: TextStyle(
                         fontFamily: AppFonts.primary,
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary,
                       ),
                     ),
                   ),
-                  
+
                   if (!isResolved) const SizedBox(width: 12),
 
                   // Mark as Resolved Button
@@ -333,24 +331,24 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                         backgroundColor: AppColors.blackText400,
                         elevation: 0,
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 16,
+                          horizontal: 22,
+                          vertical: 15,
                         ),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
                       child: const Text(
                         'Mark as Resolved',
                         style: TextStyle(
                           fontFamily: AppFonts.primary,
-                          fontSize: 14,
+                          fontSize: 13,
                           fontWeight: FontWeight.w600,
                           color: AppColors.white,
                         ),
                       ),
                     ),
-                    
+
                   const SizedBox(width: 12),
 
                   // Contact User Button
@@ -359,24 +357,21 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
                       Navigator.of(context).pop();
                     },
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: AppColors.border,
-                        width: 1,
-                      ),
+                      side: const BorderSide(color: AppColors.blackText200, width: 1),
                       backgroundColor: AppColors.surface,
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 16,
+                        horizontal: 20,
+                        vertical: 15,
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                     ),
                     child: const Text(
                       'Contact User',
                       style: TextStyle(
                         fontFamily: AppFonts.primary,
-                        fontSize: 14,
+                        fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: AppColors.textPrimary,
                       ),
@@ -394,17 +389,17 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
   // Dark pill badge for "New" and "High"
   Widget _buildDarkPillBadge(String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
       decoration: BoxDecoration(
-        color: const Color(0xFF757575), // Dark gray matching the image
-        borderRadius: BorderRadius.circular(20), // Pill shape
+        color: AppColors.pillBox1, // Dark gray matching the image
+        borderRadius: BorderRadius.circular(19), // Pill shape
       ),
       child: Text(
         text,
         style: const TextStyle(
           fontFamily: AppFonts.primary,
           fontSize: 12,
-          fontWeight: FontWeight.w500,
+          fontWeight: FontWeight.w400,
           color: AppColors.white,
         ),
       ),
@@ -416,16 +411,16 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xFFE5E7EB), // Light gray background
-        borderRadius: BorderRadius.circular(20), // Pill shape
+        color: AppColors.pillBox, // Light gray background
+        borderRadius: BorderRadius.circular(6), // Pill shape
       ),
       child: Text(
         text,
         style: const TextStyle(
           fontFamily: AppFonts.primary,
           fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textPrimary,
+          fontWeight: FontWeight.w400,
+          color: AppColors.black,
         ),
       ),
     );
@@ -441,8 +436,8 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
           style: const TextStyle(
             fontFamily: AppFonts.primary,
             fontSize: 12,
-            fontWeight: FontWeight.w500,
-            color: AppColors.blackText200,
+            fontWeight: FontWeight.w400,
+            color: AppColors.textHint2,
           ),
         ),
         const SizedBox(height: 6),
@@ -450,9 +445,9 @@ class _ComplaintDetailsDialogState extends State<ComplaintDetailsDialog> {
           value,
           style: const TextStyle(
             fontFamily: AppFonts.primary,
-            fontSize: 15,
+            fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: AppColors.textPrimary,
+            color: AppColors.black,
           ),
         ),
       ],
