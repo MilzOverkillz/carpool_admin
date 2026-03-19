@@ -23,33 +23,66 @@ class NotificationTabs extends StatelessWidget {
         color: AppColors.tabsSelection.withOpacity(0.5),
         borderRadius: BorderRadius.circular(8),
       ),
-      child: Row(
+      child: Stack(
         children: [
-          Expanded(
-            child: _buildTab(
-              label: 'Notifications',
-              isSelected: selectedIndex == 0,
-              onTap: () => onTabChanged(0),
+          // Sliding smooth background effect
+          Positioned.fill(
+            child: AnimatedAlign(
+              duration: const Duration(milliseconds: 250),
+              curve: Curves.easeOutCubic,
+              alignment: selectedIndex == 0
+                  ? Alignment.centerLeft
+                  : selectedIndex == 1
+                      ? Alignment.center
+                      : Alignment.centerRight,
+              child: FractionallySizedBox(
+                widthFactor: 1 / 3,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.white,
+                    borderRadius: BorderRadius.circular(6),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.2),
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ),
           ),
-          _buildDivider(),
+          // Original row structure untouched
+          Row(
+            children: [
+              Expanded(
+                child: _buildTab(
+                  label: 'Notifications',
+                  isSelected: selectedIndex == 0,
+                  onTap: () => onTabChanged(0),
+                ),
+              ),
+              _buildDivider(),
 
-          Expanded(
-            child: _buildTab(
-              label: 'Complaints',
-              isSelected: selectedIndex == 1,
-              onTap: () => onTabChanged(1),
-              badgeCount: complaintsBadgeCount,
-            ),
-          ),
-          _buildDivider(),
+              Expanded(
+                child: _buildTab(
+                  label: 'Complaints',
+                  isSelected: selectedIndex == 1,
+                  onTap: () => onTabChanged(1),
+                  badgeCount: complaintsBadgeCount,
+                ),
+              ),
+              _buildDivider(),
 
-          Expanded(
-            child: _buildTab(
-              label: 'Templates',
-              isSelected: selectedIndex == 2,
-              onTap: () => onTabChanged(2),
-            ),
+              Expanded(
+                child: _buildTab(
+                  label: 'Templates',
+                  isSelected: selectedIndex == 2,
+                  onTap: () => onTabChanged(2),
+                ),
+              ),
+            ],
           ),
         ],
       ),
@@ -72,21 +105,13 @@ class NotificationTabs extends StatelessWidget {
   }) {
     return GestureDetector(
       onTap: onTap,
+      behavior: HitTestBehavior.opaque,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.white : Colors.transparent,
+          color: Colors.transparent, // Transparent so the sliding background shows through
           borderRadius: BorderRadius.circular(6),
-          boxShadow: isSelected
-              ? [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ]
-              : null,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
