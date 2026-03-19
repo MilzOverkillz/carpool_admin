@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import '../../utils/theme/text_styles.dart';
 import '../nav_bar/ride_details_tab_bar.dart';
 import 'details_section.dart';
-import 'route_section.dart'; // <--- IMPORT THE NEW FILE
+import 'route_section.dart'; 
+import 'participants_section.dart'; // <--- IMPORT THE NEW FILE
+import 'payments_section.dart'; // <--- IMPORT THE PAYMENTS SECTION
+import 'ratings_section.dart'; // <--- IMPORT THE RATINGS SECTION
 
 class RideDetailsDialog extends StatefulWidget {
   final String rideId;
@@ -25,9 +28,8 @@ class _RideDetailsDialogState extends State<RideDetailsDialog> {
       backgroundColor: Colors.transparent, 
       insetPadding: const EdgeInsets.all(24), 
       child: Container(
-        width: 518, // EXACT Figma Dialog Width
-        // The fixed height will keep the box solid and rigid when switching tabs in the video
-        height: 500, // Matched total height (original 475px + the 24px overflow)
+        width: 518, 
+        height: 500, 
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16), 
@@ -51,13 +53,10 @@ class _RideDetailsDialogState extends State<RideDetailsDialog> {
             
             const SizedBox(height: 25), 
 
-            // --- TAB CONTENT ---
-            // Wrapping this in an expanded just in case later tabs use a ListView, 
-            // but for simple columns like this it's not strictly necessary.
             Expanded(
               child: Stack(
                 children: [
-                  // Show DetailsSection when the first tab is clicked
+                  // Tab 0: Details
                   if (_selectedTabIndex == 0) ...[
                     const Positioned.fill(
                       child: DetailsSection(
@@ -67,12 +66,31 @@ class _RideDetailsDialogState extends State<RideDetailsDialog> {
                     ),
                   ],
 
-                  // SHOW THE NEW ROUTE SECTION when the second tab (index 1) is clicked!
+                  // Tab 1: Route
                   if (_selectedTabIndex == 1) ...[
                     const Positioned.fill(
                       child: RouteSection(),
                     ),
-                  ]
+                  ],
+
+                  // Tab 2: Participants (THE NEW SECTION!)
+                  if (_selectedTabIndex == 2) ...[
+                    const Positioned.fill(
+                      child: ParticipantsSection(),
+                    ),
+                  ],
+
+                  if (_selectedTabIndex == 3) ...[
+                    const Positioned.fill(
+                      child: PaymentsSection(), // <--- 2. ADD THIS BLOCK
+                    ),
+                  ],
+
+                  if (_selectedTabIndex == 4) ...[
+                    const Positioned.fill(
+                      child: RatingsSection(), // <--- 2. ADD THIS BLOCK
+                    ),
+                  ],
                 ],
               ),
             ),
