@@ -182,9 +182,7 @@ class _NotificationsContentState extends State<NotificationsContent> {
       case 1:
         return const ComplaintsTab();
       case 2:
-        return Column(
-          children: [const SendNotificationButton(), const TemplatesTab()],
-        );
+        return const TemplatesTab();
       default:
         return const SizedBox.shrink();
     }

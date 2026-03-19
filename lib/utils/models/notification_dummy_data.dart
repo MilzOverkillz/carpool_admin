@@ -1,3 +1,19 @@
+class NotificationTemplate {
+  final String id;
+  final String title;
+  final String message;
+  final String category;
+  final String categoryLabel;
+
+  NotificationTemplate({
+    required this.id,
+    required this.title,
+    required this.message,
+    required this.category,
+    required this.categoryLabel,
+  });
+}
+
 class NotificationItem {
   final String title;
   final String subtitle;
@@ -261,5 +277,37 @@ class NotificationDummyData {
     'Vehicle',
     'Route',
     'Other',
+  ];
+
+  // Notification Templates
+  static List<NotificationTemplate> templates = [
+    NotificationTemplate(
+      id: 'TPL-001',
+      title: 'Ride Confirmation',
+      message: 'Your ride has been confirmed for [date] at [time]',
+      category: 'ride-alert',
+      categoryLabel: 'ride-alert',
+    ),
+    NotificationTemplate(
+      id: 'TPL-002',
+      title: 'Ride Cancelled',
+      message: 'Your ride (riderid) has been canceled. Refund will be processed shortly.',
+      category: 'ride-alert',
+      categoryLabel: 'ride-alert',
+    ),
+    NotificationTemplate(
+      id: 'TPL-003',
+      title: 'Account Verified',
+      message: 'Your ride has been confirmed for [date] at [time]',
+      category: 'account-update',
+      categoryLabel: 'account-update',
+    ),
+    NotificationTemplate(
+      id: 'TPL-004',
+      title: 'Refund Confirmed',
+      message: 'Your ride has been confirmed for [date] at [time]',
+      category: 'refund',
+      categoryLabel: 'refund',
+    ),
   ];
 }

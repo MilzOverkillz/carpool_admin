@@ -11,6 +11,7 @@ class AppSizes {
 
   // Spacing scale (based on 8dp grid system)
   static const double xs = 4;
+  static const double smm = 5;
   static const double sm = 8;
   static const double base = 12;
   static const double md = 16;

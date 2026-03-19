@@ -47,6 +47,7 @@ class AppColors {
   static const Color blackText200 = Color(0xFF9EA2A5);
   static const Color blackText400 = Color(0xFF495056);
   static const Color blackTextTitle = Color(0xFF212B36);
+  static const Color blackTextTitleTem = Color(0xFF9A9A9A);
 
   static const Color textInverse = Color(0xFFFFFFFF);
   static const Color authHeading = Color(0xFF232323);
@@ -58,6 +59,7 @@ class AppColors {
   static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
   static const Color pillBox = Color(0xFFD6D5D5);
   static const Color pillBox1 = Color(0xFF737373);
+  static const Color pillBox2 = Color(0xFFBFBFBF);
 
   // ==========================================
   // Borders & Dividers
