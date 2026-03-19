@@ -4,11 +4,9 @@ import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
 
-// Import all your screen contents (not the full screens with MainLayout)
-// import 'package:carpool_admin/screens/dashboard/dashboard_content.dart';
-// import 'package:carpool_admin/screens/users/users_content.dart';
-// import 'package:carpool_admin/screens/payments/payments_content.dart';
-// etc...
+// IMPORTING YOUR NEW CONTENT SCREENS HERE
+import 'package:carpool_admin/screens/User_Section/users_content.dart';
+import 'package:carpool_admin/screens/Rides_Section/rides_content.dart';
 
 class MainShellScreen extends StatefulWidget {
   const MainShellScreen({Key? key}) : super(key: key);
@@ -32,17 +30,14 @@ class _MainShellScreenState extends State<MainShellScreen> {
   Widget _getContentWidget() {
     switch (_activeScreen) {
       case 'Dashboard':
-        // return const DashboardContent();
         return _buildPlaceholder('Dashboard');
       case 'Companies':
         return _buildPlaceholder('Companies');
       case 'Users':
-        // return const UsersContent();
-        return _buildPlaceholder('Users');
+        return const UsersContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Rides':
-        return _buildPlaceholder('Rides');
+        return const RidesContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Payments':
-        // return const PaymentsContent();
         return _buildPlaceholder('Payments');
       case 'Analytics':
         return _buildPlaceholder('Analytics');
