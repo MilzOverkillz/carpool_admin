@@ -1,4 +1,5 @@
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
@@ -45,7 +46,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
         // return const PaymentsContent();
         return _buildPlaceholder('Payments');
       case 'Analytics':
-        return _buildPlaceholder('Analytics');
+        return const Analytics();
       case 'Notifications':
         return const NotificationsContent();
       case 'Settings':
@@ -58,10 +59,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
   // Temporary placeholder widget for screens not yet implemented
   Widget _buildPlaceholder(String screenName) {
     return Center(
-      child: Text(
-        '$screenName Content',
-        style: const TextStyle(fontSize: 24),
-      ),
+      child: Text('$screenName Content', style: const TextStyle(fontSize: 24)),
     );
   }
 
@@ -85,9 +83,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
                 TopBarWidget(title: _activeScreen),
 
                 // DYNAMIC CONTENT AREA (this is the only part that changes)
-                Expanded(
-                  child: _getContentWidget(),
-                ),
+                Expanded(child: _getContentWidget()),
               ],
             ),
           ),

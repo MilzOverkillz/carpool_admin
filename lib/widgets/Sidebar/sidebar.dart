@@ -7,11 +7,8 @@ class SidebarWidget extends StatelessWidget {
   final String activeTitle;
   final Function(String)? onNavigate; // Callback for navigation
 
-  const SidebarWidget({
-    Key? key,
-    required this.activeTitle,
-    this.onNavigate,
-  }) : super(key: key);
+  const SidebarWidget({Key? key, required this.activeTitle, this.onNavigate})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,7 @@ class SidebarWidget extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Padding(
               padding: const EdgeInsets.only(left: 40.0),
-              child: const Text(
-                'Carpool',
-                style: AppTextStyles.sidebarLogo,
-              ),
+              child: const Text('Carpool', style: AppTextStyles.sidebarLogo),
             ),
           ),
 
@@ -93,7 +87,9 @@ class SidebarWidget extends StatelessWidget {
                 width: 4,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: isActive ? const Color(0xFF495056) : Colors.transparent,
+                  color: isActive
+                      ? const Color(0xFF495056)
+                      : Colors.transparent,
                   borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(4),
                     bottomRight: Radius.circular(4),
@@ -110,13 +106,12 @@ class SidebarWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 24.0),
                 alignment: Alignment.centerLeft,
                 decoration: BoxDecoration(
-                  color: isActive ? const Color(0xFF495056) : Colors.transparent,
+                  color: isActive
+                      ? const Color(0xFF495056)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(6.0),
                 ),
-                child: Text(
-                  title,
-                  style: styleBase,
-                ),
+                child: Text(title, style: styleBase),
               ),
             ],
           ),
@@ -204,7 +199,7 @@ class SidebarWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/icons/logout.png',
+              'assets/icons/dashboard/logout.png',
               width: 18,
               height: 18,
             ),
