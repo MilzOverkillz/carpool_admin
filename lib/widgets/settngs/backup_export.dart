@@ -22,7 +22,18 @@ class BackupAndExport extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Text(
+              'Backup & Export',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: AppColors.pageHeaderTitle,
+                fontFamily: AppFonts.primary,
+              ),
+            ),
+            const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -39,8 +50,9 @@ class BackupAndExport extends StatelessWidget {
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                GestureDetector(
+                InkWell(
                   onTap: () => _showImportDialog(context),
+                  borderRadius: BorderRadius.circular(12),
                   child: Card(
                     elevation: 0,
                     shape: RoundedRectangleBorder(
@@ -86,6 +98,7 @@ class BackupAndExport extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: InkWell(
+        borderRadius: BorderRadius.circular(12),
         onTap: () => _showExportDialog(context),
         child: Container(
           padding: const EdgeInsets.all(12),

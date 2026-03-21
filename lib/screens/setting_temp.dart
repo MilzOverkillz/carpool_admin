@@ -9,7 +9,7 @@ class SettingTemp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [AutomaticBackup(), BackupAndExport(), PrivacyAndCompliance()],
+      children: [AutomaticBackup(), BackupAndExport(), PrivacyCompliance()],
     );
   }
 }

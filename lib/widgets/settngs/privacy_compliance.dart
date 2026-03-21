@@ -1,92 +1,141 @@
+import 'package:carpool_admin/utils/theme/colors.dart';
+import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:flutter/material.dart';
 
-class PrivacyAndCompliance extends StatefulWidget {
-  const PrivacyAndCompliance({super.key});
+class PrivacyCompliance extends StatefulWidget {
+  const PrivacyCompliance({super.key});
 
   @override
-  State<PrivacyAndCompliance> createState() => _PrivacyAndComplianceState();
+  State<PrivacyCompliance> createState() => _PrivacyComplianceState();
 }
 
-class _PrivacyAndComplianceState extends State<PrivacyAndCompliance> {
-  bool _gdprEnabled = false;
+class _PrivacyComplianceState extends State<PrivacyCompliance> {
+  bool _gdprCompliant = false;
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      shrinkWrap: true,
-      padding: const EdgeInsets.all(16.0),
-      children: [
-        // GDPR Compliance Section
-        Switch(
-          value: _gdprEnabled,
-          onChanged: (value) {
-            setState(() {
-              _gdprEnabled = value;
-            });
-          },
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Privacy & Compliance',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: AppColors.pageHeaderTitle,
+                fontFamily: AppFonts.primary,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'GDPR Compliance Mode',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Color(0xFF262626),
+                        fontFamily: AppFonts.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const Text(
+                      'GDPR Compliance Mode',
+                      style: TextStyle(
+                        fontSize: 10,
+                        color: Color(0xFF9A9A9A),
+                        fontFamily: AppFonts.primary,
+                      ),
+                    ),
+                  ],
+                ),
+                Switch.adaptive(
+                  value: _gdprCompliant,
+                  onChanged: (value) {
+                    setState(() {
+                      _gdprCompliant = !_gdprCompliant;
+                    });
+                  },
+                  activeColor: AppColors.primary,
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Data Detection Requests',
+              style: TextStyle(
+                fontSize: 12,
+                color: Color(0xFF262626),
+                fontFamily: AppFonts.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const Text(
+              'Handle user data detection request within 30 days',
+              style: TextStyle(
+                fontSize: 10,
+                color: Color(0xFF9A9A9A),
+                fontFamily: AppFonts.primary,
+              ),
+            ),
+            const SizedBox(height: 8),
+            customOutlineButton(label: 'View Pending Requests (3)'),
+            const SizedBox(height: 16),
+            const Text(
+              'Privacy Policy',
+              style: TextStyle(
+                fontSize: 12,
+                color: Color(0xFF262626),
+                fontFamily: AppFonts.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            customOutlineButton(label: 'Edit Privacy Policy'),
+            const SizedBox(height: 16),
+            const Text(
+              'Terms of Service',
+              style: TextStyle(
+                fontSize: 12,
+                color: Color(0xFF262626),
+                fontFamily: AppFonts.primary,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 8),
+            customOutlineButton(label: 'Edit Terms of Service'),
+          ],
         ),
-        const SizedBox(height: 16),
-
-        // Data Detection Requests Section
-        _buildSectionHeader(
-          "Data Detection Requests",
-          "Handle user data detection request within 30 days",
-        ),
-        const SizedBox(height: 8),
-        _buildActionButton("View Pending Requests (3)", () {}),
-
-        const SizedBox(height: 24),
-
-        // Privacy Policy Section
-        _buildSectionHeader(
-          "Privacy Policy",
-          null, // No subtitle for this one in the image
-        ),
-        const SizedBox(height: 8),
-        _buildActionButton("Edit Privacy Policy", () {}),
-
-        const SizedBox(height: 24),
-
-        // Terms of Service Section
-        _buildSectionHeader("Terms of Services", null),
-        const SizedBox(height: 8),
-        _buildActionButton("Edit Terms of Service", () {}),
-      ],
-    );
-  }
-
-  // Helper to build the text labels
-  Widget _buildSectionHeader(String title, String? subtitle) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-        ),
-        if (subtitle != null)
-          Text(
-            subtitle,
-            style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
-          ),
-      ],
-    );
-  }
-
-  // Helper to build the specific outlined buttons
-  Widget _buildActionButton(String label, VoidCallback onPressed) {
-    return UnconstrainedBox(
-      alignment: Alignment.centerLeft,
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
-          foregroundColor: Colors.black,
-          side: BorderSide(color: Colors.grey.shade400),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        ),
-        child: Text(label, style: const TextStyle(fontWeight: FontWeight.bold)),
       ),
     );
   }
+}
+
+Widget customOutlineButton({required String label, VoidCallback? onTap}) {
+  return OutlinedButton(
+    onPressed: onTap,
+    style: OutlinedButton.styleFrom(
+      side: const BorderSide(color: Color(0xFFA6A6A6), width: 1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      minimumSize: Size.zero,
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    ),
+    child: Text(
+      label,
+      style: TextStyle(
+        color: Colors.black,
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+        fontFamily: AppFonts.primary, // Using your custom font
+      ),
+    ),
+  );
 }
