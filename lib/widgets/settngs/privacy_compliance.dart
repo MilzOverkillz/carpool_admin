@@ -31,42 +31,17 @@ class _PrivacyComplianceState extends State<PrivacyCompliance> {
               ),
             ),
             const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'GDPR Compliance Mode',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Color(0xFF262626),
-                        fontFamily: AppFonts.primary,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const Text(
-                      'GDPR Compliance Mode',
-                      style: TextStyle(
-                        fontSize: 10,
-                        color: Color(0xFF9A9A9A),
-                        fontFamily: AppFonts.primary,
-                      ),
-                    ),
-                  ],
-                ),
-                Switch.adaptive(
-                  value: _gdprCompliant,
-                  onChanged: (value) {
-                    setState(() {
-                      _gdprCompliant = !_gdprCompliant;
-                    });
-                  },
-                  activeColor: AppColors.primary,
-                ),
-              ],
+            buildSettingsToggle(
+              title: 'GDPR Compliance Mode',
+              subtitle: 'GDPR Compliance Mode',
+              value: _gdprCompliant,
+              onChanged: (value) {
+                setState(() {
+                  _gdprCompliant = value;
+                });
+              },
             ),
+
             const SizedBox(height: 8),
             const Text(
               'Data Detection Requests',
@@ -137,5 +112,50 @@ Widget customOutlineButton({required String label, VoidCallback? onTap}) {
         fontFamily: AppFonts.primary, // Using your custom font
       ),
     ),
+  );
+}
+
+Widget buildSettingsToggle({
+  required String title,
+  required String subtitle,
+  required bool value,
+  required ValueChanged<bool> onChanged,
+}) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 12,
+              color: Color(0xFF262626),
+              fontFamily: AppFonts.primary,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Text(
+            subtitle,
+            style: const TextStyle(
+              fontSize: 10,
+              color: Color(0xFF9A9A9A),
+              fontFamily: AppFonts.primary,
+            ),
+          ),
+        ],
+      ),
+      Transform.scale(
+        scale: 0.7,
+        // Aligns the scaled switch to the right to avoid weird gaps
+        alignment: Alignment.centerRight,
+        child: Switch.adaptive(
+          value: value,
+          onChanged: onChanged,
+          activeColor: AppColors.primary,
+        ),
+      ),
+    ],
   );
 }
