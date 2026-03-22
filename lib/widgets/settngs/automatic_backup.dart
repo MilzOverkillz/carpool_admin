@@ -1,5 +1,6 @@
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
+import 'package:carpool_admin/widgets/settngs/custom_textfield.dart';
 import 'package:flutter/material.dart';
 
 class AutomaticBackup extends StatelessWidget {
@@ -42,74 +43,12 @@ class AutomaticBackup extends StatelessWidget {
           ),
           const SizedBox(height: 20),
 
-          // Backup Frequency Section
-          const Text(
-            'Backup Frequency',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: AppColors.pageHeaderTitle,
-              fontFamily: AppFonts.primary,
-            ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            decoration: InputDecoration(
-              hintText: 'Daily',
-              hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppColors.textTertiary),
-              ),
-            ),
-          ),
+          CustomTextfield(labelText: 'Backup Frequency', hintText: 'Daily'),
+
           const SizedBox(height: 16),
 
           // Retention Period Section
-          const Text(
-            'Retention Period',
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: AppColors.authHeading,
-              fontFamily: AppFonts.primary,
-            ),
-          ),
-          const SizedBox(height: 8),
-          TextField(
-            decoration: InputDecoration(
-              hintText: '1 year',
-              hintStyle: const TextStyle(color: Colors.grey, fontSize: 12),
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 16,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: Color(0xFFE0E0E0)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: const BorderSide(color: AppColors.textTertiary),
-              ),
-            ),
-          ),
+          CustomTextfield(labelText: 'Retention Period', hintText: '1 year'),
         ],
       ),
     );

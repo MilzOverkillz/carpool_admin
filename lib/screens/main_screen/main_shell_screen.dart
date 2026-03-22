@@ -1,5 +1,6 @@
 import 'package:carpool_admin/screens/notification_temp.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/policies.dart';
 import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
 import 'package:carpool_admin/screens/setting_temp.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
       case 'Notifications':
         return const NotificationsContent();
       case 'Settings':
-        return const NotificationTemp();
+        return const Policies();
       default:
         return _buildPlaceholder('Dashboard');
     }
