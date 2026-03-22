@@ -1,6 +1,5 @@
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
-import 'package:carpool_admin/utils/theme/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 

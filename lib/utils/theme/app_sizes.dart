@@ -112,7 +112,7 @@ class AppSizes {
 
   // Check if device is mobile
   static bool isMobile(BuildContext context) {
-    return MediaQuery.of(context).size.width <desktopBreakpoint;
+    return MediaQuery.of(context).size.width < desktopBreakpoint;
   }
 
   // Check if device is tablet
@@ -146,6 +146,11 @@ class AppSizes {
   // Get available screen width
   static double getAvailableWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
+  }
+
+  static double widthtoduble(BuildContext context, double value) {
+    value = MediaQuery.of(context).size.width * value;
+    return value;
   }
 
   //check if keyboard appears or disappears
