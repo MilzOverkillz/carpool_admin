@@ -3,6 +3,7 @@ import 'package:carpool_admin/screens/notifications_screen/notifications_content
 import 'package:carpool_admin/screens/policies.dart';
 import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
 import 'package:carpool_admin/screens/setting_temp.dart';
+import 'package:carpool_admin/screens/settings_section/settings_content.dart';
 import 'package:flutter/material.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
@@ -49,7 +50,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
       case 'Notifications':
         return const NotificationsContent();
       case 'Settings':
-        return const Policies();
+        return const SettingsContent();
       default:
         return _buildPlaceholder('Dashboard');
     }

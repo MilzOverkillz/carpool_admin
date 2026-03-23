@@ -18,79 +18,64 @@ class BackupAndExport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-              'Backup & Export',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: AppColors.pageHeaderTitle,
-                fontFamily: AppFonts.primary,
+            ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Text(
+                "Create Manual Backup",
+                style: TextStyle(color: Colors.white),
               ),
             ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
+            InkWell(
+              onTap: () => _showImportDialog(context),
+              borderRadius: BorderRadius.circular(12),
+              child: Card(
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  side: BorderSide(color: AppColors.authHeading),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
                   ),
-                  child: const Text(
-                    "Create Manual Backup",
-                    style: TextStyle(color: Colors.white),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset('assets/icons/settings/upload.svg'),
+                      const Text(
+                        "Import Data",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: AppFonts.primary,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                InkWell(
-                  onTap: () => _showImportDialog(context),
-                  borderRadius: BorderRadius.circular(12),
-                  child: Card(
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      side: BorderSide(color: AppColors.authHeading),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 5,
-                      ),
-                      child: Row(
-                        children: [
-                          SvgPicture.asset('assets/icons/settings/upload.svg'),
-                          const Text(
-                            "Import Data",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
-                              fontFamily: AppFonts.primary,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+              ),
             ),
-            const SizedBox(height: 20),
-            _buildExportTile("Export All Data", context),
-            _buildExportTile("Export User Data", context),
-            _buildExportTile("Export Ride Data", context),
-            _buildExportTile("Export Payment Data", context),
           ],
         ),
-      ),
+        const SizedBox(height: 20),
+        _buildExportTile("Export All Data", context),
+        _buildExportTile("Export User Data", context),
+        _buildExportTile("Export Ride Data", context),
+        _buildExportTile("Export Payment Data", context),
+      ],
     );
   }
 

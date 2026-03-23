@@ -198,7 +198,11 @@ class SidebarWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/icons/logout.png', width: 18, height: 18),
+            Image.asset(
+              'assets/icons/dashboard/logout.png',
+              width: 18,
+              height: 18,
+            ),
             const SizedBox(width: 8),
             const Text(
               'Logout',

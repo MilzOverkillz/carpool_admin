@@ -1,6 +1,13 @@
+import 'package:carpool_admin/screens/notification_temp.dart';
+import 'package:carpool_admin/screens/policies.dart';
+import 'package:carpool_admin/screens/setting_temp.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:carpool_admin/utils/theme/text_styles.dart';
+import 'package:carpool_admin/widgets/settngs/automatic_backup.dart';
+import 'package:carpool_admin/widgets/settngs/backup_export.dart';
+import 'package:carpool_admin/widgets/settngs/privacy_compliance.dart';
+import 'package:carpool_admin/widgets/settngs/toggle_status_item.dart';
 import 'package:flutter/material.dart';
 
 class SettingsContent extends StatefulWidget {
@@ -115,7 +122,7 @@ class _SettingsContentState extends State<SettingsContent>
           _buildSegmentDivider(),
           Expanded(child: _buildSegmentTab('Notifications', 3)),
           _buildSegmentDivider(),
-          Expanded(child: _buildSegmentTab('Places', 4)),
+          Expanded(child: _buildSegmentTab('Policies', 4)),
         ],
       ),
     );
@@ -161,6 +168,15 @@ class _SettingsContentState extends State<SettingsContent>
       case 1:
         content = _buildAccessControlTab();
         break;
+      case 2:
+        content = _buildDataManagementTab();
+        break;
+      case 3:
+        content = _buildNotificationsTab();
+        break;
+      case 4:
+        content = _buildPoliciesTab();
+        break;
       default:
         content = _buildComingSoon(
           [
@@ -181,10 +197,7 @@ class _SettingsContentState extends State<SettingsContent>
           padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-            ),
+            borderRadius: BorderRadius.circular(2),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x05000000),
@@ -199,7 +212,6 @@ class _SettingsContentState extends State<SettingsContent>
               _buildPageHeader(),
               const SizedBox(height: 24),
               _buildTabBar(),
-              const SizedBox(height: 24),
             ],
           ),
         ),
@@ -211,7 +223,6 @@ class _SettingsContentState extends State<SettingsContent>
   Widget _buildComingSoon(String name) {
     return _buildSectionCard(
       title: '',
-      connectTop: true,
       child: Container(
         height: 200,
         alignment: Alignment.center,
@@ -229,7 +240,6 @@ class _SettingsContentState extends State<SettingsContent>
       children: [
         _buildSectionCard(
           title: 'App Branding',
-          connectTop: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -373,7 +383,6 @@ class _SettingsContentState extends State<SettingsContent>
       children: [
         _buildSectionCard(
           title: 'Security Settings',
-          connectTop: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -477,22 +486,123 @@ class _SettingsContentState extends State<SettingsContent>
     );
   }
 
-  Widget _buildSectionCard({
-    required String title,
-    required Widget child,
-    bool connectTop = false,
-  }) {
+  Widget _buildDataManagementTab() {
+    return Column(
+      children: [
+        _buildSectionCard(title: 'Data Management', child: AutomaticBackup()),
+        const SizedBox(height: 20),
+        _buildSectionCard(title: 'Backup & Export', child: BackupAndExport()),
+        const SizedBox(height: 20),
+        _buildSectionCard(
+          title: 'Privacy & Compliance',
+          child: PrivacyCompliance(),
+        ),
+        const SizedBox(height: 24),
+        _buildActionButtons(),
+      ],
+    );
+  }
+
+  bool gdprCompliant1 = true;
+  bool gdprCompliant2 = true;
+  bool gdprCompliant3 = true;
+  bool gdprCompliant4 = true;
+  Widget _buildNotificationsTab() {
+    return Column(
+      children: [
+        _buildSectionCard(
+          title: 'Notifications',
+          child: ListView(
+            shrinkWrap: true,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  buildSettingsToggle(
+                    title: 'Email Notifications',
+                    subtitle: 'Send notifications via Email',
+                    value: gdprCompliant1,
+                    onChanged: (value) {
+                      setState(() {
+                        gdprCompliant1 = value;
+                      });
+                    },
+                  ),
+                  buildSettingsToggle(
+                    title: 'SMS Notifications',
+                    subtitle: 'Send notifications via SMS',
+                    value: gdprCompliant2,
+                    onChanged: (value) {
+                      setState(() {
+                        gdprCompliant2 = value;
+                      });
+                    },
+                  ),
+                  buildSettingsToggle(
+                    title: 'Push Notifications',
+                    subtitle: 'Send push notifications to mobile apps',
+                    value: gdprCompliant3,
+                    onChanged: (value) {
+                      setState(() {
+                        gdprCompliant3 = value;
+                      });
+                    },
+                  ),
+                  buildSettingsToggle(
+                    title: 'In-App Notifications',
+                    subtitle: 'Show notifications with the app',
+                    value: gdprCompliant4,
+
+                    onChanged: (value) {
+                      setState(() {
+                        gdprCompliant4 = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        _buildSectionCard(
+          title: 'System Notifications',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ToggleStatusItem(label: 'Ride Created'),
+              ToggleStatusItem(label: 'Ride Cancelled'),
+              ToggleStatusItem(label: 'Payment Received'),
+              ToggleStatusItem(label: 'Refund Processed'),
+              ToggleStatusItem(label: 'Account Verified'),
+              ToggleStatusItem(label: 'Complaint Filed'),
+              ToggleStatusItem(label: 'New User Registration'),
+            ],
+          ),
+        ),
+        const SizedBox(height: 24),
+        _buildActionButtons(),
+      ],
+    );
+  }
+
+  Widget _buildPoliciesTab() {
+    return Column(
+      children: [
+        _buildSectionCard(title: 'Default Policies', child: Policies()),
+        const SizedBox(height: 24),
+        _buildActionButtons(),
+      ],
+    );
+  }
+
+  Widget _buildSectionCard({required String title, required Widget child}) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: connectTop
-            ? const BorderRadius.only(
-                bottomLeft: Radius.circular(12),
-                bottomRight: Radius.circular(12),
-              )
-            : BorderRadius.circular(12),
+        borderRadius: BorderRadius.all(Radius.circular(2)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x05000000),
@@ -505,7 +615,15 @@ class _SettingsContentState extends State<SettingsContent>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (title.isNotEmpty) ...[
-            Text(title, style: AppTextStyles.cardTitle.copyWith(fontSize: 14)),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: AppColors.pageHeaderTitle,
+                fontFamily: AppFonts.primary,
+              ),
+            ),
             const SizedBox(height: 20),
           ],
           child,
