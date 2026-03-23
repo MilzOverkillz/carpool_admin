@@ -5,7 +5,6 @@ import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
 import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/main_screen/main_shell_screen.dart';
-import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,24 +15,22 @@ abstract class AppRoutes {
   static const String signIn = '/';
   static const String signUp = '/sign-up';
   static const String verification = '/verification';
-  static const String dashboard = '/dashboard';
-  static const String payments = '/payments';
-  static const String settings = '/settings';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
-  static const String users = '/users';
-  static const String notifications = '/notifications';
+  
+  // This is now the ONLY route you need for the inside of the app!
   static const String mainScreen = '/mainScreen';
-  // Added notifications route
 }
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    // Changed initial location to start directly on the Notifications screen for testing
+    // Start directly on the MainShellScreen
     initialLocation: AppRoutes.mainScreen,
     debugLogDiagnostics: true,
     routes: [
+      // ==========================================
       // Auth Flow
+      // ==========================================
       GoRoute(
         name: 'sign-in',
         path: AppRoutes.signIn,
@@ -48,11 +45,6 @@ class AppRouter {
         name: 'verification',
         path: AppRoutes.verification,
         builder: (context, state) => const Verification(),
-      ),
-      GoRoute(
-        name: 'mainScreen',
-        path: AppRoutes.mainScreen,
-        builder: (context, state) => const MainShellScreen(),
       ),
       GoRoute(
         name: 'forgot-password',
@@ -89,13 +81,15 @@ class AppRouter {
 
       // Payments Overview
       GoRoute(
-        path: AppRoutes.payments,
-        builder: (context, state) =>
-            const PlaceholderScreen(title: "Payments Overview"),
+        name: 'mainScreen',
+        path: AppRoutes.mainScreen,
+        builder: (context, state) => const MainShellScreen(),
       ),
     ],
 
+    // ==========================================
     // Error Page
+    // ==========================================
     errorBuilder: (context, state) => Scaffold(
       body: Center(
         child: Column(
@@ -119,15 +113,4 @@ class AppRouter {
   );
 
   static GoRouter get router => _router;
-}
-
-// Temporary Placeholder
-class PlaceholderScreen extends StatelessWidget {
-  final String title;
-  const PlaceholderScreen({super.key, required this.title});
-  @override
-  Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(title)),
-    body: Center(child: Text(title)),
-  );
 }
