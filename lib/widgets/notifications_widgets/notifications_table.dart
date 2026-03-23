@@ -2,6 +2,7 @@ import 'package:carpool_admin/utils/models/notification_dummy_data.dart';
 import 'package:flutter/material.dart';
 import '../../../utils/theme/colors.dart';
 import '../../../utils/theme/fonts.dart';
+import '../../../utils/theme/text_styles.dart';
 
 class NotificationsTable extends StatelessWidget {
   final List<NotificationItem> notifications;
@@ -61,7 +62,7 @@ class NotificationsTable extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child: _buildHeaderCell('CANNELS'),
+            child: _buildHeaderCell('CHANNELS'), // ✅ Fixed typo: was "CANNELS"
           ),
           Expanded(
             flex: 2,
@@ -79,13 +80,7 @@ class NotificationsTable extends StatelessWidget {
   Widget _buildHeaderCell(String text) {
     return Text(
       text,
-      style: const TextStyle(
-        fontFamily: AppFonts.primary,
-        fontSize: 11,
-        fontWeight: FontWeight.w600,
-        letterSpacing: 0.5,
-        color: AppColors.textTertiary,
-      ),
+      style: AppTextStyles.tableHeader, // ✅ Using AppTextStyles instead of inline
     );
   }
 
@@ -113,22 +108,14 @@ class NotificationsTable extends StatelessWidget {
               children: [
                 Text(
                   notification.title,
-                  style: const TextStyle(
-                    fontFamily: AppFonts.primary,
-                    fontSize: 14,
+                  style: AppTextStyles.bodyMedium.copyWith(
                     fontWeight: FontWeight.w600,
-                    color: AppColors.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   notification.subtitle,
-                  style: const TextStyle(
-                    fontFamily: AppFonts.primary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.textTertiary,
-                  ),
+                  style: AppTextStyles.caption,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -153,23 +140,15 @@ class NotificationsTable extends StatelessWidget {
               children: [
                 Text(
                   notification.recipients,
-                  style: const TextStyle(
-                    fontFamily: AppFonts.primary,
-                    fontSize: 13,
+                  style: AppTextStyles.bodySmall.copyWith(
                     fontWeight: FontWeight.w500,
-                    color: AppColors.textPrimary,
                   ),
                 ),
                 if (notification.recipientsSubtitle.isNotEmpty) ...[
                   const SizedBox(height: 2),
                   Text(
                     notification.recipientsSubtitle,
-                    style: const TextStyle(
-                      fontFamily: AppFonts.primary,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.textTertiary,
-                    ),
+                    style: AppTextStyles.caption,
                   ),
                 ],
               ],
@@ -193,12 +172,7 @@ class NotificationsTable extends StatelessWidget {
             flex: 2,
             child: Text(
               notification.sentDate,
-              style: const TextStyle(
-                fontFamily: AppFonts.primary,
-                fontSize: 13,
-                fontWeight: FontWeight.w400,
-                color: AppColors.textPrimary,
-              ),
+              style: AppTextStyles.bodySmall,
             ),
           ),
           
@@ -221,10 +195,7 @@ class NotificationsTable extends StatelessWidget {
       ),
       child: Text(
         type,
-        style: const TextStyle(
-          fontFamily: AppFonts.primary,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
+        style: AppTextStyles.statusTag.copyWith(
           color: Colors.white,
         ),
         textAlign: TextAlign.center,
@@ -264,12 +235,7 @@ class NotificationsTable extends StatelessWidget {
       ),
       child: Text(
         status,
-        style: const TextStyle(
-          fontFamily: AppFonts.primary,
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textSecondary,
-        ),
+        style: AppTextStyles.statusTag,
         textAlign: TextAlign.center,
       ),
     );
@@ -290,9 +256,7 @@ class NotificationsTable extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               'No notifications found',
-              style: TextStyle(
-                fontFamily: AppFonts.primary,
-                fontSize: 16,
+              style: AppTextStyles.bodyMedium.copyWith(
                 fontWeight: FontWeight.w500,
                 color: AppColors.textTertiary,
               ),
