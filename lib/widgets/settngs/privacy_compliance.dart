@@ -30,6 +30,7 @@ class _PrivacyComplianceState extends State<PrivacyCompliance> {
         ),
 
         const SizedBox(height: 8),
+
         const Text(
           'Data Detection Requests',
           style: TextStyle(

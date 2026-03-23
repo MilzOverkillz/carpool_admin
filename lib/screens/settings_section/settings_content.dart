@@ -528,6 +528,7 @@ class _SettingsContentState extends State<SettingsContent>
                       });
                     },
                   ),
+                  const SizedBox(height: 8),
                   buildSettingsToggle(
                     title: 'SMS Notifications',
                     subtitle: 'Send notifications via SMS',
@@ -538,6 +539,7 @@ class _SettingsContentState extends State<SettingsContent>
                       });
                     },
                   ),
+                  const SizedBox(height: 8),
                   buildSettingsToggle(
                     title: 'Push Notifications',
                     subtitle: 'Send push notifications to mobile apps',
@@ -548,6 +550,7 @@ class _SettingsContentState extends State<SettingsContent>
                       });
                     },
                   ),
+                  const SizedBox(height: 8),
                   buildSettingsToggle(
                     title: 'In-App Notifications',
                     subtitle: 'Show notifications with the app',
@@ -559,6 +562,7 @@ class _SettingsContentState extends State<SettingsContent>
                       });
                     },
                   ),
+                  const SizedBox(height: 8),
                 ],
               ),
             ],

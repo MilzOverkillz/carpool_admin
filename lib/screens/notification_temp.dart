@@ -34,6 +34,7 @@ class _NotificationTempState extends State<NotificationTemp> {
                 });
               },
             ),
+            const SizedBox(height: 8),
             buildSettingsToggle(
               title: 'SMS Notifications',
               subtitle: 'Send notifications via SMS',
@@ -44,6 +45,7 @@ class _NotificationTempState extends State<NotificationTemp> {
                 });
               },
             ),
+            const SizedBox(height: 8),
             buildSettingsToggle(
               title: 'Push Notifications',
               subtitle: 'Send push notifications to mobile apps',
@@ -54,6 +56,7 @@ class _NotificationTempState extends State<NotificationTemp> {
                 });
               },
             ),
+            const SizedBox(height: 8),
             buildSettingsToggle(
               title: 'In-App Notifications',
               subtitle: 'Show notifications with the app',
@@ -64,6 +67,7 @@ class _NotificationTempState extends State<NotificationTemp> {
                 });
               },
             ),
+            const SizedBox(height: 16),
           ],
         ),
         const SizedBox(height: 16),
