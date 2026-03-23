@@ -5,7 +5,7 @@ import '../../../utils/theme/fonts.dart';
 import 'table_filters.dart';
 
 class ComplaintsTab extends StatefulWidget {
-  const ComplaintsTab({Key? key}) : super(key: key);
+  const ComplaintsTab({super.key});
 
   @override
   State<ComplaintsTab> createState() => _ComplaintsTabState();
@@ -15,12 +15,10 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
   final TextEditingController _searchController = TextEditingController();
   String _selectedType = 'All Type';
   String _selectedStatus = 'All Status';
-  List<ComplaintItem> _filteredComplaints = [];
 
   @override
   void initState() {
     super.initState();
-    _filteredComplaints = NotificationDummyData.complaints;
   }
 
   @override
@@ -31,23 +29,6 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
 
   void _applyFilters() {
     setState(() {
-      _filteredComplaints = NotificationDummyData.complaints.where((complaint) {
-        // Search filter
-        final searchLower = _searchController.text.toLowerCase();
-        final matchesSearch = searchLower.isEmpty ||
-            complaint.title.toLowerCase().contains(searchLower) ||
-            complaint.description.toLowerCase().contains(searchLower);
-
-        // Type filter
-        final matchesType = _selectedType == 'All Type' ||
-            complaint.type == _selectedType;
-
-        // Status filter
-        final matchesStatus = _selectedStatus == 'All Status' ||
-            complaint.status == _selectedStatus;
-
-        return matchesSearch && matchesType && matchesStatus;
-      }).toList();
     });
   }
 

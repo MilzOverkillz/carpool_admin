@@ -50,7 +50,7 @@ class _UsersContentState extends State<UsersContent> {
               'User Management',
               style: AppTextStyles.pageHeaderTitle,
             ),
-            const Text(
+            Text(
               'Mange all users , rolls and permissions',
               style: AppTextStyles.pageHeaderSubtitle,
             ),

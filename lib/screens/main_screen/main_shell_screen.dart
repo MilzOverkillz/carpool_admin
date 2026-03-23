@@ -1,4 +1,5 @@
-import 'package:carpool_admin/screens/notification_temp.dart';
+import 'package:carpool_admin/screens/company_section/companies.dart';
+import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:carpool_admin/screens/policies.dart';
 import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
@@ -36,9 +37,9 @@ class _MainShellScreenState extends State<MainShellScreen> {
   Widget _getContentWidget() {
     switch (_activeScreen) {
       case 'Dashboard':
-        return _buildPlaceholder('Dashboard');
+        return MainDashboard();
       case 'Companies':
-        return _buildPlaceholder('Companies');
+        return Companies();
       case 'Users':
         return const UsersContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Rides':

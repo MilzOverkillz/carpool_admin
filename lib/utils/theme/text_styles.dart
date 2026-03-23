@@ -53,6 +53,27 @@ class AppTextStyles {
     height: 1.4,
     color: AppColors.textPrimary,
   );
+  static const TextStyle dashboardTableHeader = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Color(0xff666666),
+    letterSpacing: -0.02
+  );
+  static const TextStyle routeText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Color(0xff1d1d1d),
+    letterSpacing: -0.02
+  );
+  static const TextStyle routeText2 = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Color(0xff1d1d1d),
+    letterSpacing: -0.02
+  );
 
   // ==========================================
   // Body Styles (Main content)
@@ -104,6 +125,14 @@ class AppTextStyles {
     fontWeight: FontWeight.w500, // Medium
     color: AppColors.textPrimary,
   );
+  static const TextStyle companyTableHeader = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 14,
+    fontWeight: FontWeight.w500, 
+    letterSpacing: -0.02,
+    color: Color(0xff555556)
+  );
+
 
   // Status Tag style (e.g., "Pending" or "Approved")
   static const TextStyle statusTag = TextStyle(
@@ -298,8 +327,8 @@ class AppTextStyles {
     color: Color(0xFF212B36),
   );
 
-  static const TextStyle pageHeaderSubtitle = TextStyle(
-    fontFamily: AppFonts.primary, // DM Sans
+  static  TextStyle pageHeaderSubtitle = TextStyle(
+    fontFamily: AppFonts.dmSans, // DM Sans
     fontSize: 12,
     fontWeight: AppFonts.normal, // 400
     height: 1.66, // 20px line-height / 12px size
@@ -321,4 +350,13 @@ class AppTextStyles {
     height: 1.5,
     color: AppColors.outlinedButtonText, // Uses your new purple text color
   );
+  static const TextStyle cardHeader = TextStyle(
+    fontFamily: AppFonts.primary, 
+    fontSize: 24,
+    fontWeight: FontWeight.w700, 
+    height: 1.55, 
+    color: Color(0xFF1d1d1d),
+    letterSpacing: -0.02
+  );
+
 }

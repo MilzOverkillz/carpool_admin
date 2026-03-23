@@ -47,7 +47,7 @@ class _RidesContentState extends State<RidesContent> {
           style: AppTextStyles.pageHeaderTitle, 
         ),
         const SizedBox(height: 4),
-        const Text(
+         Text(
           'Monitor and manage all carpool rides',
           style: AppTextStyles.pageHeaderSubtitle, 
         ),
