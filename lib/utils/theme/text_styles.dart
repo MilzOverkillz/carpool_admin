@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'colors.dart';
 import 'fonts.dart';
 
@@ -8,7 +9,7 @@ class AppTextStyles {
   AppTextStyles._(); // Private constructor to prevent instantiation
 
   // ==========================================
-  // Display & Hero Styles 
+  // Display & Hero Styles
   // ==========================================
   static const TextStyle displayLarge = TextStyle(
     fontFamily: AppFonts.primary,
@@ -26,7 +27,13 @@ class AppTextStyles {
     height: 1.3,
     color: AppColors.textPrimary,
   );
-
+  static const TextStyle statesCardValue = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 24,
+    fontWeight: FontWeight.w700, // Semi-bold
+    height: 1.3,
+    color: AppColors.textPrimary,
+  );
   // ==========================================
   // Dashboard & Table Headings
   // ==========================================
@@ -95,7 +102,13 @@ class AppTextStyles {
     height: 1.4,
     color: AppColors.textPrimary,
   );
-
+  static const TextStyle statesCardLabel = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.4,
+    color: AppColors.textPrimary,
+  );
   // ==========================================
   // Label & Button Styles
   // ==========================================
@@ -175,25 +188,25 @@ class AppTextStyles {
     fontWeight: FontWeight.w700,
     fontSize: 40,
     letterSpacing: -0.4,
-    color: AppColors.authHeading
+    color: AppColors.authHeading,
   );
   static const TextStyle authContainerSubHeading = TextStyle(
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w400,
     fontSize: 18,
-    color: AppColors.authSubHeading
+    color: AppColors.authSubHeading,
   );
   static const TextStyle authActiveTextField = TextStyle(
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w400,
     fontSize: 18,
-    color: AppColors.authHeading
+    color: AppColors.authHeading,
   );
   static const TextStyle authHintTextField = TextStyle(
     fontFamily: AppFonts.primary,
     fontWeight: FontWeight.w400,
     fontSize: 18,
-    color: Color(0xFF9A9A9A)
+    color: Color(0xFF9A9A9A),
   );
   static const TextStyle loginRememberText = TextStyle(
     fontFamily: AppFonts.primary,
@@ -202,30 +215,30 @@ class AppTextStyles {
     color: AppColors.authHeading,
   );
   static const TextStyle forgotPasswordText = TextStyle(
-  fontFamily: AppFonts.primary,
-  fontSize: 16,
-  fontWeight: FontWeight.w500, 
-  height: 1.5, 
-  letterSpacing: 0,
-  color: AppColors.authHeading, // Adjust based on your primary color
-  decoration: TextDecoration.underline,
-  decorationStyle: TextDecorationStyle.solid,
-);
- static const TextStyle authButtonText = TextStyle(
-  fontFamily: AppFonts.primary,
-  fontSize: 18,
-  fontWeight: FontWeight.w600, 
-  height: 1.2, 
-  letterSpacing: -0.01,
-  color: AppColors.background,
-);
- static const TextStyle verificationHeadingText = TextStyle(
-  fontFamily: AppFonts.primary,
-  fontSize: 32,
-  fontWeight: FontWeight.w600,  
-  color: AppColors.black,
-);
- static const TextStyle sidebarLogo = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: 0,
+    color: AppColors.authHeading, // Adjust based on your primary color
+    decoration: TextDecoration.underline,
+    decorationStyle: TextDecorationStyle.solid,
+  );
+  static const TextStyle authButtonText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    height: 1.2,
+    letterSpacing: -0.01,
+    color: AppColors.background,
+  );
+  static const TextStyle verificationHeadingText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 32,
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
+  );
+  static const TextStyle sidebarLogo = TextStyle(
     fontFamily: AppFonts.nunitoSans,
     fontSize: 20,
     fontWeight: AppFonts.extrabold, // 800
@@ -237,7 +250,7 @@ class AppTextStyles {
     fontSize: 14,
     fontWeight: AppFonts.semibold, // 600
     letterSpacing: 0.3,
-    // Note: Color is omitted here because it changes dynamically 
+    // Note: Color is omitted here because it changes dynamically
     // depending on whether the tab is Active (White) or Inactive (Dark Gray).
   );
 
@@ -268,7 +281,7 @@ class AppTextStyles {
     fontWeight: AppFonts.medium, // 500
     color: AppColors.textSecondary,
   );
- static const TextStyle topBarTitle = TextStyle(
+  static const TextStyle topBarTitle = TextStyle(
     fontFamily: AppFonts.primary, // Inter
     fontSize: 30,
     fontWeight: AppFonts.bold, // 700

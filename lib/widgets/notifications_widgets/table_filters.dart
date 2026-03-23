@@ -34,9 +34,9 @@ class TableFilters extends StatelessWidget {
         children: [
           // Search Bar
           Expanded(
-            flex: 2,
+            flex: 3, // ✅ Changed from flex: 2 to flex: 3 for better proportion
             child: Container(
-              height: 60,
+              height: 48, // ✅ Reduced from 60 to 48 for consistency
               decoration: BoxDecoration(
                 color: AppColors.surface,
                 borderRadius: BorderRadius.circular(8),
@@ -91,7 +91,9 @@ class TableFilters extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 500),
+          
+          const Spacer(), // ✅ Changed from SizedBox(width: 500) to Spacer()
+          
           // Type Dropdown
           CustomDropdown(
             items: typeOptions,
@@ -100,6 +102,7 @@ class TableFilters extends StatelessWidget {
             width: 160,
           ),
           const SizedBox(width: 12),
+          
           // Status Dropdown
           CustomDropdown(
             items: statusOptions,
