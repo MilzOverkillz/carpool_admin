@@ -1,8 +1,9 @@
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
-import 'package:flutter/material.dart';
+import 'package:carpool_admin/screens/settings_section/settings_content.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
+import 'package:flutter/material.dart';
 
 // Import all your screen contents (not the full screens with MainLayout)
 // import 'package:carpool_admin/screens/dashboard/dashboard_content.dart';
@@ -11,7 +12,7 @@ import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
 // etc...
 
 class MainShellScreen extends StatefulWidget {
-  const MainShellScreen({Key? key}) : super(key: key);
+  const MainShellScreen({super.key});
 
   @override
   State<MainShellScreen> createState() => _MainShellScreenState();
@@ -49,7 +50,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
       case 'Notifications':
         return const NotificationsContent();
       case 'Settings':
-        return _buildPlaceholder('Settings');
+        return const SettingsContent();
       default:
         return _buildPlaceholder('Dashboard');
     }
@@ -58,10 +59,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
   // Temporary placeholder widget for screens not yet implemented
   Widget _buildPlaceholder(String screenName) {
     return Center(
-      child: Text(
-        '$screenName Content',
-        style: const TextStyle(fontSize: 24),
-      ),
+      child: Text('$screenName Content', style: const TextStyle(fontSize: 24)),
     );
   }
 
@@ -85,9 +83,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
                 TopBarWidget(title: _activeScreen),
 
                 // DYNAMIC CONTENT AREA (this is the only part that changes)
-                Expanded(
-                  child: _getContentWidget(),
-                ),
+                Expanded(child: _getContentWidget()),
               ],
             ),
           ),
