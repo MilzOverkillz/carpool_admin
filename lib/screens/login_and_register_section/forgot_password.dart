@@ -29,7 +29,7 @@ class ForgotPassword extends StatelessWidget {
                 ],
               ),
               child: Container(
-                margin: EdgeInsets.only(top: 156),
+                margin: EdgeInsets.only(top: 126),
                 padding: EdgeInsets.symmetric(horizontal: 100),
                 width: 510,
                 height: 396,
