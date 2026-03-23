@@ -7,13 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
+import 'package:flutter/material.dart';
 
 // IMPORTING YOUR NEW CONTENT SCREENS HERE
 import 'package:carpool_admin/screens/User_Section/users_content.dart';
 import 'package:carpool_admin/screens/Rides_Section/rides_content.dart';
 
 class MainShellScreen extends StatefulWidget {
-  const MainShellScreen({Key? key}) : super(key: key);
+  const MainShellScreen({super.key});
 
   @override
   State<MainShellScreen> createState() => _MainShellScreenState();
