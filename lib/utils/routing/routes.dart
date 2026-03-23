@@ -5,11 +5,12 @@ import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
 import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/main_screen/main_shell_screen.dart';
+import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // Import screens
-import 'package:carpool_admin/screens/User_Section/user_content.dart';
+
 
 abstract class AppRoutes {
   static const String signIn = '/';
@@ -20,6 +21,9 @@ abstract class AppRoutes {
   
   // This is now the ONLY route you need for the inside of the app!
   static const String mainScreen = '/mainScreen';
+  static const String users = '/users';
+  static const String notifications = '/notifications';
+  static const String dashboard = '/dashboard';
 }
 
 class AppRouter {
@@ -58,12 +62,6 @@ class AppRouter {
       ),
 
       // Users Flow
-      GoRoute(
-        name: 'users',
-        path: AppRoutes.users,
-        builder: (context, state) => const UserScreen(),
-      ),
-
       // Notifications Flow (NEW)
       GoRoute(
         name: 'notifications',
@@ -75,8 +73,7 @@ class AppRouter {
       GoRoute(
         name: 'main-dashboard',
         path: AppRoutes.dashboard,
-        builder: (context, state) =>
-            const PlaceholderScreen(title: "Main Dashboard"),
+        builder: (context, state) => const MainDashboard(),
       ),
 
       // Payments Overview
