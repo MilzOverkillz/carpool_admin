@@ -1,5 +1,6 @@
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
+import 'package:carpool_admin/widgets/settngs/custom_switch.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyCompliance extends StatefulWidget {
@@ -130,16 +131,7 @@ Widget buildSettingsToggle({
           ),
         ],
       ),
-      Transform.scale(
-        scale: 0.7,
-        // Aligns the scaled switch to the right to avoid weird gaps
-        alignment: Alignment.centerRight,
-        child: Switch.adaptive(
-          value: value,
-          onChanged: onChanged,
-          activeColor: AppColors.primary,
-        ),
-      ),
+      CustomSwitch(value: value, onChanged: onChanged),
     ],
   );
 }
