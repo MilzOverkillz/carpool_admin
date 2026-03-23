@@ -1,3 +1,4 @@
+import 'package:carpool_admin/screens/company_section/companies.dart';
 import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
         // return const DashboardContent();
         return MainDashboard();
       case 'Companies':
-        return _buildPlaceholder('Companies');
+        return Companies();
       case 'Users':
         // return const UsersContent();
         return _buildPlaceholder('Users');

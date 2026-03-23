@@ -112,6 +112,14 @@ class AppTextStyles {
     fontWeight: FontWeight.w500, // Medium
     color: AppColors.textPrimary,
   );
+  static const TextStyle companyTableHeader = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 14,
+    fontWeight: FontWeight.w500, 
+    letterSpacing: -0.02,
+    color: Color(0xff555556)
+  );
+
 
   // Status Tag style (e.g., "Pending" or "Approved")
   static const TextStyle statusTag = TextStyle(
