@@ -27,11 +27,11 @@ class StatsCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(AppSizes.radiusXXl),
-        border: Border.all(color: AppColors.tabsSelection, width: 2),
+        border: Border.all(color: AppColors.tabsSelection, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04), // very light shadow
-            blurRadius: 1.4, // softness
+            blurRadius: 2, // softness
             offset: Offset(0, 1), // position (x, y)
           ),
         ],
