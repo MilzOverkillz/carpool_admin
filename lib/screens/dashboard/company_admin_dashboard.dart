@@ -1,3 +1,4 @@
+import 'package:carpool_admin/screens/dashboard/dashboard_overview.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
@@ -29,7 +30,7 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
             child: Row(
               children: [
                 SizedBox(
-                  height: 52,
+                  height: 66,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -41,6 +42,16 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
                           fontSize: 34,
                           letterSpacing: -0.02,
                           color: const Color(0xff3c3c3c),
+                        ),
+                      ),
+                      Text(
+                        'Company Admin Dashboard',
+                        style: TextStyle(
+                          fontFamily: AppFonts.dmSans,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          letterSpacing: -0.02,
+                          color: Color(0xff9ea2a5),
                         ),
                       ),
                     ],
@@ -80,40 +91,50 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
           Container(
             width: 320.527,
             height: 32,
-            padding: EdgeInsets.symmetric(horizontal: 12),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: Color(0xffe5e8f0)),
-            margin: const EdgeInsets.only(left: 142, right: 20),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: List.generate(_tabs.length, (i) {
-      final bool isSelected = i == _selectedTab;
-      return GestureDetector(
-        onTap: () => setState(() => _selectedTab = i),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          margin: const EdgeInsets.only(right: 4),
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 6),
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: isSelected? AppColors.white : null),
-            height: 28,
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-              _tabs[i],
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                color: isSelected ? const Color(0xFF1E293B) : const Color(0xFF94A3B8),
-              ),
-                        ),
+            padding: EdgeInsets.symmetric(horizontal: 2),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Color(0xffe5e8f0),
             ),
-          )
-        ),
-      );
-    }),
-  ),
-),
-SizedBox(height: 22,),
+            margin: const EdgeInsets.only(left: 142, right: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: List.generate(_tabs.length, (i) {
+                final bool isSelected = i == _selectedTab;
+                return GestureDetector(
+                  onTap: () => setState(() => _selectedTab = i),
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    margin: const EdgeInsets.only(right: 4),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: isSelected ? AppColors.white : null,
+                      ),
+                      height: 28,
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          _tabs[i],
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: isSelected
+                                ? FontWeight.w600
+                                : FontWeight.w400,
+                            color: isSelected
+                                ? const Color(0xFF1E293B)
+                                : const Color(0xFF94A3B8),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }),
+            ),
+          ),
+          SizedBox(height: 22),
 
           // ── Tab Content ──────────────────────────────────────────
           Expanded(
@@ -121,14 +142,12 @@ SizedBox(height: 22,),
               padding: const EdgeInsets.only(left: 142, right: 20),
               child: AnimatedSwitcher(
                 duration: const Duration(milliseconds: 250),
-                transitionBuilder: (child, animation) => FadeTransition(
-                  opacity: animation,
-                  child: child,
-                ),
+                transitionBuilder: (child, animation) =>
+                    FadeTransition(opacity: animation, child: child),
                 child: KeyedSubtree(
                   key: ValueKey(_selectedTab),
                   child: [
-                    const Text('Replace with the Overview Widget'),
+                    const DashboardOverview(),
                     const Text('Replace with the Employee Widget'),
                     const Text('Replace with the Rides Widget'),
                     const Text('Replace with the Analytics Widget'),
@@ -142,4 +161,3 @@ SizedBox(height: 22,),
     );
   }
 }
-
