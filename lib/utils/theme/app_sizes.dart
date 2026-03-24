@@ -150,6 +150,11 @@ class AppSizes {
     return MediaQuery.of(context).size.width;
   }
 
+  static double widthtoduble(BuildContext context, double value) {
+    value = MediaQuery.of(context).size.width * value;
+    return value;
+  }
+
   //check if keyboard appears or disappears
   static bool isKeyboardOpen(BuildContext context) {
     return MediaQuery.of(context).viewInsets.bottom > 0;

@@ -5,7 +5,7 @@ import '../../../utils/theme/colors.dart';
 import 'table_filters.dart';
 
 class ComplaintsTab extends StatefulWidget {
-  const ComplaintsTab({Key? key}) : super(key: key);
+  const ComplaintsTab({super.key});
 
   @override
   State<ComplaintsTab> createState() => _ComplaintsTabState();
@@ -20,7 +20,6 @@ class _ComplaintsTabState extends State<ComplaintsTab> {
   @override
   void initState() {
     super.initState();
-    _filteredComplaints = NotificationDummyData.complaints;
   }
 
   @override

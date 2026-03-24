@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'colors.dart';
 import 'fonts.dart';
 
@@ -73,6 +74,27 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     height: 1.4,
     color: AppColors.textPrimary,
+  );
+  static const TextStyle dashboardTableHeader = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Color(0xff666666),
+    letterSpacing: -0.02
+  );
+  static const TextStyle routeText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Color(0xff1d1d1d),
+    letterSpacing: -0.02
+  );
+  static const TextStyle routeText2 = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Color(0xff1d1d1d),
+    letterSpacing: -0.02
   );
 
   // ==========================================
@@ -159,6 +181,14 @@ class AppTextStyles {
     fontWeight: FontWeight.w500, // Medium
     color: AppColors.textPrimary,
   );
+  static const TextStyle companyTableHeader = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 14,
+    fontWeight: FontWeight.w500, 
+    letterSpacing: -0.02,
+    color: Color(0xff555556)
+  );
+
 
   // Status Tag style (e.g., "Pending" or "Approved")
   static const TextStyle statusTag = TextStyle(
@@ -337,4 +367,59 @@ class AppTextStyles {
     fontSize: 14,
     color: AppColors.textPrimary,
   );
+
+  static const TextStyle filterSearchText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 14,
+    color: AppColors.filterText, // #1D1929
+  );
+
+  static const TextStyle filterDropdownText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 12,
+    color: AppColors.filterText, // #1D1929
+  );
+
+  static const TextStyle pageHeaderTitle = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 18,
+    fontWeight: AppFonts.bold, // 700
+    height: 1.55, // 28px line-height / 18px size
+    color: Color(0xFF212B36),
+  );
+
+  static const TextStyle pageHeaderSubtitle = TextStyle(
+    fontFamily: AppFonts.dmSans, // DM Sans
+    fontSize: 12,
+    fontWeight: AppFonts.normal, // 400
+    height: 1.66, // 20px line-height / 12px size
+    letterSpacing: -0.24, // -2% of 12px
+    color: Color(0xFF9EA2A5),
+  );
+
+  static const TextStyle primaryButtonText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 14,
+    fontWeight: AppFonts.normal, // 400
+    color: Color(0xFFFFFFFF),
+  );
+
+  static const TextStyle actionButtonText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 12,
+    fontWeight: FontWeight.w500, // Medium
+    height: 1.5,
+    color: AppColors.outlinedButtonText, // Uses your new purple text color
+  );
+  static const TextStyle cardHeader = TextStyle(
+    fontFamily: AppFonts.primary, 
+    fontSize: 24,
+    fontWeight: FontWeight.w700, 
+    height: 1.55, 
+    color: Color(0xFF1d1d1d),
+    letterSpacing: -0.02
+  );
+
 }
