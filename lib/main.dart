@@ -1,3 +1,4 @@
+import 'package:carpool_admin/utils/providers/payment_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:carpool_admin/utils/providers/admin_provider.dart';
@@ -11,6 +12,7 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => AdminProvider()),
+        ChangeNotifierProvider(create: (_) => PaymentProvider()),
       ],
       child: const CarpoolApp(),
     ),
@@ -22,12 +24,13 @@ class CarpoolApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router( // Note the .router here
+    return MaterialApp.router(
+      // Note the .router here
       title: 'Carpool Admin',
       debugShowCheckedModeBanner: false,
       theme: _buildTheme(),
       // Link the GoRouter configuration here
-      routerConfig: AppRouter.router, 
+      routerConfig: AppRouter.router,
     );
   }
 

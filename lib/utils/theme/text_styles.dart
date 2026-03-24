@@ -322,4 +322,30 @@ class AppTextStyles {
     color: AppColors.outlinedButtonText, // Uses your new purple text color
   );
 
+
+    static const TextStyle paymentHeader = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: 0.5,
+    color: Color(0xFF9EA2A5), // Muted color as seen in table headers
+  );
+  static const TextStyle paymentHeader2 = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: 0.5,
+    color: Color(0xFF9EA2A5), // Muted color as seen in table headers
+  );
+  static const TextStyle paymentRow = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 12,
+    fontWeight: FontWeight.w700,
+    letterSpacing: 0.5,
+    color: Color(0xFF1E272E), 
+  );
+
+  
 }

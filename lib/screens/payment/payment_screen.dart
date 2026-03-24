@@ -1,18 +1,14 @@
+import 'package:carpool_admin/utils/providers/payment_provider.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:carpool_admin/widgets/cards/payment_status.dart';
+import 'package:carpool_admin/widgets/cards/payment_status2.dart';
 import 'package:carpool_admin/widgets/cards/payment_transactions_table_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 
-class PayemntScreen extends StatefulWidget {
+class PayemntScreen extends StatelessWidget {
   const PayemntScreen({super.key});
-
-  @override
-  State<PayemntScreen> createState() => _PayemntScreenState();
-}
-
-class _PayemntScreenState extends State<PayemntScreen> {
-  int _selectedTabIndex = 0;
 
   final List<String> _tabs = const [
     "Transaction",
@@ -24,6 +20,8 @@ class _PayemntScreenState extends State<PayemntScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final selectedTabIndex = context.watch<PaymentProvider>().selectedTabIndex;
+
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -65,7 +63,7 @@ class _PayemntScreenState extends State<PayemntScreen> {
                 ],
               ),
             ),
-            PaymentStatus(),
+            _buildStatusCards(selectedTabIndex),
             SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,12 +171,13 @@ class _PayemntScreenState extends State<PayemntScreen> {
                     _tabs.length,
                     (index) => Expanded(
                       child: GestureDetector(
-                        onTap: () => setState(() => _selectedTabIndex = index),
+                        onTap: () =>
+                            context.read<PaymentProvider>().changeTab(index),
                         child: Container(
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6),
-                            color: _selectedTabIndex == index
+                            color: selectedTabIndex == index
                                 ? AppColors.surface
                                 : Colors.transparent,
                           ),
@@ -189,7 +188,7 @@ class _PayemntScreenState extends State<PayemntScreen> {
                                 _tabs[index],
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontWeight: _selectedTabIndex == index
+                                  fontWeight: selectedTabIndex == index
                                       ? FontWeight.w700
                                       : FontWeight.w600,
                                   fontSize: 12,
@@ -228,10 +227,21 @@ class _PayemntScreenState extends State<PayemntScreen> {
               ),
             ),
             SizedBox(height: 12),
-            Expanded(child: PaymentTransactionsTableCard()),
+            PaymentTransactionsTableCard()
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildStatusCards(int index) {
+    switch (index) {
+      case 0:
+        return PaymentStatus();
+      case 1 || 2:
+        return PaymentStatus2();
+      default:
+        return SizedBox();
+    }
   }
 }
