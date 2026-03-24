@@ -12,24 +12,28 @@ class UserFilterBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      child: Row(
+      // FIX 1: Replaced Row with Wrap to allow items to flow to the next line on small screens
+      child: Wrap(
+        spacing: 28.0, // Horizontal gap between items
+        runSpacing: 16.0, // Vertical gap when items wrap to a new line
+        crossAxisAlignment: WrapCrossAlignment.center, // Vertically center search bar and dropdowns
         children: [
           _buildSearchFilter(),
-          const Spacer(),
+          
+          // Note: Spacer() removed because Wrap doesn't support Spacer
+          
           const CompanyDropdownFilter(
             hint: 'All Roles', 
             width: 106.0,
             items: ['All Roles', 'Company Admin', 'Admin', 'Driver', 'Rider', 'Driver & Rider'],
           ),
-          // Increased space here from 12 to 24
-          const SizedBox(width: 28), 
+          
           const CompanyDropdownFilter(
             hint: 'All Companies', 
             width: 132.0,
             items: ['All Companies', 'Tech corp Inc', 'Design Studio Ltd', 'Finance solutions', 'Healthcare Pvt', 'Retail Group'],
           ),
-          // Increased space here from 12 to 24
-          const SizedBox(width: 28), 
+          
           const CompanyDropdownFilter(
             hint: 'All Status', 
             width: 106.0,
@@ -43,7 +47,8 @@ class UserFilterBar extends StatelessWidget {
   // --- Sub-widget: Filter Search Box ---
   Widget _buildSearchFilter() {
     return Container(
-      width: 469,
+      // Gave the search filter a constraints so it shrinks slightly if needed
+      constraints: const BoxConstraints(maxWidth: 469),
       height: 47,
       padding: const EdgeInsets.only(left: 30, right: 40),
       decoration: BoxDecoration(
