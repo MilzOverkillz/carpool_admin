@@ -375,7 +375,7 @@ class _SettingsContentState extends State<SettingsContent>
     );
   }
 
-  //-------------- AccessControl -------------- need to fix the spacing and alignment of this section, also the table design and role/status pills
+  //-------------- AccessControl --------------
 
   Widget _buildAccessControlTab() {
     return Column(
@@ -409,11 +409,13 @@ class _SettingsContentState extends State<SettingsContent>
                 label: 'Session Timeout (minutes)',
                 controller: _sessionTimeoutController,
                 keyboardType: TextInputType.number,
+                hint: '30',
               ),
               const SizedBox(height: 2),
               _buildSecurityInputRow(
                 label: 'Password Policy',
                 controller: _passwordPolicyController,
+                hint: 'Strong (8+char,numbers,symbols)',
               ),
             ],
           ),
@@ -424,18 +426,18 @@ class _SettingsContentState extends State<SettingsContent>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Admin Roles & Permissions',
                     style: AppTextStyles.cardTitle.copyWith(fontSize: 14),
                   ),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4B5563),
+                      backgroundColor: Colors.black,
                       foregroundColor: Colors.white,
                       elevation: 0,
                       shape: RoundedRectangleBorder(
@@ -447,7 +449,7 @@ class _SettingsContentState extends State<SettingsContent>
                       ),
                     ),
                     child: Text(
-                      '+ Add admin users',
+                      'Add admin users',
                       style: AppTextStyles.bodySmall.copyWith(
                         color: Colors.white,
                         fontWeight: AppFonts.medium,
@@ -779,6 +781,7 @@ class _SettingsContentState extends State<SettingsContent>
   Widget _buildSecurityInputRow({
     required String label,
     String? subtitle,
+    String? hint,
     required TextEditingController controller,
     TextInputType keyboardType = TextInputType.text,
     double inputWidth = 140,
@@ -817,6 +820,7 @@ class _SettingsContentState extends State<SettingsContent>
                 color: AppColors.textPrimary,
               ),
               decoration: InputDecoration(
+                hintText: hint,
                 hintStyle: AppTextStyles.bodySmall.copyWith(
                   color: AppColors.textHint,
                 ),
@@ -865,44 +869,26 @@ class _SettingsContentState extends State<SettingsContent>
         children: [
           Expanded(
             flex: 3,
-            child: Row(
-              children: [
-                CircleAvatar(
-                  radius: 14,
-                  backgroundColor: c[0],
-                  child: Text(
-                    user.initials,
-                    style: TextStyle(
-                      color: c[1],
-                      fontSize: 11,
-                      fontWeight: AppFonts.semibold,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  user.name,
-                  style: AppTextStyles.bodySmall.copyWith(
-                    fontWeight: AppFonts.medium,
-                  ),
-                ),
-              ],
+            child: Text(
+              user.name,
+              style: AppTextStyles.bodySmall.copyWith(
+                fontWeight: AppFonts.medium,
+              ),
             ),
           ),
+
           Expanded(
             flex: 3,
             child: Text(
               user.email,
-              style: AppTextStyles.caption.copyWith(
-                color: const Color(0xFF9CA3AF),
-              ),
+              style: AppTextStyles.caption.copyWith(color: Colors.black),
             ),
           ),
           Expanded(
             flex: 2,
             child: Align(
               alignment: Alignment.centerLeft,
-              child: _buildRolePill(user.role),
+              child: _buildStatusPill(user.role),
             ),
           ),
           Expanded(
@@ -916,16 +902,32 @@ class _SettingsContentState extends State<SettingsContent>
             flex: 1,
             child: Row(
               children: [
-                Text(
-                  'Edit',
-                  style: AppTextStyles.caption.copyWith(
-                    color: AppColors.textSecondary,
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8,
+                    vertical: 4,
                   ),
-                ),
-                const Icon(
-                  Icons.keyboard_arrow_down,
-                  size: 14,
-                  color: AppColors.textSecondary,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: AppColors.border, width: 0.5),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Edit',
+                        style: AppTextStyles.caption.copyWith(
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      const Icon(
+                        Icons.keyboard_arrow_down,
+                        size: 14,
+                        color: Colors.black,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -935,37 +937,12 @@ class _SettingsContentState extends State<SettingsContent>
     );
   }
 
-  Widget _buildRolePill(String role) {
-    final colorMap = {
-      'Super Admin': [const Color(0xFFEEF2FF), const Color(0xFF3730A3)],
-      'Admin': [const Color(0xFFFEF3C7), const Color(0xFF92400E)],
-    };
-    final c =
-        colorMap[role] ?? [const Color(0xFFE5E7EB), const Color(0xFF4B5563)];
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-      decoration: BoxDecoration(
-        color: c[0],
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Text(
-        role,
-        style: TextStyle(
-          fontFamily: AppFonts.primary,
-          fontSize: 11,
-          fontWeight: AppFonts.medium,
-          color: c[1],
-        ),
-      ),
-    );
-  }
-
   Widget _buildStatusPill(String status) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
       decoration: BoxDecoration(
-        color: const Color(0xFFECFDF5),
-        borderRadius: BorderRadius.circular(20),
+        color: const Color.fromARGB(255, 212, 214, 218),
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Text(
         status,
@@ -973,7 +950,7 @@ class _SettingsContentState extends State<SettingsContent>
           fontFamily: AppFonts.primary,
           fontSize: 11,
           fontWeight: AppFonts.medium,
-          color: Color(0xFF065F46),
+          color: Colors.black,
         ),
       ),
     );
@@ -1000,58 +977,48 @@ class _SettingsContentState extends State<SettingsContent>
         tags: ['View Tickets', 'Respond to Users'],
       ),
     ];
-    return Wrap(
-      spacing: 12,
-      runSpacing: 12,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: templates
           .map(
-            (t) => SizedBox(
-              width:
-                  (MediaQuery.of(context).size.width - 240 - 64 - 48 - 36) / 3,
-              child: Container(
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: AppColors.surfaceSecondary,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: AppColors.divider),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      t.title,
-                      style: AppTextStyles.bodySmall.copyWith(
-                        fontWeight: AppFonts.semibold,
-                      ),
+            (t) => Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    t.title,
+                    style: AppTextStyles.bodySmall.copyWith(
+                      fontWeight: AppFonts.semibold,
                     ),
-                    const SizedBox(height: 10),
-                    Wrap(
-                      spacing: 6,
-                      runSpacing: 6,
-                      children: t.tags
-                          .map(
-                            (tag) => Container(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 8,
-                                vertical: 4,
-                              ),
-                              decoration: BoxDecoration(
-                                color: AppColors.surface,
-                                borderRadius: BorderRadius.circular(4),
-                                border: Border.all(color: AppColors.border),
-                              ),
-                              child: Text(
-                                tag,
-                                style: AppTextStyles.caption.copyWith(
-                                  fontSize: 11,
-                                ),
+                  ),
+                  const SizedBox(height: 6),
+                  Wrap(
+                    spacing: 6,
+                    runSpacing: 6,
+                    children: t.tags
+                        .map(
+                          (tag) => Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 255, 255, 255),
+                              borderRadius: BorderRadius.circular(4),
+                              border: Border.all(color: AppColors.border),
+                            ),
+                            child: Text(
+                              tag,
+                              style: AppTextStyles.caption.copyWith(
+                                fontSize: 11,
                               ),
                             ),
-                          )
-                          .toList(),
-                    ),
-                  ],
-                ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
               ),
             ),
           )
