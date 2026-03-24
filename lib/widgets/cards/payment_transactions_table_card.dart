@@ -36,6 +36,7 @@ class _PaymentTransactionsTableCardState
       "dateTime": "24-03-2026 15:00",
     },
   ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,104 +44,120 @@ class _PaymentTransactionsTableCardState
       child: Container(
         width: double.infinity,
         height: 380,
-        decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
+        decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
         child: Column(
           children: [
-            PaymentTableRow(),
-            SizedBox(height: 22),
+            const PaymentTableRow(),
+            const SizedBox(height: 22),
             tableHeader(),
-            SizedBox(height: 3),
-            Divider(height: 0, thickness: 1, color: Color(0xFFF4F4F5)),
+            const SizedBox(height: 3),
+            const Divider(height: 0, thickness: 1, color: Color(0xFFF4F4F5)),
             Expanded(
               child: ListView.builder(
                 itemCount: transactions.length,
                 itemBuilder: (context, index) {
                   final item = transactions[index];
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        child: Row(
-                          children: [
-                            Expanded(
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            item["transactionId"]!,
+                            style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            item["rideId"]!,
+                            style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            item["user"]!,
+                            style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            item["company"]!,
+                            style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            item["amount"]!,
+                            style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+
+                        // TYPE Column Centered
+                        Expanded(
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFC7C9CB),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
                               child: Text(
-                                item["transactionId"]!,
+                                item["type"]!,
                                 style: AppTextStyles.paymentRow,
                               ),
                             ),
-                            Expanded(
-                              child: Text(
-                                item["rideId"]!,
-                                style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+
+                        Expanded(
+                          child: Text(
+                            item["method"]!,
+                            style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+
+                        // STATUS Column Centered
+                        Expanded(
+                          child: Center(
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5, horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFC7C9CB),
+                                borderRadius: BorderRadius.circular(10),
                               ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                item["user"]!,
-                                style: AppTextStyles.paymentRow,
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                item["company"]!,
-                                style: AppTextStyles.paymentRow,
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                item["amount"]!,
-                                style: AppTextStyles.paymentRow,
-                              ),
-                            ),
-                            Expanded(
-                              child: Container(
-                                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8.5),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFC7C9CB),
-                                  borderRadius: BorderRadius.circular(10)
-                                ),
-                                child: Text(
-                                  item["type"]!,
-                                  style: AppTextStyles.paymentRow,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                item["method"]!,
-                                style: AppTextStyles.paymentRow,
-                              ),
-                            ),
-                            Expanded(
                               child: Text(
                                 item["status"]!,
                                 style: AppTextStyles.paymentRow,
                               ),
                             ),
-                            Expanded(
-                              child: Text(
-                                item["dateTime"]!,
-                                style: AppTextStyles.paymentRow,
-                              ),
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                onTap: () {
-                                  print(
-                                    "View transaction ${item['transactionId']}",
-                                  );
-                                },
-                                child: Center(
-                                  child: Image.asset(
-                                    "assets/icons/payment/eye.png",
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ],
+
+                        Expanded(
+                          child: Text(
+                            item["dateTime"]!,
+                            style: AppTextStyles.paymentRow,
+                          ),
+                        ),
+
+                        Expanded(
+                          child: InkWell(
+                            onTap: () {
+                              print(
+                                "View transaction ${item['transactionId']}",
+                              );
+                            },
+                            child: Center(
+                              child: Image.asset(
+                                "assets/icons/payment/eye.png",
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
               ),
@@ -157,17 +174,46 @@ class _PaymentTransactionsTableCardState
         Expanded(
           child: Text("TRANSACTION ID", style: AppTextStyles.paymentHeader2),
         ),
-        Expanded(child: Text("RIDE ID", style: AppTextStyles.paymentHeader)),
-        Expanded(child: Text("USER", style: AppTextStyles.paymentHeader)),
-        Expanded(child: Text("COMPANY", style: AppTextStyles.paymentHeader)),
-        Expanded(child: Text("AMOUNT", style: AppTextStyles.paymentHeader)),
-        Expanded(child: Text("TYPE", style: AppTextStyles.paymentHeader)),
-        Expanded(child: Text("METHOD", style: AppTextStyles.paymentHeader)),
-        Expanded(child: Text("STATUS", style: AppTextStyles.paymentHeader)),
+        Expanded(
+          child: Text("RIDE ID", style: AppTextStyles.paymentHeader),
+        ),
+        Expanded(
+          child: Text("USER", style: AppTextStyles.paymentHeader),
+        ),
+        Expanded(
+          child: Text("COMPANY", style: AppTextStyles.paymentHeader),
+        ),
+        Expanded(
+          child: Text("AMOUNT", style: AppTextStyles.paymentHeader),
+        ),
+
+        // TYPE header centered
+        Expanded(
+          child: Center(
+            child: Text("TYPE", style: AppTextStyles.paymentHeader),
+          ),
+        ),
+
+        Expanded(
+          child: Text("METHOD", style: AppTextStyles.paymentHeader),
+        ),
+
+        // STATUS header centered
+        Expanded(
+          child: Center(
+            child: Text("STATUS", style: AppTextStyles.paymentHeader),
+          ),
+        ),
+
         Expanded(
           child: Text("DATE & TIME", style: AppTextStyles.paymentHeader),
         ),
-        Expanded(child: Text("ACTION", style: AppTextStyles.paymentHeader)),
+
+        Expanded(
+          child: Center(
+            child: Text("ACTION", style: AppTextStyles.paymentHeader),
+          ),
+        ),
       ],
     );
   }
