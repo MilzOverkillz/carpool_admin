@@ -327,7 +327,7 @@ class AppTextStyles {
     color: Color(0xFF212B36),
   );
 
-  static  TextStyle pageHeaderSubtitle = TextStyle(
+  static const TextStyle pageHeaderSubtitle = TextStyle(
     fontFamily: AppFonts.dmSans, // DM Sans
     fontSize: 12,
     fontWeight: AppFonts.normal, // 400
