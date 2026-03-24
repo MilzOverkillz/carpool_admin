@@ -1,3 +1,4 @@
+import 'dart:ui'; // <--- FIX 1: MUST IMPORT THIS FOR MOUSE DRAGGING!
 import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/text_styles.dart'; 
@@ -14,6 +15,14 @@ class RidesContent extends StatefulWidget {
 }
 
 class _RidesContentState extends State<RidesContent> {
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -68,12 +77,43 @@ class _RidesContentState extends State<RidesContent> {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          const RidesFilterBar(), 
-          const Divider(height: 1, color: AppColors.divider),
-          _buildDataTable(), 
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // If screen is wider than 1100, use full width. If smaller, lock at 1100 and allow scrolling.
+          double tableWidth = constraints.maxWidth < 1100 ? 1100 : constraints.maxWidth;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const RidesFilterBar(), 
+              const Divider(height: 1, color: AppColors.divider),
+              
+              // FIX 2: ScrollConfiguration allows us to click and drag the table with a mouse!
+              ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse, // <--- This enables click-to-drag on Web!
+                    PointerDeviceKind.trackpad,
+                  },
+                ),
+                child: Scrollbar(
+                  controller: _horizontalScrollController,
+                  thumbVisibility: true, 
+                  trackVisibility: true,
+                  child: SingleChildScrollView(
+                    controller: _horizontalScrollController, 
+                    scrollDirection: Axis.horizontal,
+                    child: SizedBox(
+                      width: tableWidth, 
+                      child: _buildDataTable(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        }
       ),
     );
   }
@@ -81,7 +121,7 @@ class _RidesContentState extends State<RidesContent> {
   Widget _buildDataTable() {
     return Column(
       children: [
-        // --- TABLE HEADERS (Updated Flex values) ---
+        // --- TABLE HEADERS ---
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 24.0,
