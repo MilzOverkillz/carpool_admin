@@ -346,6 +346,14 @@ class AppTextStyles {
     letterSpacing: 0.5,
     color: Color(0xFF1E272E), 
   );
+  static const TextStyle paymentRow2 = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.5,
+    color: Color(0xFFC7C9CB), 
+  );
+
 
   
 }
