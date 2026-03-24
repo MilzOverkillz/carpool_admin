@@ -27,7 +27,13 @@ class AppTextStyles {
     height: 1.3,
     color: AppColors.textPrimary,
   );
-
+  static const TextStyle statesCardValue = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 24,
+    fontWeight: FontWeight.w700, // Semi-bold
+    height: 1.3,
+    color: AppColors.textPrimary,
+  );
   // ==========================================
   // Dashboard & Table Headings
   // ==========================================
@@ -75,7 +81,13 @@ class AppTextStyles {
     height: 1.4,
     color: AppColors.textPrimary,
   );
-
+  static const TextStyle statesCardLabel = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
+    height: 1.4,
+    color: AppColors.textPrimary,
+  );
   // ==========================================
   // Label & Button Styles
   // ==========================================
@@ -287,7 +299,7 @@ class AppTextStyles {
   );
 
   static const TextStyle pageHeaderSubtitle = TextStyle(
-    fontFamily: AppFonts.dmSans, // DM Sans
+    fontFamily: AppFonts.primary, // DM Sans
     fontSize: 12,
     fontWeight: AppFonts.normal, // 400
     height: 1.66, // 20px line-height / 12px size

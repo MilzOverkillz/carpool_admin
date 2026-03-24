@@ -2,33 +2,35 @@ import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/text_styles.dart';
 
-// IMPORTANT: Ensure these paths point to your actual files
-import '../../widgets/layout/main_layout.dart';
+// IMPORTANT: MainLayout import removed!
 import '../../widgets/Cards/user_card.dart'; 
 import '../../widgets/dropdowns/add_user_dialog.dart';
-import '../../widgets/cards/user_filter_bar.dart'; // <--- Import the new filter bar widget
+import '../../widgets/cards/user_filter_bar.dart'; 
 
-class UserScreen extends StatelessWidget {
-  const UserScreen({super.key});
+class UsersContent extends StatefulWidget {
+  const UsersContent({Key? key}) : super(key: key);
 
   @override
+  State<UsersContent> createState() => _UsersContentState();
+}
+
+class _UsersContentState extends State<UsersContent> {
+  @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      pageTitle: 'Users',
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          left: 32.0,
-          right: 32.0,
-          bottom: 32.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPageHeader(context), 
-            const SizedBox(height: 24),
-            _buildMainContentCard(),
-          ],
-        ),
+    // Returning SingleChildScrollView directly, NO MainLayout wrapper!
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(
+        left: 32.0,
+        right: 32.0,
+        bottom: 32.0,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildPageHeader(context), 
+          const SizedBox(height: 24),
+          _buildMainContentCard(),
+        ],
       ),
     );
   }
@@ -113,7 +115,7 @@ class UserScreen extends StatelessWidget {
       ),
       child: Column(
         children: [
-          const UserFilterBar(), // <--- Dropped your new reusable widget right here!
+          const UserFilterBar(), 
           const Divider(height: 1, color: AppColors.divider),
           _buildDataTable(),
         ],
@@ -146,7 +148,6 @@ class UserScreen extends StatelessWidget {
         ),
         const Divider(height: 1, color: AppColors.divider),
 
-        // Calling the separated UserCardWidget
         const UserCardWidget(
           initials: 'SA',
           name: 'Sithum Anuththara',

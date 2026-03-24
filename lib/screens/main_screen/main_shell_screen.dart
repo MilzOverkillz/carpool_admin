@@ -1,15 +1,17 @@
+import 'package:carpool_admin/screens/notification_temp.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
-import 'package:carpool_admin/screens/settings_section/settings_content.dart';
+import 'package:carpool_admin/screens/policies.dart';
+import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
+import 'package:carpool_admin/screens/setting_temp.dart';
+import 'package:flutter/material.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
 import 'package:flutter/material.dart';
 
-// Import all your screen contents (not the full screens with MainLayout)
-// import 'package:carpool_admin/screens/dashboard/dashboard_content.dart';
-// import 'package:carpool_admin/screens/users/users_content.dart';
-// import 'package:carpool_admin/screens/payments/payments_content.dart';
-// etc...
+// IMPORTING YOUR NEW CONTENT SCREENS HERE
+import 'package:carpool_admin/screens/User_Section/users_content.dart';
+import 'package:carpool_admin/screens/Rides_Section/rides_content.dart';
 
 class MainShellScreen extends StatefulWidget {
   const MainShellScreen({super.key});
@@ -33,24 +35,21 @@ class _MainShellScreenState extends State<MainShellScreen> {
   Widget _getContentWidget() {
     switch (_activeScreen) {
       case 'Dashboard':
-        // return const DashboardContent();
         return _buildPlaceholder('Dashboard');
       case 'Companies':
         return _buildPlaceholder('Companies');
       case 'Users':
-        // return const UsersContent();
-        return _buildPlaceholder('Users');
+        return const UsersContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Rides':
-        return _buildPlaceholder('Rides');
+        return const RidesContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Payments':
-        // return const PaymentsContent();
         return _buildPlaceholder('Payments');
       case 'Analytics':
-        return _buildPlaceholder('Analytics');
+        return const Analytics();
       case 'Notifications':
         return const NotificationsContent();
       case 'Settings':
-        return const SettingsContent();
+        return const Policies();
       default:
         return _buildPlaceholder('Dashboard');
     }
@@ -66,7 +65,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.mainBackground,
       body: Row(
         children: [
           // 1. FIXED SIDEBAR (never rebuilds)

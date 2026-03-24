@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/fonts.dart';
 import '../../utils/theme/text_styles.dart';
@@ -8,7 +7,8 @@ class SidebarWidget extends StatelessWidget {
   final String activeTitle;
   final Function(String)? onNavigate; // Callback for navigation
 
-  const SidebarWidget({super.key, required this.activeTitle, this.onNavigate});
+  const SidebarWidget({Key? key, required this.activeTitle, this.onNavigate})
+    : super(key: key);
 
   @override
   Widget build(BuildContext context) {
