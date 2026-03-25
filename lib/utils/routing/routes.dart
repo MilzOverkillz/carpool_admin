@@ -12,14 +12,13 @@ import 'package:go_router/go_router.dart';
 
 // Import screens
 
-
 abstract class AppRoutes {
   static const String signIn = '/';
   static const String signUp = '/sign-up';
   static const String verification = '/verification';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
-  
+
   // This is now the ONLY route you need for the inside of the app!
   static const String mainScreen = '/mainScreen';
   static const String users = '/users';
