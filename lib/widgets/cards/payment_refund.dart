@@ -2,65 +2,62 @@ import 'package:carpool_admin/utils/theme/text_styles.dart';
 import 'package:carpool_admin/widgets/cards/payment_row.dart';
 import 'package:flutter/material.dart';
 
-class PaymentTransactionsTableCard extends StatefulWidget {
-  const PaymentTransactionsTableCard({super.key});
+class PaymentRefund extends StatefulWidget {
+  const PaymentRefund({super.key});
 
   @override
-  State<PaymentTransactionsTableCard> createState() =>
-      _PaymentTransactionsTableCardState();
+  State<PaymentRefund> createState() => _PaymentRefundState();
 }
 
-class _PaymentTransactionsTableCardState
-    extends State<PaymentTransactionsTableCard> {
+class _PaymentRefundState extends State<PaymentRefund> {
   final List<Map<String, String>> transactions = [
     {
       "transactionId": "TX-2025-001",
       "rideId": "TX-2025-001",
       "user": "John Smith",
-      "company": "Tech Corp Inc",
       "amount": "\$24.50",
-      "type": "Payment",
-      "method": "Company Account",
-      "status": "Completed",
-      "date": "2025-01-28",
-      "time": "8.00 AM",
+      "reason": "Ride Cancelled",
+      "request": "2025-01-28",
+      "status": "Complete",
+      "location": "2025-01-28",
     },
     {
       "transactionId": "TX-2025-002",
       "rideId": "TX-2025-002",
-      "user": "Devon Lane",
-      "company": "Health Care Plus",
-      "amount": "\$24.50",
-      "type": "Refund",
-      "method": "Credit Card",
-      "status": "Pending",
-      "date": "2025-01-28",
-      "time": "8.00 AM",
+      "user": "Courtney Henry",
+      "amount": "\$6.48",
+      "reason": "Driver Issue",
+      "request": "2025-01-28",
+      "status": "Approved",
     },
     {
       "transactionId": "TX-2025-003",
       "rideId": "TX-2025-003",
-      "user": "Arlene McCoy",
-      "company": "Finance Solution",
-      "amount": "\$24.50",
-      "type": "Refund",
-      "method": "Digital Wallet",
-      "status": "Failed",
-      "date": "2025-01-28",
-      "time": "8.00 AM",
+      "user": "Cody Fisher",
+      "amount": "\$14.81",
+      "reason": "Payment Error",
+      "request": "2025-01-28",
+      "status": "Approved",
     },
     {
       "transactionId": "TX-2025-004",
       "rideId": "TX-2025-004",
-      "user": "Jane Cooper",
-      "company": "Retail Group",
-      "amount": "\$24.50",
-      "type": "Payment",
-      "method": "Credit Card",
-      "status": "Completed",
-      "date": "2025-01-28",
-      "time": "8.00 AM",
+      "user": "Leslie Alexander",
+      "amount": "\$17.84",
+      "reason": "Ride Cancelled",
+      "request": "2025-01-28",
+      "status": "Pending",
     },
+    {
+      "transactionId": "TX-2025-005",
+      "rideId": "TX-2025-005",
+      "user": "Esther Howard",
+      "amount": "\$5.22",
+      "reason": "Ride Cancelled",
+      "request": "2025-01-28",
+      "status": "Approved",
+    },
+    
   ];
 
   @override
@@ -90,64 +87,47 @@ class _PaymentTransactionsTableCardState
                       children: [
                         Expanded(
                           child: Text(
-                            item["transactionId"]!,
+                            item["transactionId"] ?? "",
                             style: AppTextStyles.paymentRow,
                           ),
                         ),
 
                         Expanded(
                           child: Text(
-                            item["rideId"]!,
+                            item["rideId"] ?? "",
                             style: AppTextStyles.paymentRow,
                           ),
                         ),
 
                         Expanded(
                           child: Text(
-                            item["user"]!,
+                            item["user"] ?? "",
                             style: AppTextStyles.paymentRow,
                           ),
                         ),
-
-                        Expanded(
-                          child: Text(
-                            item["company"]!,
-                            style: AppTextStyles.paymentRow,
-                          ),
-                        ),
-
                         SizedBox(
-                          width: 70,
-                          child: Text(
-                            item["amount"] ?? "",
-                            style: AppTextStyles.paymentRow,
-                          ),
-                        ),
-
-                        // TYPE
-                        Expanded(
+                          width: 120,
                           child: Center(
-                            child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 5,
-                                horizontal: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFFC7C9CB),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Text(
-                                item["type"]!,
-                                style: AppTextStyles.paymentRow,
-                              ),
+                            child: Text(
+                              item["amount"] ?? "",
+                              style: AppTextStyles.paymentRow,
                             ),
                           ),
                         ),
-
                         Expanded(
-                          child: Text(
-                            item["method"]!,
-                            style: AppTextStyles.paymentRow,
+                          child: Center(
+                            child: Text(
+                              item["reason"] ?? "",
+                              style: AppTextStyles.paymentRow,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              item["request"] ?? "",
+                              style: AppTextStyles.paymentRow,
+                            ),
                           ),
                         ),
 
@@ -155,36 +135,19 @@ class _PaymentTransactionsTableCardState
                         Expanded(
                           child: Center(
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: 5,
-                                horizontal: 10,
-                              ),
+                              width: 74,
+                              height: 24,
                               decoration: BoxDecoration(
                                 color: const Color(0xFFC7C9CB),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Text(
-                                item["status"]!,
-                                style: AppTextStyles.paymentRow,
+                              child: Center(
+                                child: Text(
+                                  item["status"] ?? "",
+                                  style: AppTextStyles.paymentRow3,
+                                ),
                               ),
                             ),
-                          ),
-                        ),
-
-                        SizedBox(
-                          width: 120,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item["date"]!,
-                                style: AppTextStyles.paymentRow,
-                              ),
-                              Text(
-                                item["time"]!,
-                                style: AppTextStyles.paymentRow2,
-                              ),
-                            ],
                           ),
                         ),
 
@@ -225,29 +188,28 @@ class _PaymentTransactionsTableCardState
 
         Expanded(child: Text("USER", style: AppTextStyles.paymentHeader)),
 
-        Expanded(child: Text("COMPANY", style: AppTextStyles.paymentHeader)),
-
         SizedBox(
-          width: 70, 
-          child: Text("AMOUNT", style: AppTextStyles.paymentHeader),
+          width: 120,
+          child: Center(
+            child: Text("AMOUNT", style: AppTextStyles.paymentHeader),
+          ),
         ),
         Expanded(
           child: Center(
-            child: Text("TYPE", style: AppTextStyles.paymentHeader),
+            child: Text("REASON", style: AppTextStyles.paymentHeader),
           ),
         ),
 
-        Expanded(child: Text("METHOD", style: AppTextStyles.paymentHeader)),
+        Expanded(
+          child: Center(
+            child: Text("REQUEST", style: AppTextStyles.paymentHeader),
+          ),
+        ),
 
         Expanded(
           child: Center(
             child: Text("STATUS", style: AppTextStyles.paymentHeader),
           ),
-        ),
-
-        SizedBox(
-          width: 120,
-          child: Text("DATE & TIME", style: AppTextStyles.paymentHeader),
         ),
 
         Expanded(

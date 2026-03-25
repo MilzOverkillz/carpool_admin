@@ -1,5 +1,7 @@
 import 'package:carpool_admin/utils/providers/payment_provider.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
+import 'package:carpool_admin/widgets/cards/company_revenue.dart';
+import 'package:carpool_admin/widgets/cards/payment_refund.dart';
 import 'package:carpool_admin/widgets/cards/payment_status.dart';
 import 'package:carpool_admin/widgets/cards/payment_status2.dart';
 import 'package:carpool_admin/widgets/cards/payment_transactions_table_card.dart';
@@ -227,7 +229,7 @@ class PayemntScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12),
-            PaymentTransactionsTableCard()
+            _buildTableCards(selectedTabIndex)
           ],
         ),
       ),
@@ -240,6 +242,19 @@ class PayemntScreen extends StatelessWidget {
         return PaymentStatus();
       case 1 || 2:
         return PaymentStatus2();
+      default:
+        return SizedBox();
+    }
+  }
+
+  Widget _buildTableCards(int index) {
+    switch (index) {
+      case 0:
+        return PaymentTransactionsTableCard();
+      case 1 :
+        return PaymentRefund();
+      case 2 :
+        return CompanyRevenue();
       default:
         return SizedBox();
     }

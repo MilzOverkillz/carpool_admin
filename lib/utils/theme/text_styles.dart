@@ -353,6 +353,13 @@ class AppTextStyles {
     letterSpacing: 0.5,
     color: Color(0xFFC7C9CB), 
   );
+  static const TextStyle paymentRow3 = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    letterSpacing: 0.5,
+    color: AppColors.textPrimary,
+  );
 
 
   

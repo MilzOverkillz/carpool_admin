@@ -10,7 +10,7 @@ class PaymentTableRow extends StatefulWidget {
 
 class _PaymentTableRowState extends State<PaymentTableRow> {
   String? selectedStatus = 'AllStatus';
-  String? selectedType = 'Completed';
+  String? selectedType = 'All Type';
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -51,6 +51,66 @@ class _PaymentTableRowState extends State<PaymentTableRow> {
           ),
           Row(
             children: [
+              
+              SizedBox(
+                width: 106,
+                height: 46,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                    border: Border.all(width: 1, color: Color(0xFFE9E9EA)),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        value: selectedType,
+                        hint: Text(
+                          "All Type",
+                          style: TextStyle(
+                            color: Color(0xFF1D1929),
+                            fontWeight: FontWeight.w400,
+                            fontSize: 12,
+                            fontFamily: AppFonts.primary,
+                          ),
+                        ),
+                        style: TextStyle(
+                          color: Color(0xFF1D1929),
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12,
+                          fontFamily: AppFonts.primary,
+                        ),
+                        isExpanded: true,
+                        isDense: true,
+                        icon: Padding(
+                          padding: const EdgeInsets.only(left: 2),
+                          child: Image.asset(
+                            'assets/icons/payment/arrowDown.png',
+                            width: 24,
+                            height: 24,
+                          ),
+                        ),
+                        items: <String>['All Type', 'Completed', 'Failed', 'Pending']
+                            .map((
+                          String value,
+                        ) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                        onChanged: (val) {
+                          setState(() {
+                            selectedType = val!;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+                            SizedBox(width: 24),
               SizedBox(
                 width: 132,
                 height: 46,
@@ -101,64 +161,6 @@ class _PaymentTableRowState extends State<PaymentTableRow> {
                         onChanged: (val) {
                           setState(() {
                             selectedStatus = val!;
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(width: 24),
-              SizedBox(
-                width: 106,
-                height: 46,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.white,
-                    border: Border.all(width: 1, color: Color(0xFFE9E9EA)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton<String>(
-                        value: selectedType,
-                        hint: Text(
-                          "Completed",
-                          style: TextStyle(
-                            color: Color(0xFF1D1929),
-                            fontWeight: FontWeight.w400,
-                            fontSize: 12,
-                            fontFamily: AppFonts.primary,
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: Color(0xFF1D1929),
-                          fontWeight: FontWeight.w400,
-                          fontSize: 12,
-                          fontFamily: AppFonts.primary,
-                        ),
-                        isExpanded: true,
-                        isDense: true,
-                        icon: Padding(
-                          padding: const EdgeInsets.only(left: 2),
-                          child: Image.asset(
-                            'assets/icons/payment/arrowDown.png',
-                            width: 24,
-                            height: 24,
-                          ),
-                        ),
-                        items: <String>['Completed', 'Failed', 'Pending'].map((
-                          String value,
-                        ) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(value),
-                          );
-                        }).toList(),
-                        onChanged: (val) {
-                          setState(() {
-                            selectedType = val!;
                           });
                         },
                       ),
