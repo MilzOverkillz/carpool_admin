@@ -1,4 +1,7 @@
+import 'package:carpool_admin/screens/all_ride_section/all_ride_content.dart';
+import 'package:carpool_admin/screens/analytic_section/analytics_content.dart';
 import 'package:carpool_admin/screens/dashboard/dashboard_overview.dart';
+import 'package:carpool_admin/screens/employees_section/employees_content.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
@@ -148,9 +151,9 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
                   key: ValueKey(_selectedTab),
                   child: [
                     const DashboardOverview(),
-                    const Text('Replace with the Employee Widget'),
-                    const Text('Replace with the Rides Widget'),
-                    const Text('Replace with the Analytics Widget'),
+                    const EmployeesContent(),
+                    const AllRideContent(),
+                    const AnalyticsContent(),
                   ][_selectedTab],
                 ),
               ),
