@@ -55,6 +55,13 @@ class AppColors {
   static const Color pillBox1 = Color(0xFF737373);
   static const Color pillBox2 = Color(0xFFBFBFBF);
 
+  static const Color purpleText = Color(0xFF6B7280);
+  static const Color outlinedButtonText = Color(0xFF6B7280);
+  static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
+  static const Color pillBox = Color(0xFFD6D5D5);
+  static const Color pillBox1 = Color(0xFF737373);
+  static const Color pillBox2 = Color(0xFFBFBFBF);
+
   // ==========================================
   // Borders & Dividers
   // ==========================================

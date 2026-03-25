@@ -10,7 +10,6 @@ class StatsCard extends StatelessWidget {
   final String value;
   final IconData? icon;
   final String? iconAsset;
-  final Widget? persentage;
 
   const StatsCard({
     super.key,
@@ -26,13 +25,13 @@ class StatsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
       decoration: BoxDecoration(
-        color: Color(0xFFFFFFFF),
+        color: AppColors.surface,
         borderRadius: BorderRadius.circular(AppSizes.radiusXXl),
-        border: Border.all(color: AppColors.tabsSelection, width: 2),
+        border: Border.all(color: AppColors.tabsSelection, width: 1.5),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.04), // very light shadow
-            blurRadius: 1.4, // softness
+            blurRadius: 2, // softness
             offset: Offset(0, 1), // position (x, y)
           ),
         ],
@@ -46,10 +45,6 @@ class StatsCard extends StatelessWidget {
                 Text(label, style: AppTextStyles.statesCardLabel.copyWith()),
                 const SizedBox(height: 8),
                 Text(value, style: AppTextStyles.statesCardValue.copyWith()),
-                if (persentage != null) ...[
-                  const SizedBox(height: 8),
-                  persentage!,
-                ],
               ],
             ),
           ),

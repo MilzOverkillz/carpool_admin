@@ -80,6 +80,14 @@ class AppTextStyles {
     letterSpacing: 0.5,
     color: AppColors.blackText100,
   );
+  static const TextStyle notificationTableHeader = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 15,
+    fontWeight: FontWeight.w500,
+    height: 1.5,
+    letterSpacing: 0.5,
+    color: AppColors.blackText100, // Muted color as seen in table headers
+  );
 
   static const TextStyle cardTitle = TextStyle(
     fontFamily: AppFonts.primary,
@@ -87,6 +95,27 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     height: 1.4,
     color: AppColors.textPrimary,
+  );
+  static const TextStyle dashboardTableHeader = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: Color(0xff666666),
+    letterSpacing: -0.02
+  );
+  static const TextStyle routeText = TextStyle(
+    fontFamily: AppFonts.primary,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Color(0xff1d1d1d),
+    letterSpacing: -0.02
+  );
+  static const TextStyle routeText2 = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    color: Color(0xff1d1d1d),
+    letterSpacing: -0.02
   );
 
   static const TextStyle cardHeader = TextStyle(
@@ -139,6 +168,12 @@ class AppTextStyles {
     fontWeight: FontWeight.w400,
     height: 1.5,
     color: AppColors.textPrimary,
+  );
+  static const TextStyle filterSearchText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontWeight: AppFonts.normal, // 400
+    fontSize: 14,
+    color: AppColors.filterText, // #1D1929
   );
 
   static const TextStyle bodyMedium = TextStyle(
@@ -209,6 +244,12 @@ class AppTextStyles {
     height: 1.5,
     color: AppColors.outlinedButtonText,
   );
+  static const TextStyle primaryButtonText = TextStyle(
+    fontFamily: AppFonts.primary, // Inter
+    fontSize: 14,
+    fontWeight: AppFonts.normal, // 400
+    color: Color(0xFFFFFFFF),
+  );
 
   static const TextStyle labelInput = TextStyle(
     fontFamily: AppFonts.primary,
@@ -216,6 +257,14 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.textPrimary,
   );
+  static const TextStyle companyTableHeader = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 14,
+    fontWeight: FontWeight.w500, 
+    letterSpacing: -0.02,
+    color: Color(0xff555556)
+  );
+
 
   static const TextStyle statusTag = TextStyle(
     fontFamily: AppFonts.primary,
@@ -335,6 +384,13 @@ class AppTextStyles {
     fontSize: 12,
     fontWeight: FontWeight.w400,
     color: AppColors.textTertiary,
+  );
+  static const TextStyle notificationCaption = TextStyle(
+    fontFamily: AppFonts.dmSans,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    height: 1.2,
+    color: AppColors.blackText100,
   );
 
   static const TextStyle notificationCaption = TextStyle(
