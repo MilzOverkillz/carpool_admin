@@ -10,13 +10,19 @@ class RidesFilterBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
-      // Back to a normal Row so Spacer() works!
-      child: Row(
+      // FIX: Changed Row to Wrap so the dropdowns flow down on smaller screens
+      child: Wrap(
+        spacing: 12.0, // Horizontal gap between the dropdowns
+        runSpacing: 16.0, // Vertical gap when items wrap
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           _buildSearchFilter(),
           
-          // THIS is what pushes the search box to the far left edge!
-          const Spacer(), 
+          // REMOVED Spacer() because Wrap handles its own spacing naturally.
+          
+          // To ensure the dropdowns push to the right like a Spacer() would, 
+          // we add a flexible empty space IF the screen is wide enough to not wrap.
+          // But to keep things simple and crash-free with Wrap, we just rely on the natural layout.
 
           // 1. All Status
           const CompanyDropdownFilter(
@@ -24,7 +30,6 @@ class RidesFilterBar extends StatelessWidget {
             width: 115.0, 
             items: ['All Status', 'Completed', 'Active', 'Scheduled', 'Flagged', 'Cancelled'],
           ),
-          const SizedBox(width: 12), // Reduced slightly to fix the overflow error
           
           // 2. All Companies
           const CompanyDropdownFilter(
@@ -32,7 +37,6 @@ class RidesFilterBar extends StatelessWidget {
             width: 135.0, 
             items: ['All Companies', 'Tech corp Inc', 'Design Studio Ltd', 'Finance solutions', 'Healthcare Pvt', 'Retail Group'],
           ),
-          const SizedBox(width: 12), // Reduced slightly
           
           // 3. All Payment
           const CompanyDropdownFilter(
@@ -40,7 +44,6 @@ class RidesFilterBar extends StatelessWidget {
             width: 125.0, 
             items: ['All Payments', 'Paid', 'Pending', 'Refund'],
           ),
-          const SizedBox(width: 12), // Reduced slightly
 
           // 4. All Dates
           const CompanyDropdownFilter(
@@ -56,10 +59,12 @@ class RidesFilterBar extends StatelessWidget {
   // --- Sub-widget: Filter Search Box ---
   Widget _buildSearchFilter() {
     return Container(
-      // Exactly 469px width and matched padding from UserFilterBar
-      width: 469, 
+      // Changed to constraints to allow it to shrink slightly if the screen is super tight
+      constraints: const BoxConstraints(maxWidth: 469), 
       height: 47,
       padding: const EdgeInsets.only(left: 30, right: 40),
+      // Adding right margin so it pushes away from the dropdowns
+      margin: const EdgeInsets.only(right: 20),
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColors.filterBorder,

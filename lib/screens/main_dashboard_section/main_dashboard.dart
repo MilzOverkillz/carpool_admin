@@ -1,8 +1,10 @@
+import 'package:carpool_admin/widgets/cards/best_driver_card.dart';
 import 'package:carpool_admin/widgets/cards/dashboard_stat_card.dart';
+import 'package:carpool_admin/widgets/cards/pending_list_%20card.dart';
+import 'package:carpool_admin/widgets/cards/popular_route_cards.dart';
 import 'package:carpool_admin/widgets/charts/dashboard_bar_chart.dart';
 import 'package:carpool_admin/widgets/charts/monthly_revenue_chart.dart';
 import 'package:carpool_admin/widgets/charts/user_distribution_chart.dart';
-import 'package:carpool_admin/widgets/layout/main_layout.dart';
 import 'package:flutter/material.dart';
 
 class MainDashboard extends StatelessWidget {
@@ -49,88 +51,149 @@ class MainDashboard extends StatelessWidget {
       },
     ];
 
-    return MainLayout(
-      pageTitle: 'Dashboard',
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 270,
-              child: Container(
-                padding: const EdgeInsets.only(left: 23, right: 73),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              crossAxisSpacing: 260,
-                              mainAxisSpacing: 27,
-                              childAspectRatio: 2.2,
-                            ),
-                        itemCount: stats.length,
-                        itemBuilder: (context, index) {
-                          final stat = stats[index];
+    final List<Map<String, dynamic>> routesData = [
+      {"route": "Galle ➜ KnightOwl", "rides": 542, "earn": "1,267"},
+      {"route": "Colombo ➜ KnightOwl", "rides": 298, "earn": "1,200"},
+      {"route": "Tangalle ➜ Hameedia", "rides": 356, "earn": "14,070"},
+      {"route": "Matara ➜ KnightOwl", "rides": 169, "earn": "1,070"},
+    ];
 
-                          return DashboardStatCard(
-                            title: stat["title"]!,
-                            value: stat["value"]!,
-                            change: stat["change"]!,
-                            iconPath: stat["iconPath"]!,
-                          );
-                        },
-                      ),
+    final List<Map<String, dynamic>> driversData = [
+      {
+        "name": "John Smith",
+        "email": "johnsmith@gmail.com",
+        "route": "Galle ➜ KnightOwl",
+        "rides": 542,
+      },
+      {
+        "name": "Kasun Perera",
+        "email": "kasun@gmail.com",
+        "route": "Colombo ➜ KnightOwl",
+        "rides": 298,
+      },
+      {
+        "name": "Nimal Fernando",
+        "email": "nimal@gmail.com",
+        "route": "Tangalle ➜ Hameedia",
+        "rides": 356,
+      },
+      {
+        "name": "Supun Silva",
+        "email": "supun@gmail.com",
+        "route": "Matara ➜ KnightOwl",
+        "rides": 169,
+      },
+    ];
+
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 270,
+            child: Container(
+              padding: const EdgeInsets.only(left: 23, right: 73),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            crossAxisSpacing: 260,
+                            mainAxisSpacing: 27,
+                            childAspectRatio: 2.2,
+                          ),
+                      itemCount: stats.length,
+                      itemBuilder: (context, index) {
+                        final stat = stats[index];
+
+                        return DashboardStatCard(
+                          title: stat["title"]!,
+                          value: stat["value"]!,
+                          change: stat["change"]!,
+                          iconPath: stat["iconPath"]!,
+                        );
+                      },
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
-            const SizedBox(height: 29),
-            Row(
+          ),
+          const SizedBox(height: 29),
+          Row(
+            children: [
+              DashboardBarChart(
+                title: "Rides Per Day",
+                subtitle: "Last 7 days activity",
+                labels: const ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+                values: const [260, 200, 410, 130, 220, 60, 160],
+              ),
+              Spacer(),
+              UsersDistributionChart(
+                title: 'User Distribution',
+                subtitle: 'Drivers vs Riders',
+                period: 'Monthly',
+                ridersPercent: 65.0,
+                driversPercent: 35.0,
+              ),
+            ],
+          ),
+          const SizedBox(height: 30),
+          MonthlyRevenueChart(
+            year2020: [
+              10000,
+              18000,
+              17000,
+              20000,
+              30000,
+              38000,
+              28000,
+              19000,
+              20000,
+              23000,
+              24000,
+              23000,
+            ],
+            year2021: [
+              22000,
+              29000,
+              11000,
+              26000,
+              36000,
+              21000,
+              30000,
+              36000,
+              26000,
+              15000,
+              32000,
+              36000,
+            ],
+          ),
+          const SizedBox(height: 27),
+          PopularRoutesCard(routes: routesData),
+          const SizedBox(height: 27),
+          SizedBox(
+            height: 345,
+            child: Row(
               children: [
-                DashboardBarChart(
-                  title: "Rides Per Day",
-                  subtitle: "Last 7 days activity",
-                  labels: const [
-                    "Mon",
-                    "Tue",
-                    "Wed",
-                    "Thu",
-                    "Fri",
-                    "Sat",
-                    "Sun",
-                  ],
-                  values: const [260, 200, 410, 130, 220, 60, 160],
-                ),
-                Spacer(),
-                UsersDistributionChart(
-                  title: 'User Distribution',
-                  subtitle: 'Drivers vs Riders',
-                  period: 'Monthly',
-                  ridersPercent: 65.0,
-                  driversPercent: 35.0,
+                Expanded(child: BestDriversCard(drivers: driversData)),
+                const SizedBox(width: 20),
+                SizedBox(
+                  width: 300,
+                  child: PendingListCard(
+                    companies: ["Techcorp Inc", "Techcorp Inc", "Techcorp Inc","Techcorp Inc"],
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: 30),
-            MonthlyRevenueChart(
-  year2020: [
-    10000, 18000, 17000, 20000, 30000, 38000,
-    28000, 19000, 20000, 23000, 24000, 23000
-  ],
-  year2021: [
-    22000, 29000, 11000, 26000, 36000, 21000,
-    30000, 36000, 26000, 15000, 32000, 36000
-  ],
-)
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

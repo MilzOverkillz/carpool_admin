@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/fonts.dart';
 import '../../utils/theme/text_styles.dart';
@@ -198,7 +199,11 @@ class SidebarWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/icons/logout.png', width: 18, height: 18),
+            Image.asset(
+              'assets/icons/dashboard/logout.png',
+              width: 18,
+              height: 18,
+            ),
             const SizedBox(width: 8),
             const Text(
               'Logout',

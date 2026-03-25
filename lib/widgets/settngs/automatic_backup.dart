@@ -8,49 +8,36 @@ class AutomaticBackup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: ListView(
-        shrinkWrap: true,
-        padding: const EdgeInsets.all(24.0),
-        children: [
-          const Text(
-            'Data Management',
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: AppColors.pageHeaderTitle,
-              fontFamily: AppFonts.primary,
-            ),
+    return ListView(
+      shrinkWrap: true,
+      children: [
+        const Text(
+          'Automatic Backup',
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
+            color: AppColors.pageHeaderTitle,
+            fontFamily: AppFonts.primary,
           ),
-          const SizedBox(height: 24),
-          const Text(
-            'Automatic Backup',
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
-              color: AppColors.pageHeaderTitle,
-              fontFamily: AppFonts.primary,
-            ),
+        ),
+        const SizedBox(height: 4),
+        const Text(
+          'Configure global platform settings',
+          style: TextStyle(
+            fontSize: 12,
+            color: AppColors.pageHeaderSubtitle,
+            fontFamily: AppFonts.dmSans,
           ),
-          const SizedBox(height: 4),
-          const Text(
-            'Configure global platform settings',
-            style: TextStyle(
-              fontSize: 12,
-              color: AppColors.pageHeaderSubtitle,
-              fontFamily: AppFonts.dmSans,
-            ),
-          ),
-          const SizedBox(height: 20),
+        ),
+        const SizedBox(height: 20),
 
-          CustomTextfield(labelText: 'Backup Frequency', hintText: 'Daily'),
+        CustomTextfield(labelText: 'Backup Frequency', hintText: 'Daily'),
 
-          const SizedBox(height: 16),
+        const SizedBox(height: 16),
 
-          // Retention Period Section
-          CustomTextfield(labelText: 'Retention Period', hintText: '1 year'),
-        ],
-      ),
+        // Retention Period Section
+        CustomTextfield(labelText: 'Retention Period', hintText: '1 year'),
+      ],
     );
   }
 }

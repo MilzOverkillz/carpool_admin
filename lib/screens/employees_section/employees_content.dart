@@ -43,7 +43,7 @@ class EmployeesContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.only(left: 15, right: 32, bottom: 32, top: 0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,

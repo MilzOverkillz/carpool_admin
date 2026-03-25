@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../utils/theme/app_sizes.dart';
 import '../../../utils/theme/colors.dart';
 import '../../../utils/theme/text_styles.dart';
-import '../../../utils/theme/app_sizes.dart';
 
 class StatsCard extends StatelessWidget {
   final String label;
@@ -12,13 +13,13 @@ class StatsCard extends StatelessWidget {
   final Widget? persentage;
 
   const StatsCard({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
     this.icon,
     this.iconAsset,
     this.persentage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

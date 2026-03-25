@@ -1,36 +1,74 @@
 import 'package:flutter/material.dart';
+import '../../../utils/models/notification_dummy_data.dart';
 import '../../../utils/theme/colors.dart';
-import '../../../utils/theme/fonts.dart';
+import '../buttons/send_notification_button.dart';
+import 'template_card.dart';
 
 class TemplatesTab extends StatelessWidget {
   const TemplatesTab({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 24),
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: AppColors.divider,
-          width: 1,
+    return Column(
+      children: [
+        // Create Template Button - Using SendNotificationButton with custom parameters
+        const SendNotificationButton(
+          buttonText: 'Create Template',
+          iconAsset: 'assets/icons/notification_icons/add_template.svg',
+          showDialogOnPress: false, // Don't show dialog when pressed
         ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(48.0),
-        child: Center(
-          child: Text(
-            'Template Cards - Coming Soon',
-            style: TextStyle(
-              fontFamily: AppFonts.primary,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-              color: AppColors.textTertiary,
+        
+        // Templates List Container
+        Container(
+          height: 450,
+          margin: const EdgeInsets.fromLTRB(0, 8, 24, 0),
+          decoration: BoxDecoration(
+            color: AppColors.surface,
+            border: Border.all(color: AppColors.tableBorder, width: 1),
+            boxShadow: [
+              // Left shadow (light)
+              BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                offset: const Offset(-2, 0),
+                blurRadius: 6,
+              ),
+              // Right shadow (light)
+              BoxShadow(
+                color: Colors.black.withOpacity(0.02),
+                offset: const Offset(2, 0),
+                blurRadius: 6,
+              ),
+              // Bottom shadow (darker)
+              BoxShadow(
+                color: Colors.black.withOpacity(0.06),
+                offset: const Offset(-1, 9),
+                blurRadius: 10,
+              ),
+            ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Template Cards List
+                  ...NotificationDummyData.templates.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final template = entry.value;
+                    return Column(
+                      children: [
+                        TemplateCard(template: template),
+                        if (index < NotificationDummyData.templates.length - 1)
+                          const SizedBox(height: 16),
+                      ],
+                    );
+                  }).toList(),
+                ],
+              ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }

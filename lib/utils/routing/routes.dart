@@ -1,3 +1,5 @@
+import 'package:carpool_admin/screens/company_admin/company_admin_login.dart';
+import 'package:carpool_admin/screens/dashboard/company_admin_dashboard.dart';
 import 'package:carpool_admin/screens/login_and_register_section/forgot_password.dart';
 import 'package:carpool_admin/screens/login_and_register_section/reset_password.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
@@ -11,30 +13,36 @@ import 'package:go_router/go_router.dart';
 
 // Import screens
 
-
 abstract class AppRoutes {
   static const String signIn = '/';
   static const String signUp = '/sign-up';
   static const String verification = '/verification';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
-  
+
   // This is now the ONLY route you need for the inside of the app!
   static const String mainScreen = '/mainScreen';
   static const String users = '/users';
   static const String notifications = '/notifications';
   static const String dashboard = '/dashboard';
+  static const String companyAdminSignIn = '/company-admin-sign-in';
+  static const String companyAdminDashboard = '/company-admin-dashboard';
 }
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
     // Start directly on the MainShellScreen
-    initialLocation: AppRoutes.mainScreen,
+    initialLocation: AppRoutes.companyAdminSignIn,
     debugLogDiagnostics: true,
     routes: [
       // ==========================================
       // Auth Flow
       // ==========================================
+      GoRoute(
+        name: 'company-admin-sign-in',
+        path: AppRoutes.companyAdminSignIn,
+        builder: (context, state) => const CompanyAdminLogin(),
+      ),
       GoRoute(
         name: 'sign-in',
         path: AppRoutes.signIn,
@@ -59,6 +67,11 @@ class AppRouter {
         name: 'reset-password',
         path: AppRoutes.resetPassword,
         builder: (context, state) => const ResetPassword(),
+      ),
+      GoRoute(
+        name: 'company-admin-dashboard',
+        path: AppRoutes.companyAdminDashboard,
+        builder: (context, state) => const CompanyAdminDashboard(),
       ),
 
       // Users Flow

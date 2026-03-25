@@ -18,7 +18,7 @@ class AllRideContent extends StatelessWidget {
         fare: 'RS 1,200',
       ),
       _Ride(
-        rideId: 'RD-2025-001',
+        rideId: 'RD-2025-002',
         driver: 'John Smith',
         riders: '4',
         date: '2025-09-23',
@@ -26,7 +26,7 @@ class AllRideContent extends StatelessWidget {
         fare: 'RS 1,200',
       ),
       _Ride(
-        rideId: 'RD-2025-001',
+        rideId: 'RD-2025-003',
         driver: 'John Smith',
         riders: '4',
         date: '2025-09-23',
@@ -34,7 +34,7 @@ class AllRideContent extends StatelessWidget {
         fare: 'RS 1,200',
       ),
       _Ride(
-        rideId: 'RD-2025-001',
+        rideId: 'RD-2025-004',
         driver: 'John Smith',
         riders: '4',
         date: '2025-09-23',
@@ -44,67 +44,60 @@ class AllRideContent extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(28, 18, 28, 28),
-      child: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 900),
-          padding: const EdgeInsets.fromLTRB(18, 16, 18, 14),
-          decoration: BoxDecoration(
-            color: const Color(0xFFFDFDFD),
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x08000000),
-                blurRadius: 10,
-                offset: Offset(0, 2),
+      padding: const EdgeInsets.only(left: 15, right: 32, bottom: 32, top: 0),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x05000000),
+              blurRadius: 10,
+              offset: Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'All Rides',
+              style: AppTextStyles.cardTitle.copyWith(
+                fontSize: 20,
+                fontWeight: AppFonts.bold,
+                color: const Color(0xFF1F2937),
               ),
-            ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'All Rides',
-                style: AppTextStyles.cardTitle.copyWith(
-                  fontSize: 14,
-                  fontWeight: AppFonts.bold,
-                  color: const Color(0xFF1F2937),
-                ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'View all rides from your company employee',
+              style: AppTextStyles.caption.copyWith(
+                color: const Color(0xFFA0AEC0),
               ),
-              const SizedBox(height: 3),
-              Text(
-                'View all rides from your company employee',
-                style: AppTextStyles.caption.copyWith(
-                  fontSize: 9,
-                  color: const Color(0xFFA0AEC0),
-                ),
-              ),
-              const SizedBox(height: 14),
+            ),
+            const SizedBox(height: 20),
 
-              // Header
-              Padding(
-                padding: const EdgeInsets.only(left: 2, right: 2, bottom: 8),
-                child: Row(
-                  children: [
-                    _headerCell('Rider ID', flex: 2),
-                    _headerCell('Driver', flex: 2),
-                    _headerCell('Riders', flex: 1),
-                    _headerCell('Date', flex: 2),
-                    _headerCell('Status', flex: 1),
-                    _headerCell('Fare', flex: 1),
-                  ],
-                ),
+            // Header row
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Row(
+                children: [
+                  _headerCell('Rider ID', flex: 2),
+                  _headerCell('Driver', flex: 2),
+                  _headerCell('Riders', flex: 1),
+                  _headerCell('Date', flex: 2),
+                  _headerCell('Status', flex: 2),
+                  _headerCell('Fare', flex: 2),
+                ],
               ),
+            ),
 
-              const Divider(
-                height: 1,
-                thickness: 0.8,
-                color: Color(0xFFEAEAEA),
-              ),
+            const Divider(height: 1, color: Color(0xFFEAEAEA)),
 
-              ...rides.map((ride) => _RideRow(ride: ride)),
-            ],
-          ),
+            ...rides.map((ride) => _RideRow(ride: ride)),
+          ],
         ),
       ),
     );
@@ -117,9 +110,10 @@ class AllRideContent extends StatelessWidget {
         text,
         style: const TextStyle(
           fontFamily: AppFonts.primary,
-          fontSize: 10,
-          fontWeight: FontWeight.w500,
-          color: Color(0xFF6B7280),
+          fontSize: 12,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 0.5,
+          color: Color(0xFF9CA3AF),
         ),
       ),
     );
@@ -133,87 +127,46 @@ class _RideRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: Color(0xFFE5E7EB))),
+      ),
       child: Row(
         children: [
+          Expanded(flex: 2, child: _cell(ride.rideId)),
+          Expanded(flex: 2, child: _cell(ride.driver)),
+          Expanded(flex: 1, child: _cell(ride.riders)),
+          Expanded(flex: 2, child: _cell(ride.date)),
           Expanded(
             flex: 2,
-            child: Text(
-              ride.rideId,
-              style: const TextStyle(
-                fontFamily: AppFonts.primary,
-                fontSize: 10.5,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              ride.driver,
-              style: const TextStyle(
-                fontFamily: AppFonts.primary,
-                fontSize: 10.5,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              ride.riders,
-              style: const TextStyle(
-                fontFamily: AppFonts.primary,
-                fontSize: 10.5,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              ride.date,
-              style: const TextStyle(
-                fontFamily: AppFonts.primary,
-                fontSize: 10.5,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 1,
             child: Align(
               alignment: Alignment.centerLeft,
               child: _statusPill(ride.status),
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Text(
-              ride.fare,
-              style: const TextStyle(
-                fontFamily: AppFonts.primary,
-                fontSize: 10.5,
-                fontWeight: FontWeight.w700,
-                color: Color(0xFF111827),
-              ),
-            ),
-          ),
+          Expanded(flex: 2, child: _cell(ride.fare)),
         ],
+      ),
+    );
+  }
+
+  Widget _cell(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontFamily: AppFonts.primary,
+        fontSize: 13,
+        fontWeight: FontWeight.w500,
+        color: Color(0xFF111827),
       ),
     );
   }
 
   Widget _statusPill(String status) {
     final bool isCompleted = status == 'Completed';
-
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
       decoration: BoxDecoration(
         color: isCompleted ? const Color(0xFFD9D9D9) : const Color(0xFFE5E5E5),
         borderRadius: BorderRadius.circular(20),
@@ -222,7 +175,7 @@ class _RideRow extends StatelessWidget {
         status,
         style: const TextStyle(
           fontFamily: AppFonts.primary,
-          fontSize: 8.5,
+          fontSize: 12,
           fontWeight: FontWeight.w500,
           color: Color(0xFF4B5563),
         ),
@@ -230,6 +183,8 @@ class _RideRow extends StatelessWidget {
     );
   }
 }
+
+// ── Data Model ────────────────────────────────────────────────────────────────
 
 class _Ride {
   final String rideId;
