@@ -5,14 +5,20 @@ import 'package:carpool_admin/screens/login_and_register_section/reset_password.
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
+import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/main_screen/main_shell_screen.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/portal_selection/dmin_portal_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 // Import screens
 
 abstract class AppRoutes {
+  // Portal Selection (Entry point)
+  static const String portalSelection = '/portal-selection';
+  
+  // Platform Admin Routes
   static const String signIn = '/';
   static const String signUp = '/sign-up';
   static const String verification = '/verification';
@@ -24,24 +30,30 @@ abstract class AppRoutes {
   static const String users = '/users';
   static const String notifications = '/notifications';
   static const String dashboard = '/dashboard';
+  
+  // Company Admin Routes
   static const String companyAdminSignIn = '/company-admin-sign-in';
   static const String companyAdminDashboard = '/company-admin-dashboard';
 }
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    // Start directly on the MainShellScreen
-    initialLocation: AppRoutes.companyAdminSignIn,
+    // Start with portal selection screen
+    initialLocation: AppRoutes.portalSelection,
     debugLogDiagnostics: true,
     routes: [
       // ==========================================
-      // Auth Flow
+      // Portal Selection (Entry Point)
       // ==========================================
       GoRoute(
-        name: 'company-admin-sign-in',
-        path: AppRoutes.companyAdminSignIn,
-        builder: (context, state) => const CompanyAdminLogin(),
+        name: 'portal-selection',
+        path: AppRoutes.portalSelection,
+        builder: (context, state) => const AdminPortalSelection(),
       ),
+
+      // ==========================================
+      // Platform Admin Auth Flow
+      // ==========================================
       GoRoute(
         name: 'sign-in',
         path: AppRoutes.signIn,
@@ -67,14 +79,26 @@ class AppRouter {
         path: AppRoutes.resetPassword,
         builder: (context, state) => const ResetPassword(),
       ),
+
+      // ==========================================
+      // Company Admin Auth Flow
+      // ==========================================
+      GoRoute(
+        name: 'company-admin-sign-in',
+        path: AppRoutes.companyAdminSignIn,
+        builder: (context, state) => const CompanyAdminLogin(),
+      ),
       GoRoute(
         name: 'company-admin-dashboard',
         path: AppRoutes.companyAdminDashboard,
         builder: (context, state) => const CompanyAdminDashboard(),
       ),
 
-      // Users Flow
-      // Notifications Flow (NEW)
+      // ==========================================
+      // Main App Flows
+      // ==========================================
+      
+      // Notifications Flow
       GoRoute(
         name: 'notifications',
         path: AppRoutes.notifications,
@@ -88,7 +112,7 @@ class AppRouter {
         builder: (context, state) => const MainDashboard(),
       ),
 
-      // Payments Overview
+      // Main Screen (Shell)
       GoRoute(
         name: 'mainScreen',
         path: AppRoutes.mainScreen,
@@ -112,7 +136,7 @@ class AppRouter {
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () => context.go(AppRoutes.signIn),
+              onPressed: () => context.go(AppRoutes.portalSelection),
               child: const Text('Go to Home'),
             ),
           ],

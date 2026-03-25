@@ -21,7 +21,7 @@ class AppColors {
   static const Color surface = Color(0xFFFFFFFF);
   static const Color surfaceSecondary = Color(0xFFF9FAFB);
   static const Color mainBackground = Color(0xFFF4F7FE);
-  static const Color white = Color(0xFFFFFFFF);
+  static const Color sendNotificationButton = Color(0xFFD9D9D9);
 
   // ==========================================
   // Interactive Surfaces
@@ -29,7 +29,7 @@ class AppColors {
   static const Color buttonSecondaryBg = Color(0xFFE5E7EB);
   static const Color tagBg = Color(0xFFE5E7EB);
   static const Color tagPillBg = Color(0xFFC7C9CB);
-  static const Color sendNotificationButton = Color(0xFFD9D9D9);
+  static const Color white = Color(0xFFFFFFFF);
 
   // ==========================================
   // Text Colors
@@ -38,23 +38,16 @@ class AppColors {
   static const Color textSecondary = Color(0xFF4B5563);
   static const Color textTertiary = Color(0xFF6B7280);
   static const Color textHint = Color(0xFF9CA3AF);
-  static const Color textInverse = Color(0xFFFFFFFF);
   static const Color textHint2 = Color(0xFF9A9A9A);
   static const Color blackText100 = Color(0xFFC7C9CB);
   static const Color blackText200 = Color(0xFF9EA2A5);
   static const Color blackText400 = Color(0xFF495056);
   static const Color blackTextTitle = Color(0xFF212B36);
   static const Color blackTextTitleTem = Color(0xFF9A9A9A);
+  static const Color textInverse = Color(0xFFFFFFFF);
   static const Color authHeading = Color(0xFF232323);
   static const Color authSubHeading = Color(0xFF969696);
   static const Color tabsSelection = Color(0xFFE1E1E1);
-  static const Color purpleText = Color(0xFF6B7280);
-  static const Color outlinedButtonText = Color(0xFF6B7280);
-  static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
-  static const Color pillBox = Color(0xFFD6D5D5);
-  static const Color pillBox1 = Color(0xFF737373);
-  static const Color pillBox2 = Color(0xFFBFBFBF);
-
   static const Color purpleText = Color(0xFF6B7280);
   static const Color outlinedButtonText = Color(0xFF6B7280);
   static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
@@ -67,12 +60,12 @@ class AppColors {
   // ==========================================
   static const Color divider = Color(0xFFE5E7EB);
   static const Color border = Color(0xFFD1D5DB);
-  static const Color inputBorder = Color(0xFFD1D5DB);
-  static const Color inputFocusBorder = Color(0xFF111827);
-  static const Color inputErrorBorder = Color(0xFFEF4444);
   static const Color searchBorder = Color(0xFFE9E9EA);
   static const Color channelsBorder = Color(0xFFC3C3C3);
   static const Color tableBorder = Color(0xFFE2E8F0);
+  static const Color inputBorder = Color(0xFFD1D5DB);
+  static const Color inputFocusBorder = Color(0xFF111827);
+  static const Color inputErrorBorder = Color(0xFFEF4444);
 
   // ==========================================
   // Status & Semantic Colors
