@@ -1,6 +1,7 @@
 import 'package:carpool_admin/screens/company_section/companies.dart';
 import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/payment/payment_screen.dart';
 import 'package:carpool_admin/screens/policies.dart';
 import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
 import 'package:carpool_admin/screens/setting_temp.dart';
@@ -45,7 +46,8 @@ class _MainShellScreenState extends State<MainShellScreen> {
       case 'Rides':
         return const RidesContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Payments':
-        return _buildPlaceholder('Payments');
+        // return const PaymentsContent();
+        return const PayemntScreen();
       case 'Analytics':
         return const Analytics();
       case 'Notifications':

@@ -69,6 +69,7 @@ flutter:
     - assets/icons/
     - assets/icons/login_and_register/
     - assets/icons/notification_icons/
+    - assets/icons/payment/
     - assets/icons/dashboard/
     - assets/icons/analytics/
     - assets/icons/settings/
