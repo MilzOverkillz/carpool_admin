@@ -154,7 +154,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                   ),
                 ),
               ),
-
+              SizedBox(height: 9,),
               // Scrollable content per tab
               Expanded(
                 child: TabBarView(
@@ -168,8 +168,8 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                           const SizedBox(height: 12),
                           _gatewayCard(title: 'PayPal', connected: true),
                           const SizedBox(height: 12),
-                          _gatewayCard(title: 'Bank Account', connected: false),
-                          const SizedBox(height: 20),
+                          _gatewayCard(title: 'Bank Account', connected: true),
+                          const SizedBox(height: 12),
                         ],
                       ),
                     ),
@@ -307,32 +307,34 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    OutlinedButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        Navigator.of(context).pop();
-                      },
-                      style: OutlinedButton.styleFrom(
-                        side: const BorderSide(color: Color(0xFFBDBDBD)),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    if (_selectedTabIndex == 1) ...[
+                      OutlinedButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          Navigator.of(context).pop();
+                        },
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Color(0xFFBDBDBD)),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          backgroundColor: Colors.transparent,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 36,
+                            vertical: 8,
+                          ),
                         ),
-                        backgroundColor: Colors.transparent,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 36,
-                          vertical: 8,
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF262626),
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Color(0xFF262626),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 20),
+                      const SizedBox(width: 20),
+                    ],
                     ElevatedButton(
                       onPressed: _save,
                       style: ElevatedButton.styleFrom(
@@ -401,7 +403,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: const Color(0xFFF4F4F5)),
+        border: title == 'Bank Account' ? null : Border.all(color: const Color(0xFFF4F4F5)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -421,7 +423,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                       ),
                     ),
                     const SizedBox(width: 10),
-                    if (connected)
+                    if (connected && title != 'Bank Account')
                       Container(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 13,
@@ -452,7 +454,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                   ),
                 ),
                 const SizedBox(height: 17),
-                if (connected) ...[
+                if (connected && title != 'Bank Account') ...[
                   const Text(
                     'API Key',
                     style: TextStyle(
@@ -462,26 +464,29 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                     ),
                   ),
                   const SizedBox(height: 8),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      hintText: '****************',
-                      hintStyle: const TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF9A9A9A),
-                        fontWeight: FontWeight.w500,
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 18,
-                      ),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(color: Color(0xFFE6E6E6)),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: const BorderSide(color: Color(0xFFCCCCCC)),
+                  SizedBox(
+                    width: double.infinity,
+                    child: TextField(
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        hintText: '****************',
+                        hintStyle: const TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF9A9A9A),
+                          fontWeight: FontWeight.w500,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 18,
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(color: Color(0xFFE6E6E6)),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: const BorderSide(color: Color(0xFFCCCCCC)),
+                        ),
                       ),
                     ),
                   ),
@@ -512,27 +517,60 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                     ),
                   ),
                 ] else ...[
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF495056),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                  if (title != 'Bank Account')
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF495056),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 6),
+                          child: Text('Connect',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),),
                         ),
                       ),
-                      child: const Text('Connect'),
                     ),
-                  ),
                 ],
               ],
             ),
           ),
           const SizedBox(width: 12),
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [Switch.adaptive(value: connected, onChanged: (_) {})],
+          SizedBox(
+            width: 120,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                if (title == 'Bank Account' && connected)
+                  Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD6D5D5),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Text(
+                      'Connected',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                        color: Color(0xFF212121),
+                      ),
+                    ),
+                  )
+                else
+                  Switch.adaptive(value: connected, onChanged: (_) {}),
+              ],
+            ),
           ),
         ],
       ),
