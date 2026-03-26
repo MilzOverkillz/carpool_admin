@@ -5,6 +5,7 @@ import 'package:carpool_admin/widgets/cards/payment_refund.dart';
 import 'package:carpool_admin/widgets/cards/payment_status.dart';
 import 'package:carpool_admin/widgets/cards/payment_status2.dart';
 import 'package:carpool_admin/widgets/cards/payment_transactions_table_card.dart';
+import 'package:carpool_admin/widgets/dialogs/process_refund_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
@@ -106,7 +107,15 @@ class PayemntScreen extends StatelessWidget {
                           ),
                           backgroundColor: Color(0xFFD9D9D9),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          final result = await showDialog(
+                            context: context,
+                            builder: (_) => const ProcessRefundDialog(),
+                          );
+                          if (result != null) {
+                            debugPrint('Refund submitted: $result');
+                          }
+                        },
                         child: Row(
                           children: [
                             Image.asset("assets/icons/payment/buttonicon1.png"),
