@@ -11,10 +11,12 @@ class AppSizes {
 
   // Spacing scale (based on 8dp grid system)
   static const double xs = 4;
+  static const double smm = 5;
   static const double sm = 8;
   static const double base = 12;
   static const double md = 16;
   static const double lg = 24;
+  static const double lxg = 26;
   static const double xl = 32;
   static const double xxl = 48;
   static const double xxxl = 64;
@@ -112,7 +114,7 @@ class AppSizes {
 
   // Check if device is mobile
   static bool isMobile(BuildContext context) {
-    return MediaQuery.of(context).size.width <desktopBreakpoint;
+    return MediaQuery.of(context).size.width < desktopBreakpoint;
   }
 
   // Check if device is tablet
@@ -146,6 +148,11 @@ class AppSizes {
   // Get available screen width
   static double getAvailableWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
+  }
+
+  static double widthtoduble(BuildContext context, double value) {
+    value = MediaQuery.of(context).size.width * value;
+    return value;
   }
 
   //check if keyboard appears or disappears

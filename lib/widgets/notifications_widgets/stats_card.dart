@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../../utils/theme/app_sizes.dart';
 import '../../../utils/theme/colors.dart';
 import '../../../utils/theme/text_styles.dart';
-import '../../../utils/theme/app_sizes.dart';
 
 class StatsCard extends StatelessWidget {
   final String label;
   final String value;
   final IconData? icon;
   final String? iconAsset;
+  final Widget? persentage;
 
   const StatsCard({
-    Key? key,
+    super.key,
     required this.label,
     required this.value,
     this.icon,
     this.iconAsset,
+    this.persentage,
   }) : super(key: key);
 
   @override
@@ -23,7 +26,7 @@ class StatsCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: Color(0xFFFFFFFF),
         borderRadius: BorderRadius.circular(AppSizes.radiusXXl),
         border: Border.all(color: AppColors.tabsSelection, width: 2),
         boxShadow: [
@@ -43,6 +46,10 @@ class StatsCard extends StatelessWidget {
                 Text(label, style: AppTextStyles.statesCardLabel.copyWith()),
                 const SizedBox(height: 8),
                 Text(value, style: AppTextStyles.statesCardValue.copyWith()),
+                if (persentage != null) ...[
+                  const SizedBox(height: 8),
+                  persentage!,
+                ],
               ],
             ),
           ),

@@ -1,3 +1,19 @@
+class NotificationTemplate {
+  final String id;
+  final String title;
+  final String message;
+  final String category;
+  final String categoryLabel;
+
+  NotificationTemplate({
+    required this.id,
+    required this.title,
+    required this.message,
+    required this.category,
+    required this.categoryLabel,
+  });
+}
+
 class NotificationItem {
   final String title;
   final String subtitle;
@@ -24,30 +40,44 @@ class NotificationItem {
 
 class ComplaintItem {
   final String id;
-  final String title;
-  final String description;
-  final String type;
+  final String complaintType;
+  final String reporterName;
+  final String reporterEmail;
+  final String reporterRole;
+  final String reportedUserName;
+  final String reportedUserEmail;
+  final String reportedUserRole;
   final String priority;
   final String status;
-  final String submittedDate;
-  final String assignedTo;
+  final String rideStatus;
+  final String description;
+  final String relatedRideId;
+  final String dateReported;
+  final String? resolutionNotes;
 
   ComplaintItem({
     required this.id,
-    required this.title,
-    required this.description,
-    required this.type,
+    required this.complaintType,
+    required this.reporterName,
+    required this.reporterEmail,
+    required this.reporterRole,
+    required this.reportedUserName,
+    required this.reportedUserEmail,
+    required this.reportedUserRole,
     required this.priority,
     required this.status,
-    required this.submittedDate,
-    required this.assignedTo,
+    required this.rideStatus,
+    required this.description,
+    required this.relatedRideId,
+    required this.dateReported,
+    this.resolutionNotes,
   });
 }
 
 class NotificationDummyData {
   // Notification Stats
   static const int totalNotifications = 156;
-  static const int newComplaints = 1;
+  static const int newComplaints = 2;
   static const int inProgress = 1;
   static const int resolved = 1;
 
@@ -124,24 +154,89 @@ class NotificationDummyData {
   // Complaints List
   static List<ComplaintItem> complaints = [
     ComplaintItem(
-      id: 'CMP-001',
-      title: 'Driver was rude',
-      description: 'The driver was very unprofessional during my ride',
-      type: 'Behavior',
+      id: 'RD-2025-001',
+      complaintType: 'Driver Behavior',
+      reporterName: 'Sara Johnson',
+      reporterEmail: 'saraj@shtechcorp.com',
+      reporterRole: 'Rider',
+      reportedUserName: 'James Trailer',
+      reportedUserEmail: 'Johnsmith@shtechcorp.com',
+      reportedUserRole: 'Driver',
       priority: 'High',
       status: 'New',
-      submittedDate: '2025-01-28',
-      assignedTo: 'Support Team A',
+      rideStatus: 'New',
+      description: 'Driver was rude and unprofessional during the ride',
+      relatedRideId: 'RD-2025-006',
+      dateReported: '2025-01-08',
+      resolutionNotes: null,
     ),
     ComplaintItem(
-      id: 'CMP-002',
-      title: 'Payment issue',
-      description: 'Double charged for the same ride',
-      type: 'Payment',
+      id: 'RD-2025-001',
+      complaintType: 'Safety Concern',
+      reporterName: 'Sara Johnson',
+      reporterEmail: 'saraj@shtechcorp.com',
+      reporterRole: 'Rider',
+      reportedUserName: 'James Trailer',
+      reportedUserEmail: 'Johnsmith@shtechcorp.com',
+      reportedUserRole: 'Driver',
       priority: 'Critical',
-      status: 'Inprogress',
-      submittedDate: '2025-01-27',
-      assignedTo: 'Finance Team',
+      status: 'In-Progress',
+      rideStatus: 'New',
+      description: 'Driver was speeding and using phone while driving',
+      relatedRideId: 'RD-2025-007',
+      dateReported: '2025-01-28',
+      resolutionNotes: null,
+    ),
+    ComplaintItem(
+      id: 'RD-2025-001',
+      complaintType: 'Rider_Behavior',
+      reporterName: 'Sara Johnson',
+      reporterEmail: 'saraj@shtechcorp.com',
+      reporterRole: 'Driver',
+      reportedUserName: 'James Trailer',
+      reportedUserEmail: 'Johnsmith@shtechcorp.com',
+      reportedUserRole: 'Rider',
+      priority: 'Low',
+      status: 'Resolved',
+      rideStatus: 'New',
+      description: 'Rider was late and did not communicate',
+      relatedRideId: 'RD-2025-008',
+      dateReported: '2025-01-28',
+      resolutionNotes: 'Issue resolved after speaking with both parties',
+    ),
+    ComplaintItem(
+      id: 'RD-2025-001',
+      complaintType: 'Driver Behavior',
+      reporterName: 'Sara Johnson',
+      reporterEmail: 'saraj@shtechcorp.com',
+      reporterRole: 'Rider',
+      reportedUserName: 'James Trailer',
+      reportedUserEmail: 'Johnsmith@shtechcorp.com',
+      reportedUserRole: 'Driver',
+      priority: 'High',
+      status: 'New',
+      rideStatus: 'New',
+      description: 'Driver took a longer route unnecessarily',
+      relatedRideId: 'RD-2025-009',
+      dateReported: '2025-01-28',
+      resolutionNotes: null,
+    ),
+    ComplaintItem(
+      id: 'RD-2025-001',
+      complaintType: 'Driver Behavior',
+      reporterName: 'Sara Johnson',
+      reporterEmail: 'saraj@shtechcorp.com',
+      reporterRole: 'Rider',
+      reportedUserName: 'James Trailer',
+      reportedUserEmail: 'Johnsmith@shtechcorp.com',
+      reportedUserRole: 'Driver',
+      priority: 'High',
+      status: 'New',
+      rideStatus: 'New',
+      description: 'Driver cancelled ride at the last minute without notice',
+      relatedRideId: 'RD-2025-010',
+      dateReported: '2025-01-28',
+      resolutionNotes: null,
     ),
   ];
 
@@ -149,7 +244,7 @@ class NotificationDummyData {
   static const List<String> statusOptions = [
     'All Status',
     'New',
-    'Inprogress',
+    'In-Progress',
     'Escalated',
     'Resolved',
   ];
@@ -175,11 +270,44 @@ class NotificationDummyData {
   // Type options for complaints
   static const List<String> complaintTypeOptions = [
     'All Type',
-    'Behavior',
+    'Driver Behavior',
+    'Rider_Behavior',
+    'Safety Concern',
     'Payment',
-    'Safety',
     'Vehicle',
     'Route',
     'Other',
+  ];
+
+  // Notification Templates
+  static List<NotificationTemplate> templates = [
+    NotificationTemplate(
+      id: 'TPL-001',
+      title: 'Ride Confirmation',
+      message: 'Your ride has been confirmed for [date] at [time]',
+      category: 'ride-alert',
+      categoryLabel: 'ride-alert',
+    ),
+    NotificationTemplate(
+      id: 'TPL-002',
+      title: 'Ride Cancelled',
+      message: 'Your ride (riderid) has been canceled. Refund will be processed shortly.',
+      category: 'ride-alert',
+      categoryLabel: 'ride-alert',
+    ),
+    NotificationTemplate(
+      id: 'TPL-003',
+      title: 'Account Verified',
+      message: 'Your ride has been confirmed for [date] at [time]',
+      category: 'account-update',
+      categoryLabel: 'account-update',
+    ),
+    NotificationTemplate(
+      id: 'TPL-004',
+      title: 'Refund Confirmed',
+      message: 'Your ride has been confirmed for [date] at [time]',
+      category: 'refund',
+      categoryLabel: 'refund',
+    ),
   ];
 }
