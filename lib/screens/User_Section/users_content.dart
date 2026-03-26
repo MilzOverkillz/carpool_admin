@@ -1,34 +1,44 @@
+import 'dart:ui'; // <--- FIX 1: MUST IMPORT THIS FOR MOUSE DRAGGING!
 import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/text_styles.dart';
 
-// IMPORTANT: Ensure these paths point to your actual files
-import '../../widgets/layout/main_layout.dart';
 import '../../widgets/Cards/user_card.dart'; 
 import '../../widgets/dropdowns/add_user_dialog.dart';
-import '../../widgets/cards/user_filter_bar.dart'; // <--- Import the new filter bar widget
+import '../../widgets/cards/user_filter_bar.dart'; 
 
-class UserScreen extends StatelessWidget {
-  const UserScreen({super.key});
+class UsersContent extends StatefulWidget {
+  const UsersContent({Key? key}) : super(key: key);
+
+  @override
+  State<UsersContent> createState() => _UsersContentState();
+}
+
+class _UsersContentState extends State<UsersContent> {
+  // FIX 2: Add a ScrollController to manage the horizontal scrolling
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MainLayout(
-      pageTitle: 'Users',
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.only(
-          left: 32.0,
-          right: 32.0,
-          bottom: 32.0,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildPageHeader(context), 
-            const SizedBox(height: 24),
-            _buildMainContentCard(),
-          ],
-        ),
+    return SingleChildScrollView(
+      padding: const EdgeInsets.only(
+        left: 32.0,
+        right: 32.0,
+        bottom: 32.0,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildPageHeader(context), 
+          const SizedBox(height: 24),
+          _buildMainContentCard(),
+        ],
       ),
     );
   }
@@ -111,12 +121,43 @@ class UserScreen extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          const UserFilterBar(), // <--- Dropped your new reusable widget right here!
-          const Divider(height: 1, color: AppColors.divider),
-          _buildDataTable(),
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Give the table a strict width to prevent the 'Expanded' crash.
+          double tableWidth = constraints.maxWidth < 1050 ? 1050 : constraints.maxWidth;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start, 
+            children: [
+              const UserFilterBar(), 
+              const Divider(height: 1, color: AppColors.divider),
+              
+              // FIX 3: ScrollConfiguration allows click-and-drag, Scrollbar makes it visible!
+              ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse, // Enables click-to-drag on Web!
+                    PointerDeviceKind.trackpad,
+                  },
+                ),
+                child: Scrollbar(
+                  controller: _horizontalScrollController,
+                  thumbVisibility: true, 
+                  trackVisibility: true,
+                  child: SingleChildScrollView(
+                    controller: _horizontalScrollController,
+                    scrollDirection: Axis.horizontal,
+                    child: SizedBox(
+                      width: tableWidth, 
+                      child: _buildDataTable(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
@@ -146,7 +187,6 @@ class UserScreen extends StatelessWidget {
         ),
         const Divider(height: 1, color: AppColors.divider),
 
-        // Calling the separated UserCardWidget
         const UserCardWidget(
           initials: 'SA',
           name: 'Sithum Anuththara',

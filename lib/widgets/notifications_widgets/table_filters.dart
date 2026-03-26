@@ -1,4 +1,6 @@
+import 'package:carpool_admin/utils/theme/app_sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../../../utils/theme/colors.dart';
 import '../../../utils/theme/fonts.dart';
 import 'custom_dropdown.dart';
@@ -34,23 +36,23 @@ class TableFilters extends StatelessWidget {
         children: [
           // Search Bar
           Expanded(
-            flex: 3, // ✅ Changed from flex: 2 to flex: 3 for better proportion
+            flex: 2, // ✅ Changed from flex: 2 to flex: 3 for better proportion
             child: Container(
-              height: 48, // ✅ Reduced from 60 to 48 for consistency
+              height: 56, // ✅ Reduced from 60 to 48 for consistency
               decoration: BoxDecoration(
                 color: AppColors.surface,
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: AppColors.divider, width: 1),
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(color: AppColors.searchBorder, width: 1.2),
               ),
               child: Row(
                 children: [
-                  const SizedBox(width: 16),
-                  const Icon(
-                    Icons.search,
-                    size: 20,
-                    color: AppColors.textTertiary,
+                  const SizedBox(width: 30),
+                   SvgPicture.asset(
+                    "assets/icons/notification_icons/search.svg",
+                    width: 18,
+                    height: 18,
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 20),
                   Expanded(
                     child: TextField(
                       controller: searchController,
@@ -62,38 +64,37 @@ class TableFilters extends StatelessWidget {
                         contentPadding: EdgeInsets.zero,
                         hintStyle: TextStyle(
                           fontFamily: AppFonts.primary,
-                          fontSize: 14,
+                          fontSize: 16,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.textTertiary,
+                          color: AppColors.black,
                         ),
                       ),
                       style: TextStyle(
                         fontFamily: AppFonts.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.textPrimary,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.black,
                       ),
                     ),
                   ),
                   const SizedBox(width: 16),
                   IconButton(
-                    icon: const Icon(
-                      Icons.tune,
-                      size: 20,
-                      color: AppColors.textTertiary,
+                    icon: SvgPicture.asset(
+                      'assets/icons/notification_icons/filter.svg',
+                      width: 18,
+                      height: 18,
                     ),
                     onPressed: () {},
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 50),
                 ],
               ),
             ),
           ),
-          
+
           const Spacer(), // ✅ Changed from SizedBox(width: 500) to Spacer()
-          
           // Type Dropdown
           CustomDropdown(
             items: typeOptions,
@@ -101,8 +102,8 @@ class TableFilters extends StatelessWidget {
             onChanged: onTypeChanged,
             width: 160,
           ),
-          const SizedBox(width: 12),
-          
+          const SizedBox(width: AppSizes.xl),
+
           // Status Dropdown
           CustomDropdown(
             items: statusOptions,

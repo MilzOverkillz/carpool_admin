@@ -10,6 +10,10 @@ class DashboardBarChart extends StatelessWidget {
   final List<String> labels;
   final Color barColor;
 
+  // ✅ NEW (optional size params)
+  final double? width;
+  final double? height;
+
   const DashboardBarChart({
     super.key,
     required this.title,
@@ -17,13 +21,17 @@ class DashboardBarChart extends StatelessWidget {
     required this.values,
     required this.labels,
     this.barColor = const Color(0xFF78797B),
+    this.width,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 970,
-      height: 400,
+      // ✅ USE dynamic values with fallback
+      width: width ?? 970,
+      height: height ?? 400,
+
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: const Color(0xFFFFFFFF),
@@ -86,9 +94,7 @@ class DashboardBarChart extends StatelessWidget {
                     );
                   },
                 ),
-
                 borderData: FlBorderData(show: false),
-
                 titlesData: FlTitlesData(
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
@@ -112,15 +118,12 @@ class DashboardBarChart extends StatelessWidget {
                       },
                     ),
                   ),
-
                   rightTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
-
                   topTitles: const AxisTitles(
                     sideTitles: SideTitles(showTitles: false),
                   ),
-
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -142,7 +145,6 @@ class DashboardBarChart extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 barGroups: List.generate(
                   values.length,
                   (index) => BarChartGroupData(

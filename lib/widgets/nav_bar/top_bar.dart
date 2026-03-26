@@ -73,7 +73,7 @@ class TopBarWidget extends StatelessWidget {
       height: 41,
       padding: const EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
-        color: AppColors.surface, 
+        color: AppColors.mainBackground, 
         borderRadius: BorderRadius.circular(24.0), 
         boxShadow: const [
           BoxShadow(
@@ -88,8 +88,8 @@ class TopBarWidget extends StatelessWidget {
           // Custom Search Icon
           Image.asset(
             'assets/icons/dashboard/search.png', 
-            width: 10.0, 
-            height: 10.0, 
+            width: 12.0, 
+            height: 12.0, 
             color: const Color(0xFF495056), 
           ),
           const SizedBox(width: 12),
