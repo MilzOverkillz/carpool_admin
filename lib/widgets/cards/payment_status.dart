@@ -9,12 +9,21 @@ class PaymentStatus extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 17),
-      child: Row(
-        children: [
-          _PaymentStatusCard(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final double cardWidth = (constraints.maxWidth.isFinite && constraints.maxWidth > 0)
+              ? (constraints.maxWidth / 4)
+              : 260;
+
+          return SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _PaymentStatusCard(
             title: "Total Driver Earnings",
             value: "\$ 66.50",
             iconPath: "assets/icons/payment/icon1.png",
+                    width: cardWidth,
             bottomContent: Row(
               children: [
                 Image.asset("assets/icons/payment/subicon1.png"),
@@ -31,12 +40,13 @@ class PaymentStatus extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 10),
-          _PaymentStatusCard(
+                SizedBox(width: 10),
+                _PaymentStatusCard(
             title: "Total Commisioned Earned",
             value: "\$ 12.50",
             iconPath: "assets/icons/payment/icon2.png",
             rightPadding: 13,
+                    width: cardWidth,
             bottomContent: Row(
               children: [
                 Image.asset("assets/icons/payment/subicon2.png"),
@@ -53,11 +63,12 @@ class PaymentStatus extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(width: 10),
-          _PaymentStatusCard(
+                SizedBox(width: 10),
+                _PaymentStatusCard(
             title: "Pending Payments",
             value: "1",
             iconPath: "assets/icons/payment/icon3.png",
+                    width: cardWidth,
             bottomContent: Text(
               "Requires Attention",
               style: TextStyle(
@@ -68,13 +79,14 @@ class PaymentStatus extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 10),
-          _PaymentStatusCard(
+                SizedBox(width: 10),
+                _PaymentStatusCard(
             title: "Gateway Status",
             value: "Completed",
             iconPath: "assets/icons/payment/icon4.png",
             valueFontSize: 14,
             topSpacingBeforeValue: 6,
+                    width: cardWidth,
             bottomContent: Text(
               "Stripe and paypal",
               style: TextStyle(
@@ -85,7 +97,10 @@ class PaymentStatus extends StatelessWidget {
               ),
             ),
           ),
-        ],
+              ],
+            ),
+          );
+        },
       ),
     );
   }
@@ -100,6 +115,7 @@ class _PaymentStatusCard extends StatelessWidget {
     this.rightPadding = 22,
     this.valueFontSize = 20,
     this.topSpacingBeforeValue = 0,
+    this.width,
   });
 
   final String title;
@@ -109,9 +125,71 @@ class _PaymentStatusCard extends StatelessWidget {
   final double rightPadding;
   final double valueFontSize;
   final double topSpacingBeforeValue;
+  final double? width;
 
   @override
   Widget build(BuildContext context) {
+    if (width != null) {
+      return SizedBox(
+        width: width,
+        child: Container(
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+            border: Border.all(width: 1, color: Color(0xFFD4D4D4)),
+          ),
+          child: Padding(
+            padding: EdgeInsets.only(right: rightPadding),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 23, top: 17),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          color: AppColors.primaryDark,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontFamily: AppFonts.primary,
+                        ),
+                      ),
+                      if (topSpacingBeforeValue > 0)
+                        SizedBox(height: topSpacingBeforeValue),
+                      Text(
+                        value,
+                        style: TextStyle(
+                          color: AppColors.primaryDark,
+                          fontWeight: FontWeight.w700,
+                          fontSize: valueFontSize,
+                          fontFamily: AppFonts.primary,
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      bottomContent,
+                    ],
+                  ),
+                ),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFFE1E1E1),
+                  ),
+                  child: Center(child: Image.asset(iconPath)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Expanded(
       child: Container(
         height: 100,

@@ -1,5 +1,3 @@
-import 'package:carpool_admin/utils/theme/colors.dart';
-import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:flutter/material.dart';
 
 class ProcessRefundDialog extends StatefulWidget {
@@ -12,6 +10,7 @@ class ProcessRefundDialog extends StatefulWidget {
 class _ProcessRefundDialogState extends State<ProcessRefundDialog> {
   final TextEditingController _txnController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   String? _selectedReason;
 
   final List<String> _reasons = [
@@ -26,6 +25,7 @@ class _ProcessRefundDialogState extends State<ProcessRefundDialog> {
   void dispose() {
     _txnController.dispose();
     _amountController.dispose();
+    _noteController.dispose();
     super.dispose();
   }
 
@@ -34,6 +34,7 @@ class _ProcessRefundDialogState extends State<ProcessRefundDialog> {
     final txn = _txnController.text.trim();
     final amount = _amountController.text.trim();
     final reason = _selectedReason;
+    final note = _noteController.text.trim();
 
     if (txn.isEmpty || amount.isEmpty || reason == null) {
       ScaffoldMessenger.of(
@@ -41,10 +42,10 @@ class _ProcessRefundDialogState extends State<ProcessRefundDialog> {
       ).showSnackBar(const SnackBar(content: Text('Please fill all fields')));
       return;
     }
-    debugPrint('Processing refund: $txn | $amount | $reason');
+    debugPrint('Processing refund: $txn | $amount | $reason | note: $note');
     Navigator.of(
       context,
-    ).pop({'transactionId': txn, 'amount': amount, 'reason': reason});
+    ).pop({'transactionId': txn, 'amount': amount, 'reason': reason, 'note': note.isEmpty ? null : note});
   }
 
   @override
@@ -55,8 +56,8 @@ class _ProcessRefundDialogState extends State<ProcessRefundDialog> {
       child: SizedBox(
         width: 516,
         height: 469,
-        child: Padding(
-          padding: const EdgeInsets.only(left: 38,top:  57,right:  38,),
+          child: Padding(
+          padding: const EdgeInsets.only(left: 38, top: 57, right: 38, bottom: 37),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,138 +96,199 @@ class _ProcessRefundDialogState extends State<ProcessRefundDialog> {
               ),
               const SizedBox(height: 18),
 
-              // Transaction ID
-              const Text(
-                'Transaction ID',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF262626),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _txnController,
-                decoration: InputDecoration(
-                  hintText: 'TXN -2025-XXX',
-                  hintStyle: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF9A9A9A),
-                    fontWeight: FontWeight.w400,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 14,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Text(
-                'Refund Amount',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF262626),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _amountController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(
-                  hintText: r'$0.00',
-                  hintStyle: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF9A9A9A),
-                    fontWeight: FontWeight.w400,
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 14,
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
+              // Scrollable form area (only this part scrolls)
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Transaction ID',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF262626),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _txnController,
+                        decoration: InputDecoration(
+                          hintText: 'TXN -2025-XXX',
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF9A9A9A),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Refund Amount',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF262626),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      TextField(
+                        controller: _amountController,
+                        keyboardType: TextInputType.numberWithOptions(decimal: true),
+                        decoration: InputDecoration(
+                          hintText: r'$0.00',
+                          hintStyle: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF9A9A9A),
+                            fontWeight: FontWeight.w400,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 14,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
 
-              // Reason
-              const Text(
-                'Reason',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF262626),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(height: 8),
-              DropdownButtonFormField<String>(
-                value: _selectedReason,
-                isExpanded: true,
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Color(0xFF9A9A9A),
-                  fontWeight: FontWeight.w400,
-                ),
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
-                  ),
-                ),
-                hint: const Text(
-                  'Select reason',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Color(0xFF9A9A9A),
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                items: _reasons
-                    .map((r) => DropdownMenuItem(
-                          value: r,
-                          child: Text(
-                            r,
-                            style: const TextStyle(
+                      // Reason
+                      const Text(
+                        'Reason',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF262626),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      DropdownButtonFormField<String>(
+                        value: _selectedReason,
+                        isExpanded: true,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Color(0xFF9A9A9A),
+                          fontWeight: FontWeight.w400,
+                        ),
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 14,
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                          ),
+                        ),
+                        icon: Padding(
+                          padding: const EdgeInsets.only(right: 9.5),
+                          child: Image.asset(
+                            'assets/icons/payment/dropdown.png',
+                            width: 20,
+                            height: 20,
+                          ),
+                        ),
+                        hint: const Text(
+                          'Select reason',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF9A9A9A),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        items: _reasons
+                            .map(
+                              (r) => DropdownMenuItem(
+                                value: r,
+                                child: Text(
+                                  r,
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                    color: Color(0xFF9A9A9A),
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (v) => setState(() => _selectedReason = v),
+                      ),
+
+                      // Note field appears only when 'Other' is selected
+                      if (_selectedReason == 'Other') ...[
+                        const SizedBox(height: 16),
+                        const Text(
+                          'Note (Optional)',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Color(0xFF262626),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        TextField(
+                          controller: _noteController,
+                          maxLines: 3,
+                          decoration: InputDecoration(
+                            hintText: 'Add a note...',
+                            hintStyle: TextStyle(
                               fontSize: 12,
                               color: Color(0xFF9A9A9A),
                               fontWeight: FontWeight.w400,
                             ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 14,
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(16),
+                              borderSide: BorderSide(color: Color(0xFFD9D9D9), width: 1),
+                            ),
                           ),
-                        ))
-                    .toList(),
-                onChanged: (v) => setState(() => _selectedReason = v),
+                        ),
+                      ],
+                      const SizedBox(height: 8),
+                    ],
+                  ),
+                ),
               ),
 
-              const SizedBox(height: 22),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 37),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(),
                     style: TextButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFFA6A6A6)),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       padding: const EdgeInsets.symmetric(
@@ -252,16 +314,20 @@ class _ProcessRefundDialogState extends State<ProcessRefundDialog> {
                         vertical: 12,
                       ),
                     ),
-                    child: const Text('Process Refund',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                  ),),
+                    child: const Text(
+                      'Process Refund',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ],
+                )
               ),
             ],
+          
           ),
         ),
       ),
@@ -407,13 +473,16 @@ class _ProcessRefundScreenState extends State<ProcessRefundScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(
+                  OutlinedButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    style: TextButton.styleFrom(
+                    style: OutlinedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      side: const BorderSide(color: Color(0xFFE9E9EA)),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
+                      side: const BorderSide(
+                        color: Color(0xFFE9E9EA),
+                        width: 1,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       padding: const EdgeInsets.symmetric(
                         horizontal: 22,
@@ -426,19 +495,26 @@ class _ProcessRefundScreenState extends State<ProcessRefundScreen> {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  ElevatedButton(
-                    onPressed: _submit,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4B4F54),
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.zero,
+                  OutlinedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      side: const BorderSide(
+                        color: Color(0xFFE9E9EA),
+                        width: 1,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 18,
+                        horizontal: 22,
                         vertical: 12,
                       ),
                     ),
-                    child: const Text('Process Refund'),
+                    child: const Text(
+                      'Cancel',
+                      style: TextStyle(color: Colors.black),
+                    ),
                   ),
                 ],
               ),
