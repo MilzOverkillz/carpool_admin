@@ -28,16 +28,15 @@ class AppColors {
   static const Color buttonSecondaryBg = Color(0xFFE5E7EB); // Light gray (Process Refund button)
   static const Color tagBg = Color(0xFFE5E7EB); 
   static const Color white = Color(0xFFFFFFFF);// Light gray (Pending/Approved pills)
-  static const Color mainBackground = Color(0xFFF4F7FE);
   static const Color sendNotificationButton = Color(0xFFD9D9D9);
 
   // ==========================================
   // Interactive Surfaces
   // ==========================================
-  static const Color buttonSecondaryBg = Color(0xFFE5E7EB);
-  static const Color tagBg = Color(0xFFE5E7EB);
+
+
   static const Color tagPillBg = Color(0xFFC7C9CB);
-  static const Color white = Color(0xFFFFFFFF);
+ 
 
   // ==========================================
   // Text Colors
@@ -109,16 +108,11 @@ class AppColors {
   static const Color pageHeaderSubtitle = Color(0xFF9EA2A5);
 
   
-  // The subtle grey used for the role/status pills and filter bar
-  static const Color tagPillBg = Color(0xFFC7C9CB); // #C7C9CB from roles/status pills
 
-  static const Color purpleText = Color(0xFF6B7280); // Lighter purple for role pill text
-  static const Color outlinedButtonText = Color(0xFF6B7280); // Outlined button text color (purple)
-  static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
 
   static const Color paymentText = Color(0xFF1E272E);
   
-}
+
   // ==========================================
   // Progress Bar
   // ==========================================
