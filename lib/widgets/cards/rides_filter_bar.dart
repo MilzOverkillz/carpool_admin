@@ -1,3 +1,4 @@
+import 'dart:ui'; // <--- MUST IMPORT THIS FOR MOUSE DRAGGING!
 import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/text_styles.dart';
@@ -8,63 +9,85 @@ class RidesFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      // FIX: Changed Row to Wrap so the dropdowns flow down on smaller screens
-      child: Wrap(
-        spacing: 12.0, // Horizontal gap between the dropdowns
-        runSpacing: 16.0, // Vertical gap when items wrap
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          _buildSearchFilter(),
-          
-          // REMOVED Spacer() because Wrap handles its own spacing naturally.
-          
-          // To ensure the dropdowns push to the right like a Spacer() would, 
-          // we add a flexible empty space IF the screen is wide enough to not wrap.
-          // But to keep things simple and crash-free with Wrap, we just rely on the natural layout.
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Search Bar: 469px
+        // Dropdowns: 115 + 135 + 125 + 105 = 480px
+        // Spacing: 3 * 12 = 36px
+        // Padding: Left 20, Right 50 = 70px
+        // Total Minimum Width needed before scrolling = ~1055px
+        double barWidth = constraints.maxWidth < 1055 ? 1055 : constraints.maxWidth;
 
-          // 1. All Status
-          const CompanyDropdownFilter(
-            hint: 'All Status', 
-            width: 115.0, 
-            items: ['All Status', 'Completed', 'Active', 'Scheduled', 'Flagged', 'Cancelled'],
+        return ScrollConfiguration(
+          // Enables click-and-drag scrolling on Web/Desktop
+          behavior: ScrollConfiguration.of(context).copyWith(
+            dragDevices: {
+              PointerDeviceKind.touch,
+              PointerDeviceKind.mouse,
+              PointerDeviceKind.trackpad,
+            },
           ),
-          
-          // 2. All Companies
-          const CompanyDropdownFilter(
-            hint: 'All Companies', 
-            width: 135.0, 
-            items: ['All Companies', 'Tech corp Inc', 'Design Studio Ltd', 'Finance solutions', 'Healthcare Pvt', 'Retail Group'],
-          ),
-          
-          // 3. All Payment
-          const CompanyDropdownFilter(
-            hint: 'All Payments', 
-            width: 125.0, 
-            items: ['All Payments', 'Paid', 'Pending', 'Refund'],
-          ),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              // Passing the calculated strict width allows the Spacer() to work!
+              width: barWidth, 
+              child: Padding(
+                // Added the 50px right padding exactly as requested!
+                padding: const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0, right: 50.0),
+                child: Row(
+                  children: [
+                    _buildSearchFilter(),
+                    
+                    // This Spacer now pushes the dropdowns to the far right side
+                    const Spacer(), 
 
-          // 4. All Dates
-          const CompanyDropdownFilter(
-            hint: 'All Dates', 
-            width: 105.0, 
-            items: ['All Dates', 'Today', 'This week', 'This month'],
+                    // 1. All Status
+                    const CompanyDropdownFilter(
+                      hint: 'All Status', 
+                      width: 115.0, 
+                      items: ['All Status', 'Completed', 'Active', 'Scheduled', 'Flagged', 'Cancelled'],
+                    ),
+                    const SizedBox(width: 12),
+                    
+                    // 2. All Companies
+                    const CompanyDropdownFilter(
+                      hint: 'All Companies', 
+                      width: 135.0, 
+                      items: ['All Companies', 'Tech corp Inc', 'Design Studio Ltd', 'Finance solutions', 'Healthcare Pvt', 'Retail Group'],
+                    ),
+                    const SizedBox(width: 12),
+                    
+                    // 3. All Payment
+                    const CompanyDropdownFilter(
+                      hint: 'All Payments', 
+                      width: 125.0, 
+                      items: ['All Payments', 'Paid', 'Pending', 'Refund'],
+                    ),
+                    const SizedBox(width: 12),
+
+                    // 4. All Dates
+                    const CompanyDropdownFilter(
+                      hint: 'All Dates', 
+                      width: 105.0, 
+                      items: ['All Dates', 'Today', 'This week', 'This month'],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   // --- Sub-widget: Filter Search Box ---
   Widget _buildSearchFilter() {
     return Container(
-      // Changed to constraints to allow it to shrink slightly if the screen is super tight
-      constraints: const BoxConstraints(maxWidth: 469), 
+      width: 469, 
       height: 47,
       padding: const EdgeInsets.only(left: 30, right: 40),
-      // Adding right margin so it pushes away from the dropdowns
-      margin: const EdgeInsets.only(right: 20),
       decoration: BoxDecoration(
         border: Border.all(
           color: AppColors.filterBorder,
