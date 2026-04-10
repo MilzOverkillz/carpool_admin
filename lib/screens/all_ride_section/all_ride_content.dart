@@ -44,7 +44,7 @@ class AllRideContent extends StatelessWidget {
     ];
 
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(left: 15, right: 32, bottom: 32, top: 0),
+      padding: const EdgeInsets.only(left: 15, right: 32, bottom: 360, top: 0),
       child: Container(
         width: double.infinity,
         padding: const EdgeInsets.all(24),
