@@ -24,74 +24,84 @@ class DashboardStatCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 245,
-      height: 98,
-      padding: const EdgeInsets.only(top: 14, left: 23, right: 20),
+      constraints: const BoxConstraints(
+        minWidth: 200,
+        maxWidth: 300,
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          /// LEFT TEXT SECTION
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontFamily: AppFonts.dmSans,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  letterSpacing: -0.02,
-                  color: AppColors.black,
+          /// LEFT TEXT
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                /// TITLE
+                Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    fontFamily: AppFonts.dmSans,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 13,
+                    color: AppColors.black,
+                  ),
                 ),
-              ),
 
-              Text(
-                value,
-                style: TextStyle(
-                  fontFamily: AppFonts.dmSans,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                  letterSpacing: -0.02,
-                  color: AppColors.black,
+                const SizedBox(height: 4),
+
+                /// VALUE
+                Text(
+                  value,
+                  style: TextStyle(
+                    fontFamily: AppFonts.dmSans,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 22,
+                    color: AppColors.black,
+                  ),
                 ),
-              ),
-              SizedBox(height: 9,),
-              Row(
-                children: [
-                  Text(
-                    change,
-                    style: TextStyle(
-                      fontFamily: AppFonts.dmSans,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 12,
-                      letterSpacing: -0.02,
-                      color: const Color(0xFF636363),
+
+                const SizedBox(height: 6),
+
+                /// CHANGE + SUBTITLE
+                Row(
+                  children: [
+                    Text(
+                      change,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF636363),
+                      ),
                     ),
-                  ),
-                  Text(
-                    " $subtitle",
-                    style: TextStyle(
-                      fontFamily: AppFonts.dmSans,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 12,
-                      letterSpacing: -0.02,
-                      color: AppColors.black,
+                    const SizedBox(width: 4),
+                    Flexible(
+                      child: Text(
+                        subtitle,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
 
-          /// RIGHT ICON
+          const SizedBox(width: 12),
+
+          /// ICON
           Container(
-            margin: const EdgeInsets.only(bottom: 24),
-            width: 56,
-            height: 56,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
               color: iconBackground,
               shape: BoxShape.circle,
@@ -99,8 +109,8 @@ class DashboardStatCard extends StatelessWidget {
             child: Center(
               child: SvgPicture.asset(
                 iconPath,
-                width: 21.88,
-                height: 25,
+                width: 20,
+                height: 20,
               ),
             ),
           ),
