@@ -110,15 +110,15 @@ class AppColors {
 
   
   // The subtle grey used for the role/status pills and filter bar
-  static const Color tagPillBg = Color(0xFFC7C9CB); // #C7C9CB from roles/status pills
+  // static const Color tagPillBg = Color(0xFFC7C9CB); // #C7C9CB from roles/status pills
 
-  static const Color purpleText = Color(0xFF6B7280); // Lighter purple for role pill text
-  static const Color outlinedButtonText = Color(0xFF6B7280); // Outlined button text color (purple)
-  static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
+  // static const Color purpleText = Color(0xFF6B7280); // Lighter purple for role pill text
+  // static const Color outlinedButtonText = Color(0xFF6B7280); // Outlined button text color (purple)
+  // static const Color outlinedButtonBorder = Color(0xFFE9E9EA);
 
   static const Color paymentText = Color(0xFF1E272E);
   
-}
+
   // ==========================================
   // Progress Bar
   // ==========================================
