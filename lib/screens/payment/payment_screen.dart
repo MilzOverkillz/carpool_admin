@@ -29,9 +29,9 @@ class PayemntScreen extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
+      decoration: BoxDecoration(color: Color(0xFFF4F7FE)),
       child: Padding(
-        padding: EdgeInsets.only(left: 12, right: 45),
+        padding: EdgeInsets.only(left: 12, right: 42),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Column(
