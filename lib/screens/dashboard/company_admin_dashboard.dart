@@ -2,11 +2,13 @@ import 'package:carpool_admin/screens/all_ride_section/all_ride_content.dart';
 import 'package:carpool_admin/screens/analytic_section/analytics_content.dart';
 import 'package:carpool_admin/screens/dashboard/dashboard_overview.dart';
 import 'package:carpool_admin/screens/employees_section/employees_content.dart';
+import 'package:carpool_admin/utils/routing/routes.dart'; // IMPORTED
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart'; // IMPORTED
 
 class CompanyAdminDashboard extends StatefulWidget {
   const CompanyAdminDashboard({super.key});
@@ -26,7 +28,7 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ── Your existing header ─────────────────────────────────
+          // ── Header Section ─────────────────────────────────
           Container(
             padding: const EdgeInsets.only(left: 142, right: 20),
             height: 100,
@@ -36,6 +38,7 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
                   height: 66,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start, // Better alignment
                     children: [
                       Text(
                         'Gamil Inc',
@@ -54,36 +57,44 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
                           letterSpacing: -0.02,
-                          color: Color(0xff9ea2a5),
+                          color: const Color(0xff9ea2a5),
                         ),
                       ),
                     ],
                   ),
                 ),
                 const Spacer(),
-                TopBarWidget(title: ''),
-                Container(
-                  width: 119,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(11),
-                    color: const Color(0xffEEEEEE),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SvgPicture.asset('assets/icons/dashboard/logout.svg'),
-                      const SizedBox(width: 10),
-                      Text(
-                        'Logout',
-                        style: TextStyle(
-                          fontFamily: AppFonts.primary,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 12,
-                          color: const Color(0xff495056),
-                        ),
+                const TopBarWidget(title: ''),
+                
+                // ── LOGOUT BUTTON ──
+                GestureDetector(
+                  onTap: () => context.go(AppRoutes.portalSelection),
+                  child: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: Container(
+                      width: 119,
+                      height: 45,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(11),
+                        color: const Color(0xffEEEEEE),
                       ),
-                    ],
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('assets/icons/dashboard/logout.svg'),
+                          const SizedBox(width: 10),
+                          Text(
+                            'Logout',
+                            style: TextStyle(
+                              fontFamily: AppFonts.primary,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12,
+                              color: const Color(0xff495056),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -94,10 +105,10 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
           Container(
             width: 320.527,
             height: 32,
-            padding: EdgeInsets.symmetric(horizontal: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Color(0xffe5e8f0),
+              color: const Color(0xffe5e8f0),
             ),
             margin: const EdgeInsets.only(left: 142, right: 20),
             child: Row(
@@ -109,26 +120,23 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
                     margin: const EdgeInsets.only(right: 4),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 6),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6),
-                        color: isSelected ? AppColors.white : null,
-                      ),
-                      height: 28,
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          _tabs[i],
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: isSelected
-                                ? FontWeight.w600
-                                : FontWeight.w400,
-                            color: isSelected
-                                ? const Color(0xFF1E293B)
-                                : const Color(0xFF94A3B8),
-                          ),
+                    padding: const EdgeInsets.symmetric(horizontal: 6),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      color: isSelected ? AppColors.white : null,
+                    ),
+                    height: 28,
+                    child: Center(
+                      child: Text(
+                        _tabs[i],
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: isSelected
+                              ? FontWeight.w600
+                              : FontWeight.w400,
+                          color: isSelected
+                              ? const Color(0xFF1E293B)
+                              : const Color(0xFF94A3B8),
                         ),
                       ),
                     ),
@@ -137,7 +145,7 @@ class _CompanyAdminDashboardState extends State<CompanyAdminDashboard> {
               }),
             ),
           ),
-          SizedBox(height: 22),
+          const SizedBox(height: 22),
 
           // ── Tab Content ──────────────────────────────────────────
           Expanded(
