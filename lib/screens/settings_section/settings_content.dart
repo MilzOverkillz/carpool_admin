@@ -1,6 +1,5 @@
 import 'package:carpool_admin/screens/notification_temp.dart';
 import 'package:carpool_admin/screens/policies.dart';
-import 'package:carpool_admin/screens/setting_temp.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:carpool_admin/utils/theme/text_styles.dart';
