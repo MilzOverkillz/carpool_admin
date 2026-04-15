@@ -1,54 +1,50 @@
 import 'package:flutter/material.dart';
 
-class CustomSwitch extends StatelessWidget {
+class PaymentCustomSwitch extends StatelessWidget {
   final bool value;
+  final ValueChanged<bool> onChanged;
   final Color activeColor;
   final Color inactiveColor;
-  final Function(bool) onChanged;
+  final double width;
+  final double height;
 
-  const CustomSwitch({
+  const PaymentCustomSwitch({
     super.key,
     required this.value,
-    this.activeColor = Colors.lightGreen,
-    this.inactiveColor = Colors.grey,
     required this.onChanged,
+    this.activeColor = Colors.lightGreen,
+    this.inactiveColor = const Color(0xFFBDC3C7),
+    this.width = 32.0,
+    this.height = 21.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        onChanged(!value);
-        print(value);
-      },
+      onTap: () => onChanged(!value),
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 250),
-        curve: Curves.easeInOut,
-        width: 32,
-        height: 21,
-        padding: const EdgeInsets.all(1.5),
-
+        duration: const Duration(milliseconds: 200),
+        width: width,
+        height: height,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          color: value ? activeColor: inactiveColor,
+          borderRadius: BorderRadius.circular(20.0),
+          color: value ? activeColor : inactiveColor,
         ),
-        child: Stack(
-          children: [
-            AnimatedPositioned(
-              duration: const Duration(milliseconds: 250),
-              curve: Curves.easeInOut,
-              left: value ? 14 : 0,
-              top: 0,
-              child: Container(
-                width: 18,
-                height: 18,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.white,
-                ),
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: AnimatedAlign(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.decelerate,
+            alignment: value ? Alignment.centerRight : Alignment.centerLeft,
+            child: Container(
+              width: height - 4,
+              height: height - 4,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.white,
               ),
             ),
-          ],
+          ),
         ),
       ),
     );

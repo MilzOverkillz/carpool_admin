@@ -1,7 +1,6 @@
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart' show AppFonts;
-import 'package:carpool_admin/widgets/settngs/custom_switch.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:carpool_admin/widgets/buttons/payment_switch.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSettingsDialog extends StatefulWidget {
@@ -36,9 +35,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
       try {
         final int idx = _tabController.index;
         setState(() => _selectedTabIndex = idx);
-      } catch (_) {
-        
-      }
+      } catch (_) {}
     });
   }
 
@@ -165,7 +162,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    // Payment Gateway 
+                    // Payment Gateway
                     SingleChildScrollView(
                       child: Column(
                         children: [
@@ -270,7 +267,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                                     ],
                                   ),
                                 ),
-                                CustomSwitch(
+                                PaymentCustomSwitch(
                                   value: _autoRefund,
                                   onChanged: (v) =>
                                       setState(() => _autoRefund = v),
@@ -306,7 +303,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                                     ],
                                   ),
                                 ),
-                                CustomSwitch(
+                                PaymentCustomSwitch(
                                   value: _manualApproval,
                                   onChanged: (v) =>
                                       setState(() => _manualApproval = v),
@@ -613,7 +610,10 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                     ),
                   )
                 else
-                  CustomSwitch(value: switchValue, onChanged: onSwitchChanged),
+                  PaymentCustomSwitch(
+                    value: switchValue,
+                    onChanged: onSwitchChanged,
+                  ),
                 // CupertinoSwitch(
                 //   value: switchValue,
                 //   onChanged: onSwitchChanged,
