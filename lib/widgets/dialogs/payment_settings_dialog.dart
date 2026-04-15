@@ -1,5 +1,6 @@
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart' show AppFonts;
+import 'package:carpool_admin/widgets/settngs/custom_switch.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +37,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
         final int idx = _tabController.index;
         setState(() => _selectedTabIndex = idx);
       } catch (_) {
-        // ignore any type errors during hot reload or transient states
+        
       }
     });
   }
@@ -164,7 +165,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    // Payment Gateway (placeholder cards)
+                    // Payment Gateway 
                     SingleChildScrollView(
                       child: Column(
                         children: [
@@ -269,7 +270,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                                     ],
                                   ),
                                 ),
-                                CupertinoSwitch(
+                                CustomSwitch(
                                   value: _autoRefund,
                                   onChanged: (v) =>
                                       setState(() => _autoRefund = v),
@@ -305,11 +306,17 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                                     ],
                                   ),
                                 ),
-                                CupertinoSwitch(
+                                CustomSwitch(
                                   value: _manualApproval,
                                   onChanged: (v) =>
                                       setState(() => _manualApproval = v),
                                 ),
+                                // CupertinoSwitch(
+                                //   value: _manualApproval,
+                                //   onChanged: (v) =>
+                                //       setState(() => _manualApproval = v),
+                                //       activeColor: Colors.black,
+                                // ),
                               ],
                             ),
                             const SizedBox(height: 20),
@@ -606,10 +613,11 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                     ),
                   )
                 else
-                  CupertinoSwitch(
-                    value: switchValue,
-                    onChanged: onSwitchChanged,
-                  ),
+                  CustomSwitch(value: switchValue, onChanged: onSwitchChanged),
+                // CupertinoSwitch(
+                //   value: switchValue,
+                //   onChanged: onSwitchChanged,
+                // ),
               ],
             ),
           ),
