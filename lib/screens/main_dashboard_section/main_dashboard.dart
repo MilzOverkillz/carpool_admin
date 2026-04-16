@@ -91,7 +91,7 @@ class MainDashboard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 270,
+            height: 334,
             child: Container(
               padding: const EdgeInsets.only(left: 23, right: 73),
               child: Row(
@@ -125,7 +125,7 @@ class MainDashboard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 29),
+          const SizedBox(height: 44),
           Row(
             children: [
               DashboardBarChart(
