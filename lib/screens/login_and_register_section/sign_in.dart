@@ -1,3 +1,4 @@
+import 'package:carpool_admin/utils/routing/routes.dart'; // Import your router file
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/text_styles.dart';
 import 'package:carpool_admin/widgets/buttons/auth_back_button.dart';
@@ -15,6 +16,7 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isChecked = false;
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -22,8 +24,9 @@ class _SignInState extends State<SignIn> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          leading: AuthBackButton(),
+          leading: const AuthBackButton(),
           backgroundColor: Colors.transparent,
+          elevation: 0,
         ),
         body: Center(
           child: Container(
@@ -41,83 +44,87 @@ class _SignInState extends State<SignIn> {
                 ),
               ],
             ),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 86),
-                  width: 514,
-                  height: 371,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Sign In',
-                        style: AppTextStyles.authContainerHeading,
-                      ),
-                      SizedBox(height: 14),
-                      Text(
-                        'Please login to continue to your admin account.',
-                        style: AppTextStyles.authContainerSubHeading,
-                      ),
-                      SizedBox(height: 30),
-                      CustomAuthTextField(
-                        label: "Email",
-                        hintText: "Enter your Email",
-                        keyboardType: TextInputType.emailAddress,
-                      ),
-                      const SizedBox(height: 10),
-                      CustomAuthTextField(
-                        hintText: "Password",
-                        isPassword: true,
-                        suffixIcon: Image.asset(
-                          'assets/icons/login_and_register/ic_eyeOff.png',
-                          width: 20.0,
-                          height: 20,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 86),
+                    width: 514,
+                    child: Column(
+                      children: [
+                        Text(
+                          'Sign In',
+                          style: AppTextStyles.authContainerHeading,
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: isChecked,
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isChecked = value ?? false;
-                                  });
-                                },
-                                // Matches the black primary color in your design
-                                activeColor: Colors.black,
-                                checkColor: Colors.white,
-                                // Custom shape to match the 25px radius theme
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(
-                                    4,
-                                  ), // Slightly rounded corners
-                                ),
-                                side: const BorderSide(
-                                  color: AppColors.inputFocusBorder,
-                                  width: 2.0,
-                                ),
-                              ),
-                              Text('Keep me logged in', style: AppTextStyles.loginRememberText,)
-                            ],
+                        const SizedBox(height: 14),
+                        Text(
+                          'Please login to continue to your admin account.',
+                          style: AppTextStyles.authContainerSubHeading,
+                        ),
+                        const SizedBox(height: 30),
+                        const CustomAuthTextField(
+                          label: "Email",
+                          hintText: "Enter your Email",
+                          keyboardType: TextInputType.emailAddress,
+                        ),
+                        const SizedBox(height: 10),
+                        CustomAuthTextField(
+                          hintText: "Password",
+                          isPassword: true,
+                          suffixIcon: Image.asset(
+                            'assets/icons/login_and_register/ic_eyeOff.png',
+                            width: 20.0,
+                            height: 20,
                           ),
-                          GestureDetector(onTap: () => context.pushNamed('forgot-password'), child: Text('Forgot Password ?', style: AppTextStyles.forgotPasswordText,))
-                        ],
-                      ),
-                      SizedBox(height: 12,),
-                      AuthButton(
-                        label: "Sign in",
-                        onTap: () {
-                          context.pushNamed('verification');
-                        },
-                      ),
-                    ],
+                        ),
+                        const SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: isChecked,
+                                  onChanged: (bool? value) {
+                                    setState(() {
+                                      isChecked = value ?? false;
+                                    });
+                                  },
+                                  activeColor: Colors.black,
+                                  checkColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  side: const BorderSide(
+                                    color: AppColors.inputFocusBorder,
+                                    width: 2.0,
+                                  ),
+                                ),
+                                Text('Keep me logged in', style: AppTextStyles.loginRememberText)
+                              ],
+                            ),
+                            GestureDetector(
+                              onTap: () => context.pushNamed('forgot-password'),
+                              child: MouseRegion(
+                                cursor: SystemMouseCursors.click,
+                                child: Text('Forgot Password ?', style: AppTextStyles.forgotPasswordText),
+                              ),
+                            )
+                          ],
+                        ),
+                        const SizedBox(height: 12),
+                        AuthButton(
+                          label: "Sign in",
+                          onTap: () {
+                            // Navigate to the dashboard shell
+                            context.go(AppRoutes.mainScreen);
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

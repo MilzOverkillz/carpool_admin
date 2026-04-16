@@ -1,5 +1,6 @@
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
+import 'package:carpool_admin/widgets/settngs/custom_switch.dart';
 import 'package:flutter/material.dart';
 
 class PrivacyCompliance extends StatefulWidget {
@@ -14,81 +15,66 @@ class _PrivacyComplianceState extends State<PrivacyCompliance> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2)),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Privacy & Compliance',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: AppColors.pageHeaderTitle,
-                fontFamily: AppFonts.primary,
-              ),
-            ),
-            const SizedBox(height: 12),
-            buildSettingsToggle(
-              title: 'GDPR Compliance Mode',
-              subtitle: 'GDPR Compliance Mode',
-              value: _gdprCompliant,
-              onChanged: (value) {
-                setState(() {
-                  _gdprCompliant = value;
-                });
-              },
-            ),
-
-            const SizedBox(height: 8),
-            const Text(
-              'Data Detection Requests',
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xFF262626),
-                fontFamily: AppFonts.primary,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const Text(
-              'Handle user data detection request within 30 days',
-              style: TextStyle(
-                fontSize: 10,
-                color: Color(0xFF9A9A9A),
-                fontFamily: AppFonts.primary,
-              ),
-            ),
-            const SizedBox(height: 8),
-            customOutlineButton(label: 'View Pending Requests (3)'),
-            const SizedBox(height: 16),
-            const Text(
-              'Privacy Policy',
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xFF262626),
-                fontFamily: AppFonts.primary,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            customOutlineButton(label: 'Edit Privacy Policy'),
-            const SizedBox(height: 16),
-            const Text(
-              'Terms of Service',
-              style: TextStyle(
-                fontSize: 12,
-                color: Color(0xFF262626),
-                fontFamily: AppFonts.primary,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            const SizedBox(height: 8),
-            customOutlineButton(label: 'Edit Terms of Service'),
-          ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildSettingsToggle(
+          title: 'GDPR Compliance Mode',
+          subtitle: 'GDPR Compliance Mode',
+          value: _gdprCompliant,
+          onChanged: (value) {
+            setState(() {
+              _gdprCompliant = value;
+            });
+          },
         ),
-      ),
+
+        const SizedBox(height: 8),
+
+        const Text(
+          'Data Detection Requests',
+          style: TextStyle(
+            fontSize: 12,
+            color: Color(0xFF262626),
+            fontFamily: AppFonts.primary,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const Text(
+          'Handle user data detection request within 30 days',
+          style: TextStyle(
+            fontSize: 10,
+            color: Color(0xFF9A9A9A),
+            fontFamily: AppFonts.primary,
+          ),
+        ),
+        const SizedBox(height: 8),
+        customOutlineButton(label: 'View Pending Requests (3)'),
+        const SizedBox(height: 16),
+        const Text(
+          'Privacy Policy',
+          style: TextStyle(
+            fontSize: 12,
+            color: Color(0xFF262626),
+            fontFamily: AppFonts.primary,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: 8),
+        customOutlineButton(label: 'Edit Privacy Policy'),
+        const SizedBox(height: 16),
+        const Text(
+          'Terms of Service',
+          style: TextStyle(
+            fontSize: 12,
+            color: Color(0xFF262626),
+            fontFamily: AppFonts.primary,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        const SizedBox(height: 8),
+        customOutlineButton(label: 'Edit Terms of Service'),
+      ],
     );
   }
 }

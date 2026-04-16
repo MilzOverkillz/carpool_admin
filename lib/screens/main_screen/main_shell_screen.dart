@@ -4,10 +4,17 @@ import 'package:carpool_admin/screens/User_Section/users_content.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
 import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
 import 'package:carpool_admin/screens/settings_section/settings_content.dart';
+import 'package:carpool_admin/screens/company_section/companies.dart';
+import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
+import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/payment/payment_screen.dart';
+import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
+import 'package:carpool_admin/screens/settings_section/settings_content.dart';
+import 'package:flutter/material.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
-import 'package:flutter/material.dart';
+
 
 class MainShellScreen extends StatefulWidget {
   const MainShellScreen({super.key});
@@ -31,15 +38,16 @@ class _MainShellScreenState extends State<MainShellScreen> {
   Widget _getContentWidget() {
     switch (_activeScreen) {
       case 'Dashboard':
-        return _buildPlaceholder('Dashboard');
+        return MainDashboard();
       case 'Companies':
-        return _buildPlaceholder('Companies');
+        return Companies();
       case 'Users':
         return const UsersContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Rides':
         return const RidesContent(); // <-- REPLACED PLACEHOLDER WITH YOUR SCREEN
       case 'Payments':
-        return _buildPlaceholder('Payments');
+        // return const PaymentsContent();
+        return const PayemntScreen();
       case 'Analytics':
         return const Analytics();
       case 'Notifications':

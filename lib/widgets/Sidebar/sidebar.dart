@@ -1,4 +1,6 @@
+import 'package:carpool_admin/utils/routing/routes.dart'; // Ensure correct import for AppRoutes
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart'; // Added GoRouter import
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/fonts.dart';
 import '../../utils/theme/text_styles.dart';
@@ -52,15 +54,15 @@ class SidebarWidget extends StatelessWidget {
           _buildProfileSection(),
           const SizedBox(height: 16),
 
-          // Logout Button
-          _buildLogoutButton(),
+          // Logout Button - Now updated with navigation
+          _buildLogoutButton(context), 
           const SizedBox(height: 32),
         ],
       ),
     );
   }
 
-  /// Helper to build a menu item with exact Figma sizes
+  /// Helper to build a menu item
   Widget _buildMenuItem(String title, bool isActive) {
     final styleBase = TextStyle(
       fontFamily: AppFonts.primary,
@@ -74,7 +76,6 @@ class SidebarWidget extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 4.0),
       child: InkWell(
         onTap: () {
-          // Use the callback instead of GoRouter
           onNavigate?.call(title);
         },
         child: SizedBox(
@@ -82,7 +83,6 @@ class SidebarWidget extends StatelessWidget {
           height: 50,
           child: Row(
             children: [
-              // 1. The Active Marker
               Container(
                 width: 4,
                 height: 50,
@@ -96,10 +96,7 @@ class SidebarWidget extends StatelessWidget {
                   ),
                 ),
               ),
-
               const SizedBox(width: 20),
-
-              // 2. The Main Button Area
               Container(
                 width: 192,
                 height: 50,
@@ -120,7 +117,6 @@ class SidebarWidget extends StatelessWidget {
     );
   }
 
-  /// Helper to build the bottom profile section
   Widget _buildProfileSection() {
     return Container(
       width: 230,
@@ -187,18 +183,23 @@ class SidebarWidget extends StatelessWidget {
     );
   }
 
-  /// Helper to build the logout button
-  Widget _buildLogoutButton() {
+  /// Updated Logout Button Logic
+  Widget _buildLogoutButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Handle logout logic
+        // Navigates back to the very first portal selection screen
+        context.go(AppRoutes.portalSelection);
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/icons/logout.png', width: 18, height: 18),
+            Image.asset(
+              'assets/icons/dashboard/logout.png',
+              width: 18,
+              height: 18,
+            ),
             const SizedBox(width: 8),
             const Text(
               'Logout',

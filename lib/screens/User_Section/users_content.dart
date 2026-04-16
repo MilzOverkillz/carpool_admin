@@ -1,8 +1,8 @@
+import 'dart:ui'; // <--- FIX 1: MUST IMPORT THIS FOR MOUSE DRAGGING!
 import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/text_styles.dart';
 
-// IMPORTANT: MainLayout import removed!
 import '../../widgets/Cards/user_card.dart'; 
 import '../../widgets/dropdowns/add_user_dialog.dart';
 import '../../widgets/cards/user_filter_bar.dart'; 
@@ -15,9 +15,17 @@ class UsersContent extends StatefulWidget {
 }
 
 class _UsersContentState extends State<UsersContent> {
+  // FIX 2: Add a ScrollController to manage the horizontal scrolling
+  final ScrollController _horizontalScrollController = ScrollController();
+
+  @override
+  void dispose() {
+    _horizontalScrollController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Returning SingleChildScrollView directly, NO MainLayout wrapper!
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
         left: 32.0,
@@ -113,12 +121,43 @@ class _UsersContentState extends State<UsersContent> {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          const UserFilterBar(), 
-          const Divider(height: 1, color: AppColors.divider),
-          _buildDataTable(),
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // Give the table a strict width to prevent the 'Expanded' crash.
+          double tableWidth = constraints.maxWidth < 1050 ? 1050 : constraints.maxWidth;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start, 
+            children: [
+              const UserFilterBar(), 
+              const Divider(height: 1, color: AppColors.divider),
+              
+              // FIX 3: ScrollConfiguration allows click-and-drag, Scrollbar makes it visible!
+              ScrollConfiguration(
+                behavior: ScrollConfiguration.of(context).copyWith(
+                  dragDevices: {
+                    PointerDeviceKind.touch,
+                    PointerDeviceKind.mouse, // Enables click-to-drag on Web!
+                    PointerDeviceKind.trackpad,
+                  },
+                ),
+                child: Scrollbar(
+                  controller: _horizontalScrollController,
+                  thumbVisibility: true, 
+                  trackVisibility: true,
+                  child: SingleChildScrollView(
+                    controller: _horizontalScrollController,
+                    scrollDirection: Axis.horizontal,
+                    child: SizedBox(
+                      width: tableWidth, 
+                      child: _buildDataTable(),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

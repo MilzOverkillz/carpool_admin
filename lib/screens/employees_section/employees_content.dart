@@ -1,3 +1,5 @@
+import 'package:carpool_admin/utils/theme/colors.dart';
+import 'package:carpool_admin/utils/theme/fonts.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/theme/text_styles.dart';
@@ -43,11 +45,11 @@ class EmployeesContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(32),
+      padding: const EdgeInsets.only(left: 15, right: 32, bottom: 360, top: 0),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
               color: Color(0x0A000000),
@@ -61,7 +63,7 @@ class EmployeesContent extends StatelessWidget {
           children: [
             // ── Header inside white box ──
             Padding(
-              padding: const EdgeInsets.fromLTRB(24, 20, 24, 16),
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -111,9 +113,10 @@ class EmployeesContent extends StatelessWidget {
       child: Text(
         text,
         style: const TextStyle(
-          fontSize: 12,
+          fontSize: 14,
           fontWeight: FontWeight.w500,
-          color: Color(0xFF9CA3AF),
+          color: Color(0xFF666666),
+          fontFamily: AppFonts.primary,
         ),
       ),
     );
@@ -122,9 +125,6 @@ class EmployeesContent extends StatelessWidget {
   Widget _buildTableRow(_Employee employee) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: Color(0xFFF5F5F5))),
-      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -145,8 +145,9 @@ class EmployeesContent extends StatelessWidget {
                     employee.initials,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: AppFonts.primary,
                     ),
                   ),
                 ),
@@ -154,9 +155,10 @@ class EmployeesContent extends StatelessWidget {
                 Text(
                   employee.name,
                   style: const TextStyle(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
                     color: Color(0xFF111827),
+                    fontFamily: AppFonts.primary,
                   ),
                 ),
               ],
@@ -168,7 +170,12 @@ class EmployeesContent extends StatelessWidget {
             flex: 4,
             child: Text(
               employee.email,
-              style: const TextStyle(fontSize: 12, color: Color(0xFF6B7280)),
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: Color(0xFF111827),
+                fontFamily: AppFonts.primary,
+              ),
             ),
           ),
 
@@ -184,15 +191,16 @@ class EmployeesContent extends StatelessWidget {
                   vertical: 5,
                 ),
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE5E7EB),
-                  borderRadius: BorderRadius.circular(20),
+                  color: AppColors.blackText100,
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
                   employee.role,
                   style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xFF374151),
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.black,
+                    fontFamily: AppFonts.primary,
                   ),
                 ),
               ),
@@ -205,9 +213,10 @@ class EmployeesContent extends StatelessWidget {
             child: Text(
               employee.totalRides.toString(),
               style: const TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-                color: Color(0xFF374151),
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+                color: AppColors.black,
+                fontFamily: AppFonts.primary,
               ),
             ),
           ),
@@ -225,18 +234,19 @@ class EmployeesContent extends StatelessWidget {
                 ),
                 decoration: BoxDecoration(
                   color: employee.status == 'Active'
-                      ? const Color(0xFF4B5563)
-                      : const Color(0xFFD1D5DB),
-                  borderRadius: BorderRadius.circular(20),
+                      ? const Color(0xFF646464)
+                      : const Color(0xFFC7C9CB),
+                  borderRadius: BorderRadius.circular(10),
                 ),
                 child: Text(
                   employee.status,
                   style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 10,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: AppFonts.primary,
                     color: employee.status == 'Active'
                         ? Colors.white
-                        : const Color(0xFF6B7280),
+                        : const Color(0xFF1E272E),
                   ),
                 ),
               ),

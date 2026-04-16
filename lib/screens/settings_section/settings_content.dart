@@ -6,6 +6,7 @@ import 'package:carpool_admin/utils/theme/text_styles.dart';
 import 'package:carpool_admin/widgets/settngs/automatic_backup.dart';
 import 'package:carpool_admin/widgets/settngs/backup_export.dart';
 import 'package:carpool_admin/widgets/settngs/privacy_compliance.dart';
+import 'package:carpool_admin/widgets/settngs/toggle_status_item.dart';
 import 'package:flutter/material.dart';
 
 class SettingsContent extends StatefulWidget {
@@ -196,10 +197,7 @@ class _SettingsContentState extends State<SettingsContent>
           padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(12),
-              topRight: Radius.circular(12),
-            ),
+            borderRadius: BorderRadius.circular(2),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x05000000),
@@ -214,7 +212,6 @@ class _SettingsContentState extends State<SettingsContent>
               _buildPageHeader(),
               const SizedBox(height: 24),
               _buildTabBar(),
-              const SizedBox(height: 24),
             ],
           ),
         ),
@@ -226,7 +223,6 @@ class _SettingsContentState extends State<SettingsContent>
   Widget _buildComingSoon(String name) {
     return _buildSectionCard(
       title: '',
-      connectTop: true,
       child: Container(
         height: 200,
         alignment: Alignment.center,
@@ -244,7 +240,6 @@ class _SettingsContentState extends State<SettingsContent>
       children: [
         _buildSectionCard(
           title: 'App Branding',
-          connectTop: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -388,7 +383,6 @@ class _SettingsContentState extends State<SettingsContent>
       children: [
         _buildSectionCard(
           title: 'Security Settings',
-          connectTop: true,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -546,12 +540,7 @@ class _SettingsContentState extends State<SettingsContent>
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: connectTop
-            ? const BorderRadius.only(
-                bottomLeft: Radius.circular(12),
-                bottomRight: Radius.circular(12),
-              )
-            : BorderRadius.circular(12),
+        borderRadius: BorderRadius.all(Radius.circular(2)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x05000000),

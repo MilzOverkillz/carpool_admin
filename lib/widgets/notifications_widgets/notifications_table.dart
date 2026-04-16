@@ -23,14 +23,23 @@ class NotificationsTable extends StatelessWidget {
         if (notifications.isEmpty)
           _buildEmptyState()
         else
-          ...notifications.asMap().entries.map((entry) {
-            final index = entry.key;
-            final notification = entry.value;
-            return _buildTableRow(
-              notification,
-              isLast: index == notifications.length - 1,
-            );
-          }).toList(),
+          ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxHeight: 315, // Limits height to approximately 4 rows (~75px per row)
+            ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: notifications.asMap().entries.map((entry) {
+                  final index = entry.key;
+                  final notification = entry.value;
+                  return _buildTableRow(
+                    notification,
+                    isLast: index == notifications.length - 1,
+                  );
+                }).toList(),
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -49,7 +58,7 @@ class NotificationsTable extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-            flex: 3,
+            flex: 5,
             child: _buildHeaderCell('TITLE'),
           ),
           Expanded(
@@ -57,12 +66,12 @@ class NotificationsTable extends StatelessWidget {
             child: _buildHeaderCell('TYPE'),
           ),
           Expanded(
-            flex: 2,
+            flex: 3,
             child: _buildHeaderCell('RECIPIENTS'),
           ),
           Expanded(
-            flex: 2,
-            child: _buildHeaderCell('CHANNELS'), // ✅ Fixed typo: was "CANNELS"
+            flex: 3,
+            child: _buildHeaderCell('CHANNELS'), 
           ),
           Expanded(
             flex: 2,
@@ -80,42 +89,32 @@ class NotificationsTable extends StatelessWidget {
   Widget _buildHeaderCell(String text) {
     return Text(
       text,
-      style: AppTextStyles.tableHeader, // ✅ Using AppTextStyles instead of inline
+      style: AppTextStyles.notificationTableHeader, // ✅ Using AppTextStyles instead of inline
     );
   }
 
   Widget _buildTableRow(NotificationItem notification, {bool isLast = false}) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
-      decoration: BoxDecoration(
-        border: isLast
-            ? null
-            : const Border(
-                bottom: BorderSide(
-                  color: AppColors.divider,
-                  width: 1,
-                ),
-              ),
-      ),
+      
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Title Column
           Expanded(
-            flex: 3,
+            flex: 5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   notification.title,
-                  style: AppTextStyles.bodyMedium.copyWith(
-                    fontWeight: FontWeight.w600,
+                  style: AppTextStyles.notificationBodyMedium.copyWith(
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   notification.subtitle,
-                  style: AppTextStyles.caption,
+                  style: AppTextStyles.notificationCaption,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -134,21 +133,22 @@ class NotificationsTable extends StatelessWidget {
           
           // Recipients Column
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   notification.recipients,
-                  style: AppTextStyles.bodySmall.copyWith(
-                    fontWeight: FontWeight.w500,
+                  style: AppTextStyles.notificationBodyMedium.copyWith(
                   ),
                 ),
                 if (notification.recipientsSubtitle.isNotEmpty) ...[
                   const SizedBox(height: 2),
                   Text(
                     notification.recipientsSubtitle,
-                    style: AppTextStyles.caption,
+                    style: AppTextStyles.notificationCaption.copyWith(
+                      fontSize: 14,
+                    ),
                   ),
                 ],
               ],
@@ -157,9 +157,9 @@ class NotificationsTable extends StatelessWidget {
           
           // Channels Column
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Wrap(
-              spacing: 6,
+              spacing: 4,
               runSpacing: 6,
               children: notification.channels.map((channel) {
                 return _buildChannelPill(channel);
@@ -172,14 +172,19 @@ class NotificationsTable extends StatelessWidget {
             flex: 2,
             child: Text(
               notification.sentDate,
-              style: AppTextStyles.bodySmall,
+              style: AppTextStyles.bodyMedium.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
           
           // Status Column
           Expanded(
             flex: 1,
-            child: _buildStatusBadge(notification.status),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: _buildStatusBadge(notification.status),
+            ),
           ),
         ],
       ),
@@ -188,14 +193,14 @@ class NotificationsTable extends StatelessWidget {
 
   Widget _buildTypeTag(String type) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: AppColors.textPrimary,
-        borderRadius: BorderRadius.circular(6),
+        color: AppColors.textPrimary, // Usually black based on image
+        borderRadius: BorderRadius.circular(9), // Updated to 20 for a pill shape
       ),
       child: Text(
         type,
-        style: AppTextStyles.statusTag.copyWith(
+        style: AppTextStyles.notificationCaption.copyWith(
           color: Colors.white,
         ),
         textAlign: TextAlign.center,
@@ -205,22 +210,22 @@ class NotificationsTable extends StatelessWidget {
 
   Widget _buildChannelPill(String channel) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
       decoration: BoxDecoration(
         color: Colors.transparent,
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(12), // Updated to 20 for a pill shape
         border: Border.all(
-          color: AppColors.border,
-          width: 1,
+          color: AppColors.channelsBorder,
+          width: 1.2,
         ),
       ),
       child: Text(
         channel,
         style: const TextStyle(
           fontFamily: AppFonts.primary,
-          fontSize: 11,
-          fontWeight: FontWeight.w500,
-          color: AppColors.textSecondary,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          color: AppColors.black, // Standard grey color
         ),
       ),
     );
@@ -228,14 +233,17 @@ class NotificationsTable extends StatelessWidget {
 
   Widget _buildStatusBadge(String status) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
-        color: AppColors.tagBg,
-        borderRadius: BorderRadius.circular(6),
+        color: AppColors.blackText100, // Using light grey background 
+        borderRadius: BorderRadius.circular(12), // Updated to 20 for a pill shape
       ),
       child: Text(
         status,
-        style: AppTextStyles.statusTag,
+        style: AppTextStyles.statusTag.copyWith(
+          color: AppColors.black,
+          fontWeight: FontWeight.w400, // Dark text color for the tag
+        ),
         textAlign: TextAlign.center,
       ),
     );

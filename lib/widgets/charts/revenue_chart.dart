@@ -134,7 +134,7 @@ class _RevenueRidesChartState extends State<RevenueRidesChart> {
             const months = ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             if (value.toInt() < months.length) {
               return Padding(
-                padding: const EdgeInsets.only(top: 10),
+                padding: const EdgeInsets.only(top: 5),
                 child: Text(
                   months[value.toInt()],
                   style: sideTextStyle.copyWith(

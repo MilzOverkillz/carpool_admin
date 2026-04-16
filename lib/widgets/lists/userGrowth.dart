@@ -29,7 +29,12 @@ class UserGrowth extends StatelessWidget {
         children: [
           for (var i = 0; i < statTitles.length; i++)
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(
+                top: 8,
+                bottom: 8,
+                left: 25,
+                right: 5,
+              ),
               child: Row(
                 children: [
                   Container(
@@ -65,7 +70,6 @@ class UserGrowth extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(width: 30),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

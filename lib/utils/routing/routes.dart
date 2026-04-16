@@ -1,39 +1,52 @@
+import 'package:carpool_admin/screens/company_admin/company_admin_login.dart';
+import 'package:carpool_admin/screens/dashboard/company_admin_dashboard.dart';
 import 'package:carpool_admin/screens/login_and_register_section/forgot_password.dart';
 import 'package:carpool_admin/screens/login_and_register_section/reset_password.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_in.dart';
 import 'package:carpool_admin/screens/login_and_register_section/sign_up.dart';
 import 'package:carpool_admin/screens/login_and_register_section/verification.dart';
-import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/main_screen/main_shell_screen.dart';
-import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/portal_selection/dmin_portal_selection_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-// Import screens
-
-
+/// AppRoutes provides a central place for all route path strings.
 abstract class AppRoutes {
-  static const String signIn = '/';
+  // Entry Point
+  static const String portalSelection = '/portal-selection';
+  
+  // Platform Admin Auth Flow
+  static const String signIn = '/sign-in';
   static const String signUp = '/sign-up';
   static const String verification = '/verification';
   static const String forgotPassword = '/forgot-password';
   static const String resetPassword = '/reset-password';
+
+  // Main App Shell (Dashboard, Users, Rides, etc.)
+  static const String mainScreen = '/main-screen';
   
-  // This is now the ONLY route you need for the inside of the app!
-  static const String mainScreen = '/mainScreen';
-  static const String users = '/users';
-  static const String notifications = '/notifications';
-  static const String dashboard = '/dashboard';
+  // Company Admin Flow
+  static const String companyAdminSignIn = '/company-admin-sign-in';
+  static const String companyAdminDashboard = '/company-admin-dashboard';
 }
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
-    // Start directly on the MainShellScreen
-    initialLocation: AppRoutes.mainScreen,
+    // The app starts at the Portal Selection screen
+    initialLocation: AppRoutes.portalSelection,
     debugLogDiagnostics: true,
     routes: [
       // ==========================================
-      // Auth Flow
+      // Portal Selection (Entry Point)
+      // ==========================================
+      GoRoute(
+        name: 'portal-selection',
+        path: AppRoutes.portalSelection,
+        builder: (context, state) => const AdminPortalSelection(),
+      ),
+
+      // ==========================================
+      // Platform Admin Auth Flow
       // ==========================================
       GoRoute(
         name: 'sign-in',
@@ -61,31 +74,32 @@ class AppRouter {
         builder: (context, state) => const ResetPassword(),
       ),
 
-      // Users Flow
-      // Notifications Flow (NEW)
-      GoRoute(
-        name: 'notifications',
-        path: AppRoutes.notifications,
-        builder: (context, state) => const NotificationsContent(),
-      ),
-
-      // Dashboard Flow
-      GoRoute(
-        name: 'main-dashboard',
-        path: AppRoutes.dashboard,
-        builder: (context, state) => const MainDashboard(),
-      ),
-
-      // Payments Overview
+      // ==========================================
+      // Main Application Shell (Platform Admin)
+      // ==========================================
       GoRoute(
         name: 'mainScreen',
         path: AppRoutes.mainScreen,
         builder: (context, state) => const MainShellScreen(),
       ),
+
+      // ==========================================
+      // Company Admin Flow
+      // ==========================================
+      GoRoute(
+        name: 'company-admin-sign-in',
+        path: AppRoutes.companyAdminSignIn,
+        builder: (context, state) => const CompanyAdminLogin(),
+      ),
+      GoRoute(
+        name: 'company-admin-dashboard',
+        path: AppRoutes.companyAdminDashboard,
+        builder: (context, state) => const CompanyAdminDashboard(),
+      ),
     ],
 
     // ==========================================
-    // Error Page
+    // Error Page (404)
     // ==========================================
     errorBuilder: (context, state) => Scaffold(
       body: Center(
@@ -95,13 +109,13 @@ class AppRouter {
             const Icon(Icons.error_outline, size: 64, color: Colors.red),
             const SizedBox(height: 16),
             const Text(
-              'Oops! Page not found.',
+              'Oops! This page does not exist.',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 24),
             ElevatedButton(
-              onPressed: () => context.go(AppRoutes.signIn),
-              child: const Text('Go to Home'),
+              onPressed: () => context.go(AppRoutes.portalSelection),
+              child: const Text('Back to Portal Selection'),
             ),
           ],
         ),

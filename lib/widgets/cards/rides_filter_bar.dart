@@ -1,3 +1,4 @@
+import 'dart:ui'; // <--- MUST IMPORT THIS FOR MOUSE DRAGGING!
 import 'package:flutter/material.dart';
 import '../../utils/theme/colors.dart';
 import '../../utils/theme/text_styles.dart';
@@ -8,55 +9,82 @@ class RidesFilterBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      // Back to a normal Row so Spacer() works!
-      child: Row(
-        children: [
-          _buildSearchFilter(),
-          
-          // THIS is what pushes the search box to the far left edge!
-          const Spacer(), 
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Search Bar: 469px
+        // Dropdowns: 115 + 135 + 125 + 105 = 480px
+        // Spacing: 3 * 12 = 36px
+        // Padding: Left 20, Right 50 = 70px
+        // Total Minimum Width needed before scrolling = ~1055px
+        double barWidth = constraints.maxWidth < 1055 ? 1055 : constraints.maxWidth;
 
-          // 1. All Status
-          const CompanyDropdownFilter(
-            hint: 'All Status', 
-            width: 115.0, 
-            items: ['All Status', 'Completed', 'Active', 'Scheduled', 'Flagged', 'Cancelled'],
+        return ScrollConfiguration(
+          // Enables click-and-drag scrolling on Web/Desktop
+          behavior: ScrollConfiguration.of(context).copyWith(
+            dragDevices: {
+              PointerDeviceKind.touch,
+              PointerDeviceKind.mouse,
+              PointerDeviceKind.trackpad,
+            },
           ),
-          const SizedBox(width: 12), // Reduced slightly to fix the overflow error
-          
-          // 2. All Companies
-          const CompanyDropdownFilter(
-            hint: 'All Companies', 
-            width: 135.0, 
-            items: ['All Companies', 'Tech corp Inc', 'Design Studio Ltd', 'Finance solutions', 'Healthcare Pvt', 'Retail Group'],
-          ),
-          const SizedBox(width: 12), // Reduced slightly
-          
-          // 3. All Payment
-          const CompanyDropdownFilter(
-            hint: 'All Payments', 
-            width: 125.0, 
-            items: ['All Payments', 'Paid', 'Pending', 'Refund'],
-          ),
-          const SizedBox(width: 12), // Reduced slightly
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: SizedBox(
+              // Passing the calculated strict width allows the Spacer() to work!
+              width: barWidth, 
+              child: Padding(
+                // Added the 50px right padding exactly as requested!
+                padding: const EdgeInsets.only(left: 20.0, top: 20.0, bottom: 20.0, right: 50.0),
+                child: Row(
+                  children: [
+                    _buildSearchFilter(),
+                    
+                    // This Spacer now pushes the dropdowns to the far right side
+                    const Spacer(), 
 
-          // 4. All Dates
-          const CompanyDropdownFilter(
-            hint: 'All Dates', 
-            width: 105.0, 
-            items: ['All Dates', 'Today', 'This week', 'This month'],
+                    // 1. All Status
+                    const CompanyDropdownFilter(
+                      hint: 'All Status', 
+                      width: 115.0, 
+                      items: ['All Status', 'Completed', 'Active', 'Scheduled', 'Flagged', 'Cancelled'],
+                    ),
+                    const SizedBox(width: 12),
+                    
+                    // 2. All Companies
+                    const CompanyDropdownFilter(
+                      hint: 'All Companies', 
+                      width: 135.0, 
+                      items: ['All Companies', 'Tech corp Inc', 'Design Studio Ltd', 'Finance solutions', 'Healthcare Pvt', 'Retail Group'],
+                    ),
+                    const SizedBox(width: 12),
+                    
+                    // 3. All Payment
+                    const CompanyDropdownFilter(
+                      hint: 'All Payments', 
+                      width: 125.0, 
+                      items: ['All Payments', 'Paid', 'Pending', 'Refund'],
+                    ),
+                    const SizedBox(width: 12),
+
+                    // 4. All Dates
+                    const CompanyDropdownFilter(
+                      hint: 'All Dates', 
+                      width: 105.0, 
+                      items: ['All Dates', 'Today', 'This week', 'This month'],
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 
   // --- Sub-widget: Filter Search Box ---
   Widget _buildSearchFilter() {
     return Container(
-      // Exactly 469px width and matched padding from UserFilterBar
       width: 469, 
       height: 47,
       padding: const EdgeInsets.only(left: 30, right: 40),
