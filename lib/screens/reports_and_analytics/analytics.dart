@@ -149,12 +149,12 @@ class _AnalyticsState extends State<Analytics> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'User Growth',
+                                    'Peak Hours Analysis',
                                     style: AppTextStyles.statesCardValue
                                         .copyWith(fontSize: 18),
                                   ),
                                   Text(
-                                    'Driver vs Rider growth over 4 weeks',
+                                    'Ride distribution throughout the day',
                                     style: TextStyle(
                                       fontFamily: AppFonts.dmSans,
                                       fontSize: 12,
