@@ -132,7 +132,20 @@ Widget buildSettingsToggle({
           ),
         ],
       ),
-      CustomSwitch(value: value, onChanged: onChanged),
+      Transform.scale(
+        scale: 0.7,
+        // Aligns the scaled switch to the right to avoid weird gaps
+        alignment: Alignment.centerRight,
+        child: Switch.adaptive(
+          value: value,
+          onChanged: onChanged,
+          activeColor: Colors.white,
+          activeTrackColor: const Color.fromARGB(255, 0, 0, 0),
+          inactiveThumbColor: Colors.white,
+          inactiveTrackColor: const Color.fromARGB(255, 197, 201, 206),
+          trackOutlineColor: WidgetStateProperty.all(Colors.transparent),
+        ),
+      ),
     ],
   );
 }

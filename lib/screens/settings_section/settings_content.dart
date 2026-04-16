@@ -1,3 +1,4 @@
+import 'package:carpool_admin/screens/notification_temp.dart';
 import 'package:carpool_admin/screens/policies.dart';
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart';
@@ -145,8 +146,10 @@ class _SettingsContentState extends State<SettingsContent>
           style: TextStyle(
             fontFamily: AppFonts.primary,
             fontSize: 13,
-            fontWeight: isActive ? AppFonts.semibold : AppFonts.normal,
-            color: isActive ? AppColors.textPrimary : AppColors.textPrimary,
+            fontWeight: isActive
+                ? FontWeight.w700
+                : FontWeight.w600, // ← bolder
+            color: Colors.black, // ← always black
           ),
         ),
       ),
@@ -170,10 +173,10 @@ class _SettingsContentState extends State<SettingsContent>
         content = _buildDataManagementTab();
         break;
       case 3:
-        content = _buildNotificationsTab();
+        content = _buildNotificationsTab(); // ← add this
         break;
       case 4:
-        content = _buildPoliciesTab();
+        content = _buildPoliciesTab(); // ← was 5, now 4
         break;
       default:
         content = _buildComingSoon(
@@ -182,11 +185,10 @@ class _SettingsContentState extends State<SettingsContent>
             'Access Control',
             'Data Management',
             'Notifications',
-            'Places',
+            'Policies',
           ][_tabController.index],
         );
     }
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -489,103 +491,31 @@ class _SettingsContentState extends State<SettingsContent>
   Widget _buildDataManagementTab() {
     return Column(
       children: [
-        _buildSectionCard(title: 'Data Management', child: AutomaticBackup()),
-        const SizedBox(height: 20),
-        _buildSectionCard(title: 'Backup & Export', child: BackupAndExport()),
-        const SizedBox(height: 20),
         _buildSectionCard(
-          title: 'Privacy & Compliance',
-          child: PrivacyCompliance(),
+          title: '',
+          connectTop: true,
+          child: const AutomaticBackup(),
         ),
+        const SizedBox(height: 20),
+        _buildSectionCard(title: '', child: const BackupAndExport()),
+        const SizedBox(height: 20),
+        _buildSectionCard(title: '', child: const PrivacyCompliance()),
         const SizedBox(height: 24),
-        _buildActionButtons(),
+        _buildActionButtons(), // ← already here
       ],
     );
   }
 
-  bool gdprCompliant1 = true;
-  bool gdprCompliant2 = true;
-  bool gdprCompliant3 = true;
-  bool gdprCompliant4 = true;
   Widget _buildNotificationsTab() {
     return Column(
       children: [
         _buildSectionCard(
-          title: 'Notifications',
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  buildSettingsToggle(
-                    title: 'Email Notifications',
-                    subtitle: 'Send notifications via Email',
-                    value: gdprCompliant1,
-                    onChanged: (value) {
-                      setState(() {
-                        gdprCompliant1 = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  buildSettingsToggle(
-                    title: 'SMS Notifications',
-                    subtitle: 'Send notifications via SMS',
-                    value: gdprCompliant2,
-                    onChanged: (value) {
-                      setState(() {
-                        gdprCompliant2 = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  buildSettingsToggle(
-                    title: 'Push Notifications',
-                    subtitle: 'Send push notifications to mobile apps',
-                    value: gdprCompliant3,
-                    onChanged: (value) {
-                      setState(() {
-                        gdprCompliant3 = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                  buildSettingsToggle(
-                    title: 'In-App Notifications',
-                    subtitle: 'Show notifications with the app',
-                    value: gdprCompliant4,
-
-                    onChanged: (value) {
-                      setState(() {
-                        gdprCompliant4 = value;
-                      });
-                    },
-                  ),
-                  const SizedBox(height: 8),
-                ],
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 20),
-        _buildSectionCard(
-          title: 'System Notifications',
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ToggleStatusItem(label: 'Ride Created'),
-              ToggleStatusItem(label: 'Ride Cancelled'),
-              ToggleStatusItem(label: 'Payment Received'),
-              ToggleStatusItem(label: 'Refund Processed'),
-              ToggleStatusItem(label: 'Account Verified'),
-              ToggleStatusItem(label: 'Complaint Filed'),
-              ToggleStatusItem(label: 'New User Registration'),
-            ],
-          ),
+          title: '',
+          connectTop: true,
+          child: const NotificationTemp(),
         ),
         const SizedBox(height: 24),
-        _buildActionButtons(),
+        _buildActionButtons(), // ← add this
       ],
     );
   }
@@ -593,14 +523,18 @@ class _SettingsContentState extends State<SettingsContent>
   Widget _buildPoliciesTab() {
     return Column(
       children: [
-        _buildSectionCard(title: 'Default Policies', child: Policies()),
+        _buildSectionCard(title: '', connectTop: true, child: const Policies()),
         const SizedBox(height: 24),
-        _buildActionButtons(),
+        _buildActionButtons(), // ← add this
       ],
     );
   }
 
-  Widget _buildSectionCard({required String title, required Widget child}) {
+  Widget _buildSectionCard({
+    required String title,
+    required Widget child,
+    bool connectTop = false,
+  }) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(24),
@@ -621,11 +555,9 @@ class _SettingsContentState extends State<SettingsContent>
           if (title.isNotEmpty) ...[
             Text(
               title,
-              style: TextStyle(
+              style: AppTextStyles.cardTitle.copyWith(
                 fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: AppColors.pageHeaderTitle,
-                fontFamily: AppFonts.primary,
+                color: const Color(0xFF212B36),
               ),
             ),
             const SizedBox(height: 20),
@@ -648,7 +580,7 @@ class _SettingsContentState extends State<SettingsContent>
         Text(
           label,
           style: AppTextStyles.caption.copyWith(
-            color: AppColors.textPrimary,
+            color: const Color(0xFF262626),
             fontWeight: AppFonts.medium,
             fontSize: 12,
           ),
@@ -670,7 +602,7 @@ class _SettingsContentState extends State<SettingsContent>
             decoration: InputDecoration(
               hintText: hint,
               hintStyle: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textHint,
+                color: const Color(0xFF9A9A9A),
               ),
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 12,
@@ -697,7 +629,7 @@ class _SettingsContentState extends State<SettingsContent>
         Text(
           label,
           style: AppTextStyles.caption.copyWith(
-            color: AppColors.textPrimary,
+            color: const Color(0xFF262626),
             fontWeight: AppFonts.medium,
             fontSize: 12,
           ),
@@ -721,7 +653,7 @@ class _SettingsContentState extends State<SettingsContent>
                 color: AppColors.iconPrimary,
               ),
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textPrimary,
+                color: const Color(0xFF9A9A9A),
               ),
               onChanged: onChanged,
               items: items
@@ -815,7 +747,7 @@ class _SettingsContentState extends State<SettingsContent>
               controller: controller,
               keyboardType: keyboardType,
               style: AppTextStyles.bodySmall.copyWith(
-                color: AppColors.textPrimary,
+                color: const Color(0xFF9A9A9A),
               ),
               decoration: InputDecoration(
                 hintText: hint,

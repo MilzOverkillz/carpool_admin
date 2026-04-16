@@ -1,3 +1,9 @@
+import 'package:carpool_admin/screens/Rides_Section/rides_content.dart';
+// IMPORTING YOUR NEW CONTENT SCREENS HERE
+import 'package:carpool_admin/screens/User_Section/users_content.dart';
+import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
+import 'package:carpool_admin/screens/reports_and_analytics/analytics.dart';
+import 'package:carpool_admin/screens/settings_section/settings_content.dart';
 import 'package:carpool_admin/screens/company_section/companies.dart';
 import 'package:carpool_admin/screens/main_dashboard_section/main_dashboard.dart';
 import 'package:carpool_admin/screens/notifications_screen/notifications_content.dart';
@@ -9,10 +15,6 @@ import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/widgets/Sidebar/sidebar.dart';
 import 'package:carpool_admin/widgets/nav_bar/top_bar.dart';
 
-
-// IMPORTING YOUR NEW CONTENT SCREENS HERE
-import 'package:carpool_admin/screens/User_Section/users_content.dart';
-import 'package:carpool_admin/screens/Rides_Section/rides_content.dart';
 
 class MainShellScreen extends StatefulWidget {
   const MainShellScreen({super.key});
@@ -51,7 +53,7 @@ class _MainShellScreenState extends State<MainShellScreen> {
       case 'Notifications':
         return const NotificationsContent();
       case 'Settings':
-        return const SettingsContent();
+        return const SettingsContent(); // ← change from Policies() to SettingsContent()
       default:
         return _buildPlaceholder('Dashboard');
     }
