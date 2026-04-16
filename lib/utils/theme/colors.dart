@@ -109,7 +109,6 @@ class AppColors {
 
   
 
-
   static const Color paymentText = Color(0xFF1E272E);
   
 

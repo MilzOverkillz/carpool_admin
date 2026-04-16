@@ -1,5 +1,6 @@
 import 'package:carpool_admin/utils/theme/colors.dart';
 import 'package:carpool_admin/utils/theme/fonts.dart' show AppFonts;
+import 'package:carpool_admin/widgets/buttons/payment_switch.dart';
 import 'package:flutter/material.dart';
 
 class PaymentSettingsDialog extends StatefulWidget {
@@ -20,6 +21,9 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
   bool _autoRefund = false;
   bool _manualApproval = false;
 
+  bool _creditCard = false;
+  bool _paypal = false;
+
   late TabController _tabController;
 
   @override
@@ -31,9 +35,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
       try {
         final int idx = _tabController.index;
         setState(() => _selectedTabIndex = idx);
-      } catch (_) {
-        // ignore any type errors during hot reload or transient states
-      }
+      } catch (_) {}
     });
   }
 
@@ -154,21 +156,37 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                   ),
                 ),
               ),
-              SizedBox(height: 9,),
+              SizedBox(height: 9),
               // Scrollable content per tab
               Expanded(
                 child: TabBarView(
                   controller: _tabController,
                   children: [
-                    // Payment Gateway (placeholder cards)
+                    // Payment Gateway
                     SingleChildScrollView(
                       child: Column(
                         children: [
-                          _gatewayCard(title: 'Stripe', connected: true),
+                          _gatewayCard(
+                            title: 'Stripe',
+                            connected: true,
+                            switchValue: _creditCard,
+                            onSwitchChanged: (v) =>
+                                setState(() => _creditCard = v),
+                          ),
                           const SizedBox(height: 12),
-                          _gatewayCard(title: 'PayPal', connected: true),
+                          _gatewayCard(
+                            title: 'PayPal',
+                            connected: true,
+                            switchValue: _paypal,
+                            onSwitchChanged: (v) => setState(() => _paypal = v),
+                          ),
                           const SizedBox(height: 12),
-                          _gatewayCard(title: 'Bank Account', connected: true),
+                          _gatewayCard(
+                            title: 'Bank Account',
+                            connected: true,
+                            switchValue: false,
+                            onSwitchChanged: (_) {},
+                          ),
                           const SizedBox(height: 12),
                         ],
                       ),
@@ -249,7 +267,7 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                                     ],
                                   ),
                                 ),
-                                Switch.adaptive(
+                                PaymentCustomSwitch(
                                   value: _autoRefund,
                                   onChanged: (v) =>
                                       setState(() => _autoRefund = v),
@@ -285,11 +303,17 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                                     ],
                                   ),
                                 ),
-                                Switch.adaptive(
+                                PaymentCustomSwitch(
                                   value: _manualApproval,
                                   onChanged: (v) =>
                                       setState(() => _manualApproval = v),
                                 ),
+                                // CupertinoSwitch(
+                                //   value: _manualApproval,
+                                //   onChanged: (v) =>
+                                //       setState(() => _manualApproval = v),
+                                //       activeColor: Colors.black,
+                                // ),
                               ],
                             ),
                             const SizedBox(height: 20),
@@ -396,14 +420,21 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
     );
   }
 
-  Widget _gatewayCard({required String title, required bool connected}) {
+  Widget _gatewayCard({
+    required String title,
+    required bool connected,
+    required bool switchValue,
+    required Function(bool) onSwitchChanged,
+  }) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: title == 'Bank Account' ? null : Border.all(color: const Color(0xFFF4F4F5)),
+        border: title == 'Bank Account'
+            ? null
+            : Border.all(color: const Color(0xFFF4F4F5)),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -481,11 +512,15 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(color: Color(0xFFE6E6E6)),
+                          borderSide: const BorderSide(
+                            color: Color(0xFFE6E6E6),
+                          ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
-                          borderSide: const BorderSide(color: Color(0xFFCCCCCC)),
+                          borderSide: const BorderSide(
+                            color: Color(0xFFCCCCCC),
+                          ),
                         ),
                       ),
                     ),
@@ -529,13 +564,18 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 6),
-                          child: Text('Connect',
-                          style: TextStyle(
-                            fontSize: 10,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                          ),),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 13,
+                            vertical: 6,
+                          ),
+                          child: Text(
+                            'Connect',
+                            style: TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -552,8 +592,10 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
               children: [
                 if (title == 'Bank Account' && connected)
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 8,
+                    ),
                     decoration: BoxDecoration(
                       color: const Color(0xFFD6D5D5),
                       borderRadius: BorderRadius.circular(12),
@@ -568,7 +610,14 @@ class _PaymentSettingsDialogState extends State<PaymentSettingsDialog>
                     ),
                   )
                 else
-                  Switch.adaptive(value: connected, onChanged: (_) {}),
+                  PaymentCustomSwitch(
+                    value: switchValue,
+                    onChanged: onSwitchChanged,
+                  ),
+                // CupertinoSwitch(
+                //   value: switchValue,
+                //   onChanged: onSwitchChanged,
+                // ),
               ],
             ),
           ),
