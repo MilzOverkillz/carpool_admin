@@ -85,6 +85,10 @@ class MainDashboard extends StatelessWidget {
       },
     ];
 
+    // determine chart size breakpoint to keep charts consistent
+    final bool _chartsAreSmall = MediaQuery.of(context).size.width < 700;
+    final double _chartHeight = _chartsAreSmall ? 320.0 : 417.0;
+
     return SingleChildScrollView(
       padding: const EdgeInsets.only(left: 32.0, right: 32.0, bottom: 32.0),
       child: Column(
@@ -104,7 +108,7 @@ class MainDashboard extends StatelessWidget {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            crossAxisSpacing: 260,
+                            crossAxisSpacing: 26,
                             mainAxisSpacing: 27,
                             childAspectRatio: 2.2,
                           ),
@@ -127,20 +131,38 @@ class MainDashboard extends StatelessWidget {
           ),
           const SizedBox(height: 44),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              DashboardBarChart(
-                title: "Rides Per Day",
-                subtitle: "Last 7 days activity",
-                labels: const ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-                values: const [260, 200, 410, 130, 220, 60, 160],
+              Expanded(
+                flex: 3,
+                child: DashboardBarChart(
+                  title: "Rides Per Day",
+                  subtitle: "Last 7 days activity",
+                  labels: const [
+                    "Mon",
+                    "Tue",
+                    "Wed",
+                    "Thu",
+                    "Fri",
+                    "Sat",
+                    "Sun",
+                  ],
+                  values: const [260, 200, 410, 130, 220, 60, 160],
+                ),
               ),
-              Spacer(),
-              UsersDistributionChart(
-                title: 'User Distribution',
-                subtitle: 'Drivers vs Riders',
-                period: 'Monthly',
-                ridersPercent: 65.0,
-                driversPercent: 35.0,
+
+              const SizedBox(width: 24),
+
+              SizedBox(
+                width: 360,
+                child: UsersDistributionChart(
+                  title: 'User Distribution',
+                  subtitle: 'Drivers vs Riders',
+                  period: 'Monthly',
+                  ridersPercent: 65.0,
+                  driversPercent: 35.0,
+                  height: _chartHeight,
+                ),
               ),
             ],
           ),
@@ -187,7 +209,12 @@ class MainDashboard extends StatelessWidget {
                 SizedBox(
                   width: 300,
                   child: PendingListCard(
-                    companies: ["Techcorp Inc", "Techcorp Inc", "Techcorp Inc","Techcorp Inc"],
+                    companies: [
+                      "Techcorp Inc",
+                      "Techcorp Inc",
+                      "Techcorp Inc",
+                      "Techcorp Inc",
+                    ],
                   ),
                 ),
               ],
