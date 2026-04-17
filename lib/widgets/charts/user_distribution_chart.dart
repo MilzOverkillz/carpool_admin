@@ -9,6 +9,7 @@ class UsersDistributionChart extends StatelessWidget {
   final String period;
   final double ridersPercent;
   final double driversPercent;
+  final double? height;
 
   const UsersDistributionChart({
     super.key,
@@ -17,12 +18,15 @@ class UsersDistributionChart extends StatelessWidget {
     required this.period,
     required this.ridersPercent,
     required this.driversPercent,
+    this.height,
   });
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
+    return SizedBox(
+      height: height,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
         final bool isSmall = constraints.maxWidth < 700;
 
         return ConstrainedBox(
@@ -205,7 +209,8 @@ class UsersDistributionChart extends StatelessWidget {
             ),
           ),
         );
-      },
+        },
+      ),
     );
   }
 }
